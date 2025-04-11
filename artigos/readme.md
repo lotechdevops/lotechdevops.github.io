@@ -16,10 +16,10 @@ Repositório com meus artigos, tutoriais e guias práticos sobre DevOps, Cloud e
 ## Artigos publicados
 
 ### Kubernetes
-- [Cluster Autoscaler no EKS](./kubernetes/cluster-autoscaler-eks/README.md)
+- - [Certificados SSL/TLS para Kubernetes com Cert-Manager e Let’s Encrypt](./kubernetes/Cert-Manager e Lets Encrypt/README.md)
 
 ### AWS
-- Em breve...
+- - [Cluster Autoscaler no EKS](./aws/cluster-autoscaler-eks/README.md)
 
 ### Terraform
 - Em breve...
