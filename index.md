@@ -5,7 +5,7 @@ Apaixonado por Linux, Kubernetes, Cloud, Automação.
 ## Sobre mim
 Olá, me chamo Neto e atuo como DevOps / SRE desde 2020. Sou apaixonado por infraestrutura, automação e boas práticas de engenharia.
 
-Tenho experiência na construção e manutenção de ambientes em nuvem (AWS e GCP), utilizando práticas de infraestrutura como código com Terraform, Ansible e Packer.
+Tenho experiência na construção e manutenção de ambientes em nuvem e on-premises, utilizando práticas de infraestrutura como código com Terraform, Ansible e Packer.
 
 Trabalho com foco em Kubernetes, provisionamento de ambientes, pipelines de CI/CD (Jenkins e ArgoCD), segurança com HashiCorp Vault e ferramentas de observabilidade como Prometheus, Grafana e Alertmanager.
 
