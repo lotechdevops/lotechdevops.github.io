@@ -15,7 +15,7 @@ Este espaço no GitHub é onde compartilho alguns dos meus estudos, projetos pes
 
 ## Seções
 
-- [Artigos Técnicos](./artigos/index.md)
+- [Artigos Técnicos](./artigos/readme.md)
 - [Meus Repositórios](https://github.com/lotechdevops?tab=repositories)
 - [LinkedIn](https://www.linkedin.com/in/divino-sabino-moreira-neto-918844108/)
 
