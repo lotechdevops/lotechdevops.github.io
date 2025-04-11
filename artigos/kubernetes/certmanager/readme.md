@@ -32,7 +32,7 @@ O Let’s Encrypt é uma Autoridade Certificadora (CA) gratuita e automatizada q
 
 O Let’s Encrypt utiliza um protocolo chamado ACME (Automated Certificate Management Environmet), que permite a emissão e renovação automática dos certificados. O processo ocorre em três etapas principais:
 
-1 — Validação do Domínio
+**1 — Validação do Domínio**
 
 * O Let’s Encrypt verifica se você realmente tem controle sobre o domínio para o qual deseja emitir o certificado.
 
@@ -44,11 +44,11 @@ O Let’s Encrypt utiliza um protocolo chamado ACME (Automated Certificate Manag
     
     3 - **TLS-ALPN-01:** Um certificado especial é servido via TLS.
 
-2 — Emissão do Certificado
+**2 — Emissão do Certificado**
 
 * Após validar o domínio, o Let’s Encrypt emite um certificado SSL/TLS válido por 90 dias.
 
-3 — Renovação automática
+**3 — Renovação automática**
 
 * Ferramentas como cert-manager podem ser configurados para renovar os certifiados automaticamente antes do vencimento.
 
@@ -56,3 +56,12 @@ O Let’s Encrypt utiliza um protocolo chamado ACME (Automated Certificate Manag
 ## 🛠️ Passo a Passo Configuração
 
 Nosso nosso exemplo iremos utilizar um domínio hospedado na AWS Route53.
+
+**1 — Criar um Secret com as credenciais da conta da AWS:**
+
+```bash
+kubectl create secret generic route53-credentials-secret \
+  --from-literal=access-key-id=SEU_ACCESS_KEY \
+  --from-literal=secret-access-key=SEU_SECRET_KEY \
+  -n cert-manager
+```
