@@ -11,3 +11,23 @@ O cert-manager gerencia certificados no Kubernetes por meio do Custom Resource D
 
 * Define a CA responsável pela emissão dos certificados.
 * Pode ser um Issuer (válido apenas no namespace onde foi criado) ou um ClusterIssuer (válido em todo o cluster).
+
+2 — Solicitação de Certificados (Certificate)
+
+* Define um recurso Certificate para solicitar certificados com base no Issuer ou ClusterIssuer.
+
+3 — Validação do domínio
+
+* O cert-manager usa desafios ACME (HTTP-01 ou DNS-01) para validar a posse do domínio.
+
+4 — Emissão e renovação automática
+
+* O certificado é armazenado como um Secret no Kubernetes e é automaticamente renovado antes do vencimento.
+
+## O que é o Let’s Encrypt?
+
+O Let’s Encrypt é uma Autoridade Certificadora (CA) gratuita e automatizada que fornece certificados SSL/TLS para proteger aplicações com criptografia HTTPS. Ele é amplamente utilizado para garantir conexões seguras na web sem a necessidade de comprar certificados de outras CAs pagas.
+
+### Como ele funciona?
+
+O Let’s Encrypt utiliza um protocolo chamado ACME (Automated Certificate Management Environmet), que permite a emissão e renovação automática dos certificados. O processo ocorre em três etapas principais:
