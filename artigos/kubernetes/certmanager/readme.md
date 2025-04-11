@@ -43,3 +43,16 @@ O Let’s Encrypt utiliza um protocolo chamado ACME (Automated Certificate Manag
     2 - **DNS-01:** Um registro TXT é adicionado ao DNS do domínio.
     
     3 - **TLS-ALPN-01:** Um certificado especial é servido via TLS.
+
+2 — Emissão do Certificado
+
+* Após validar o domínio, o Let’s Encrypt emite um certificado SSL/TLS válido por 90 dias.
+
+3 — Renovação automática
+
+* Ferramentas como cert-manager podem ser configurados para renovar os certifiados automaticamente antes do vencimento.
+
+
+## 🛠️ Passo a Passo Configuração
+
+Nosso nosso exemplo iremos utilizar um domínio hospedado na AWS Route53.
