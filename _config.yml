@@ -1,5 +1,6 @@
 title: Lotech DevOps
-description: Blog sobre DevOps, Cloud e Engenharia de Plataforma
+description: Blog sobre DevOps, Cloud e Automação.
+Compartilho experiências, tutoriais e boas práticas sobre Linux, Kubernetes, Terraform, Ansible e AWS.
 author: Neto
-email: seu-email@gmail.com
+email: divinoneto@gmail.com
 theme: jekyll-theme-hacker
