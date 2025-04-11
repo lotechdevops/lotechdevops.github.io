@@ -1,9 +1,9 @@
 # Olá, eu sou o Neto! 
 
-Apaixonado por Linux, Kubernetes, Cloud, Automação.
+Apaixonado por Tecnologias
 
 ## Sobre mim
-Olá, me chamo Neto e atuo como DevOps / SRE desde 2020. Sou apaixonado por Tecnologias.
+Olá, me chamo Neto e atuo como DevOps desde 2020.
 
 Tenho experiência na construção e manutenção de ambientes em nuvem e on-premises, utilizando práticas de infraestrutura como código com Terraform, Ansible e Packer.
 
