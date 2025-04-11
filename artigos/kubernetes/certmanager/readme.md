@@ -1,1 +1,1 @@
-## Configuração do Cert-Manager e Let's Encrypt 
+## Certificados SSL/TLS para Kubernetes com Cert-Manager e Let’s Encrypt
