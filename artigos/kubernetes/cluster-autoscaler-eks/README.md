@@ -1,0 +1,1 @@
+## Configuração do cluster-autoscaler no EKS
