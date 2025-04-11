@@ -38,8 +38,8 @@ O Let’s Encrypt utiliza um protocolo chamado ACME (Automated Certificate Manag
 
 * Isso pode ser feito de três maneiras:
 
-    1. **HTTP-01:** Um arquivo temporário é criado no servidor web para ser acessado pelo Let’s Encrypt.
+    1 - **HTTP-01:** Um arquivo temporário é criado no servidor web para ser acessado pelo Let’s Encrypt.
 
-    2. **DNS-01:** Um registro TXT é adicionado ao DNS do domínio.
+    2 - **DNS-01:** Um registro TXT é adicionado ao DNS do domínio.
     
-    3. **TLS-ALPN-01:** Um certificado especial é servido via TLS.
+    3 - **TLS-ALPN-01:** Um certificado especial é servido via TLS.
