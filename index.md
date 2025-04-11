@@ -9,7 +9,7 @@ Sou um profissional em constante evolução, explorando soluções com Kubernete
 
 - [Artigos Técnicos](./artigos/index.md)
 - [Meus Repositórios](https://github.com/lotechdevops?tab=repositories)
-- [LinkedIn](https://www.linkedin.com/in/seu-linkedin)
+- [LinkedIn](https://www.linkedin.com/in/divino-sabino-moreira-neto-918844108/)
 
 ---
 *Powered by GitHub Pages*
