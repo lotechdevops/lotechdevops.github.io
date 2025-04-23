@@ -141,3 +141,11 @@ spec:
     - "*.devopsr66.com"  # Coloque um wildcard do seu domínio)
 ```
 
+## Passos para verificar a configuração do certificado
+
+**1 — Certifique-se de que o certificado está armazenado na Secret criada, como devopsr66-tls**
+
+```bash
+kubectl get secret devopsr66-tls -n default
+```
+
