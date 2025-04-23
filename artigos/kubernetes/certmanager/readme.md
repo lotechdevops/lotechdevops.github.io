@@ -65,3 +65,15 @@ kubectl create secret generic route53-credentials-secret \
   --from-literal=secret-access-key=SEU_SECRET_KEY \
   -n cert-manager
 ```
+
+**2 — Instalar o cert-manager:**
+O cert-manager pode ser instalado via Helm:
+
+```bash
+helm repo add jetstack https://charts.jetstack.io
+helm repo update
+helm install cert-manager jetstack/cert-manager \
+  --namespace cert-manager \
+  --create-namespace \
+  --set installCRDs=true
+```
