@@ -119,8 +119,25 @@ Após criar o clusterissuer, você deverá ver um registro no Route53, como:
 
 ![ClusterIssuer Criado](./images/clusterissuer-criado.png)
 
+**4 — Emitir um Certificado**
 
+Agora, crie um Certificate para seu domínio
 
+### Exemplo Arquivo YAML: certificate-route53.yaml
 
-
+```yaml
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: devopsr66-cert  # Nome do seu certificado.
+  namespace: default    # Namespace que a secret será criado.
+spec:
+  secretName: devopsr66-tls         # Nome da sua secret com o certificado.
+  issuerRef:
+    name: letsencrypt-prod-route53   # Nome do seu ClusterIssuer criado no passo 2
+    kind: ClusterIssuer
+  dnsNames:
+    - devopsr66.com      # Coloque seu domínio.
+    - "*.devopsr66.com"  # Coloque um wildcard do seu domínio)
+```
 
