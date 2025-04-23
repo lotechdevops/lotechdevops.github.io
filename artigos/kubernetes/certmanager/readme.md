@@ -149,3 +149,6 @@ spec:
 kubectl get secret devopsr66-tls -n default
 ```
 
+Você deve ver algo como:
+
+![Secret Criada](./images/secret-criada.png)
