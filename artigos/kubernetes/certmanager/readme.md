@@ -78,3 +78,45 @@ helm install cert-manager jetstack/cert-manager \
   --create-namespace \
   --set installCRDs=true
 ```
+
+Verifica se os pods do cert-manager estão rodando:
+
+```bash
+kubectl get pods -n cert-manager
+```
+
+**3 - Criar o ClusterIssuer**
+
+Agora, crie o ClusterIssuer usando o Route53 como solver.
+
+### Exemplo Arquivo YAML: clusterIssuer-route53.yaml
+
+```yaml
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt-prod-route53
+spec:
+  acme:
+    server: https://acme-v02.api.letsencrypt.org/directory
+    email: admin@devopsr66.com
+    privateKeySecretRef:
+      name: letsencrypt-prod-route53
+    solvers:
+    - dns01:
+        route53:
+          region: us-east-1  
+          hostedZoneID: "ZXXXXXXXXXXXX" #Substitua pelo Hosted Zone ID do seu domínio
+          accessKeyIDSecretRef:
+            name: route53-credentials-secret  #Nome da secret do passo 1.
+            key: access-key-id
+          secretAccessKeySecretRef:
+            name: route53-credentials-secret  #Nome da secret do passo 1.
+            key: secret-access-key
+```
+
+
+
+
+
+
