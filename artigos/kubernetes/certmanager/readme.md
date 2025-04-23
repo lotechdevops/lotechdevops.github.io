@@ -115,6 +115,10 @@ spec:
             key: secret-access-key
 ```
 
+Após criar o clusterissuer, você deverá ver um registro no Route53, como:
+
+![Cluster Issuer Criado Route53](./images/result_clusterissuer_create)
+
 
 
 
