@@ -67,6 +67,7 @@ kubectl create secret generic route53-credentials-secret \
 ```
 
 **2 — Instalar o cert-manager:**
+
 O cert-manager pode ser instalado via Helm:
 
 ```bash
