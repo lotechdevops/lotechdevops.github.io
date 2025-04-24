@@ -181,3 +181,46 @@ Você deve ver algo como:
 ![Certificado Criado](./images/certificate.png)
 
 
+## Passo a Passo para testar o certificado
+
+**1— Cria um Ingress com o certificado SSL/TLS**
+
+### Exemplo Arquivo YAML: ingress.yaml
+
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: nginx-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: devopsr66.com  # Substitua pelo seu domínio
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: nginx
+            port:
+              number: 80
+  tls:
+  - hosts:
+    - devopsr66.com  # Substitua pelo seu domínio
+    secretName: devopsr66-tls  # Nome do Secret gerado pelo cert-manager
+```
+
+Aplique o arquivo no cluster
+
+Para verificar o ingress criado no cluster utilize o comando abaixo:
+
+```bash
+kubectl describe ingress -n default
+```
+
+Você deve ver algo como:
+
+![Ingress Criado](./images/ingress-criado.png)
