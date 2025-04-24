@@ -152,3 +152,25 @@ kubectl get secret devopsr66-tls -n default
 Você deve ver algo como:
 
 ![Secret Criada](./images/secret-criada.png)
+
+**2 — A Secret deve conter os certificados e a chave privada**
+
+```bash
+kubectl describe secret devopsr66-tls -n default
+```
+
+Você deve ver algo como:
+
+![Secret Descrição](./images/secret-describe.png)
+
+
+Para verificar o certificado criado:
+
+```bash
+kubectl describe certificate devopsr66-cert -n default
+```
+
+Você deve ver algo como:
+
+![Certificado Criado](./images/certificate.png)
+
