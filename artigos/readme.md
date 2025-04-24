@@ -17,9 +17,10 @@ Repositório com meus artigos, tutoriais e guias práticos sobre DevOps, Cloud e
 
 ### Kubernetes
 - - [Certificados SSL/TLS para Kubernetes com Cert-Manager e Let’s Encrypt](./kubernetes/certmanager/readme.md)
+- - [Como Atualizar Deployments no Kubernetes: Estratégias RollingUpdate e Recreate](./kubernetes/updates-deployments/readme.md)
 
 ### AWS
-- - [Cluster Autoscaler no EKS](./aws/cluster-autoscaler-eks/readme.md)
+- Em breve...
 
 ### Terraform
 - Em breve...
