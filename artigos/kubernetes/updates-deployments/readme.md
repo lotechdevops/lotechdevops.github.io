@@ -17,7 +17,7 @@ Essa abordagem é ideal para garantir **alta disponibilidade** durante atualiza�
 
 ---
 
-## 🔧 Exemplo de Configuração
+### 🔧 Exemplo de Configuração
 
 ```yaml
 apiVersion: apps/v1
