@@ -57,7 +57,9 @@ O Let’s Encrypt utiliza um protocolo chamado ACME (Automated Certificate Manag
 
 Nosso nosso exemplo iremos utilizar um domínio hospedado na AWS Route53.
 
-**1 — Criar um Secret com as credenciais da conta da AWS:**
+**1 — Cria uma Secret com as credenciais da conta da AWS:**
+
+Execute o comando abaixo para criar a secret:
 
 ```bash
 kubectl create secret generic route53-credentials-secret \
@@ -68,7 +70,7 @@ kubectl create secret generic route53-credentials-secret \
 
 **2 — Instalar o cert-manager:**
 
-O cert-manager pode ser instalado via Helm:
+O cert-manager pode ser instalado via Helm utilizando os comandos abaixo:
 
 ```bash
 helm repo add jetstack https://charts.jetstack.io
@@ -79,7 +81,7 @@ helm install cert-manager jetstack/cert-manager \
   --set installCRDs=true
 ```
 
-Verifica se os pods do cert-manager estão rodando:
+Verifica se os pods do cert-manager estão rodando com o comando abaixo:
 
 ```bash
 kubectl get pods -n cert-manager
@@ -87,7 +89,7 @@ kubectl get pods -n cert-manager
 
 **3 - Criar o ClusterIssuer**
 
-Agora, crie o ClusterIssuer usando o Route53 como solver.
+Agora, crie o ClusterIssuer usando o Route53 como solver e aplique no cluster.
 
 ### Exemplo Arquivo YAML: clusterIssuer-route53.yaml
 
@@ -121,7 +123,7 @@ Após criar o clusterissuer, você deverá ver um registro no Route53, como:
 
 **4 — Emitir um Certificado**
 
-Agora, crie um Certificate para seu domínio
+Agora, crie um Certificate para seu domínio e aplique no cluster.
 
 ### Exemplo Arquivo YAML: certificate-route53.yaml
 
@@ -145,6 +147,8 @@ spec:
 
 **1 — Certifique-se de que o certificado está armazenado na Secret criada, como devopsr66-tls**
 
+Comando para verificar as secrets criadas:
+
 ```bash
 kubectl get secret devopsr66-tls -n default
 ```
@@ -155,6 +159,8 @@ Você deve ver algo como:
 
 **2 — A Secret deve conter os certificados e a chave privada**
 
+Comando para verificar os detalhes da secret:
+
 ```bash
 kubectl describe secret devopsr66-tls -n default
 ```
@@ -164,7 +170,7 @@ Você deve ver algo como:
 ![Secret Descrição](./images/secret-describe.png)
 
 
-Para verificar o certificado criado:
+Para verificar o certificado criado execute o comando abaixo:
 
 ```bash
 kubectl describe certificate devopsr66-cert -n default
@@ -173,4 +179,5 @@ kubectl describe certificate devopsr66-cert -n default
 Você deve ver algo como:
 
 ![Certificado Criado](./images/certificate.png)
+
 
