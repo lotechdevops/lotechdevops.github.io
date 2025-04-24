@@ -40,7 +40,7 @@ O Let’s Encrypt utiliza um protocolo chamado ACME (Automated Certificate Manag
 
     1 - **HTTP-01:** Um arquivo temporário é criado no servidor web para ser acessado pelo Let’s Encrypt.
 
-    2 - **DNS-01:** Um registro TXT é adicionado ao DNS do domínio.
+    2 - **DNS-01:** Um registro TXT é adicionado ao DNS do domínio. (No nosso exemplo iremos usar esse modo)
     
     3 - **TLS-ALPN-01:** Um certificado especial é servido via TLS.
 
@@ -123,7 +123,7 @@ Após criar o clusterissuer, você deverá ver um registro no Route53, como:
 
 **4 — Emitir um Certificado**
 
-Agora, crie um Certificate para seu domínio e aplique no cluster.
+Agora, crie um certificado para seu domínio e aplique no cluster.
 
 ### Exemplo Arquivo YAML: certificate-route53.yaml
 
@@ -224,3 +224,44 @@ kubectl describe ingress -n default
 Você deve ver algo como:
 
 ![Ingress Criado](./images/ingress-criado.png)
+
+
+**2— Cria um Pod e um Serviço para testar o certificado funcionando**
+
+### Exemplo Arquivo YAML: pod.yaml
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+  namespace: default
+  labels:
+    app: nginx
+spec:
+  containers:
+  - name: nginx
+    image: nginx:latest
+    ports:
+    - containerPort: 80
+```
+
+### Exemplo Arquivo YAML: service.yaml
+
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx
+  namespace: default
+spec:
+  selector:
+    app: nginx
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: ClusterIP
+```
+
+![Teste Certificado](./images/teste-certificado.png)
