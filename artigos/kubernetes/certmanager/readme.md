@@ -264,4 +264,6 @@ spec:
   type: ClusterIP
 ```
 
+Abre a url no navegador e verifica se o certificado foi carregado conforme a imagem abaixo:
+
 ![Teste Certificado](./images/teste-certificado.png)
