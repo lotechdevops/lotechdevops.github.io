@@ -67,3 +67,29 @@ Essa abordagem pode ser útil quando:
 - Você quer garantir que todos os recursos antigos sejam encerrados antes da nova versão subir.
 
 ### 🔧 Exemplo de Configuração
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+      app: webserver
+  name: webserver
+  namespace: webserver
+spec:
+  replicas: 12
+  selector:
+    matchLabels:
+      app: webserver
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: webserver
+    spec:
+      containers:
+      - image: nginx:1.15.0
+        name: webserver
+```
+- O Recreate não possui configurações adicionais, pois ele remove todos os Pods antes de criar os novos.
