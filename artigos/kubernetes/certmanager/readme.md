@@ -271,4 +271,4 @@ Abre a url no navegador e verifica se o certificado foi carregado conforme a ima
 
 🔗 Todos os arquivos utilizados neste artigo estão disponíveis em:
   
-[https://github.com/lotechdevops/cert-manager](https://github.com/lotechdevops/config-examples/tree/main/cert-manager)
+[cert-manager](https://github.com/lotechdevops/config-examples/tree/main/cert-manager)
