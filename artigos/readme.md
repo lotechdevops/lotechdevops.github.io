@@ -1,3 +1,18 @@
+# Artigos Técnicos — Lotech DevOps
+
+Repositório com meus artigos, tutoriais e guias práticos sobre DevOps, Cloud e outros assuntos de tecnologia.
+## Temas que abordo:
+
+- Kubernetes
+- AWS
+- Terraform
+- Ansible
+- Automação
+- Observabilidade
+- Infraestrutura como Código
+
+---
+
 ## Artigos publicados
 
 ### Kubernetes
