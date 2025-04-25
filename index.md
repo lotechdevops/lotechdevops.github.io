@@ -15,6 +15,16 @@ Possuo conhecimento em desenvolvimento de scripts de automação utilizando Pyth
 
 Este espaço no GitHub é onde compartilho alguns dos meus estudos, projetos pessoais e anotações técnicas.
 
+## Temas que abordo:
+
+- Kubernetes
+- AWS
+- Terraform
+- Ansible
+- Automação
+- Observabilidade
+- Infraestrutura como Código
+
 ## Seções
 
 - [Artigos Técnicos](./artigos/readme.md)
