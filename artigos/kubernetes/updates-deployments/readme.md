@@ -17,7 +17,7 @@ Essa abordagem é ideal para garantir **alta disponibilidade** durante atualiza�
 
 ---
 
-### 🔧 Exemplo de Configuração
+## 🔧 Exemplo de Configuração
 
 ```yaml
 apiVersion: apps/v1
@@ -55,3 +55,15 @@ spec:
 - Abaixo um exemplo de quando aplicamos uma atualização do Deployment utilizando a estratégia RollingUpdate.
 
 ![Exemplo RollingUpdate](./images/exemplo-rolling-update.png)
+
+## Estratégia Recreate
+
+Ao contrário da RollingUpdate, a **Estratégia Recreate**interrompe todos os Pods atuais antes de iniciar novos. Isso significa que haverá um período em que nenhum Pod estará disponível.
+
+Essa abordagem pode ser útil quando:
+
+- O novo pod não pode coexistir com os antigos (por exemplo, mudança incompatível no banco de dados).
+
+- Você quer garantir que todos os recursos antigos sejam encerrados antes da nova versão subir.
+
+### 🔧 Exemplo de Configuração
