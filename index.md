@@ -1,3 +1,8 @@
+---
+layout: default
+title: Sobre mim
+---
+
 # Sobre mim
 
 Olá, me chamo Neto e atuo como DevOps desde 2020.
