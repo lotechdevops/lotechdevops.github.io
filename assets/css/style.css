@@ -1,0 +1,35 @@
+/* estilo baseado no jekyll-theme-hacker */
+body {
+    margin: 0;
+    padding: 2rem;
+    font-family: monospace;
+    background: #0d0d0d;
+    color: #ccff66;
+  }
+  
+  a {
+    color: #cc99ff;
+    text-decoration: none;
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }
+  
+  h1, h2, h3, h4 {
+    color: #99ff33;
+  }
+  
+  ul {
+    list-style-type: none;
+  }
+  
+  header, main, footer {
+    max-width: 800px;
+    margin: auto;
+  }
+  
+  hr {
+    border: 1px dotted #444;
+  }
+  
