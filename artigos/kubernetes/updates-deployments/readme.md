@@ -92,4 +92,10 @@ spec:
       - image: nginx:1.15.0
         name: webserver
 ```
-- O Recreate não possui configurações adicionais, pois ele remove todos os Pods antes de criar os novos.
+- A estratégia Recreate possui apenas a configuração do campo **type** ,pois ele remove todos os Pods antes de criar os novos.
+
+- Abaixo um exemplo de quando aplicamos uma atualização do Deployment utilizando a estratégia Recreate.
+
+![Exemplo Recreate](./images/exemplo-recreate.png)
+
+Todos os pods são encerrados de uma única vez.
