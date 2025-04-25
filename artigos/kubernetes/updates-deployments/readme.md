@@ -111,3 +111,15 @@ spec:
 ```bash
 kubectl rollout status deployment webserver -n webserver
 ```
+
+- Comando para fazer rollback de uma versão anterior do deployment ou fazer rollback para uma versão específica.
+
+```bash
+kubectl rollout undo deployment webserver -n webserver
+```
+
+```bash
+kubectl rollout undo deployment webserver  -n webserver --to-revision=1
+```
+
+
