@@ -145,5 +145,8 @@ kubectl rollout resume deployment webserver -n webserver
 kubectl rollout restart deployment webserver -n webserver
 ```
 
+🔗 Todos os arquivos utilizados neste artigo estão disponíveis em:
+  
+[https://github.com/lotechdevops/deployments-updates](https://github.com/lotechdevops/config-examples/tree/main/deployments-updates)
 
 
