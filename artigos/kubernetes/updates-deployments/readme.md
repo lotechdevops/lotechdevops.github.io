@@ -102,3 +102,12 @@ spec:
 - Abaixo um exemplo de quando aplicamos uma atualização do Deployment utilizando a estratégia Recreate.
 
 ![Exemplo Recreate](./images/exemplo-recreate.png)
+
+
+### Comandos úteis
+
+- Acompanha o processo de atualização, mostrando se a atualização falhou ou se deu sucesso.
+
+```bash
+kubectl rollout status deployment webserver -n webserver
+```
