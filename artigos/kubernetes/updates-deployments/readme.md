@@ -112,14 +112,38 @@ spec:
 kubectl rollout status deployment webserver -n webserver
 ```
 
-- Comando para fazer rollback de uma versão anterior do deployment ou fazer rollback para uma versão específica.
+- Comandos para fazer rollback de uma versão anterior ou fazer rollback para uma versão específica.
 
 ```bash
 kubectl rollout undo deployment webserver -n webserver
 ```
 
 ```bash
-kubectl rollout undo deployment webserver  -n webserver --to-revision=1
+kubectl rollout undo deployment webserver -n webserver --to-revision=1
 ```
+- Comando para visualizar o histórico de atualizações
+
+```bash 
+kubectl rollout history deployment webserver -n webserver
+```
+
+- Pausar uma atualização em andamento
+
+```bash
+kubectl rollout pause deployment webserver -n webserver
+```
+
+- Retomar uma atualização pausada:
+
+```bash
+kubectl rollout resume deployment webserver -n webserver
+```
+
+- Reiniciar um Deployment:
+
+```bash
+kubectl rollout restart deployment webserver -n webserver
+```
+
 
 
