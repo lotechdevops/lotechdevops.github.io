@@ -9,7 +9,7 @@ Mas você sabia que o Kubernetes oferece **duas estratégias principais** para a
 
 Essas estratégias definem como os Pods de um Deployment serão atualizados quando há alterações na definição do recurso — como uma nova imagem de container ou mudanças nas configurações.
 
-### Estratégia RollingUpdate
+## Estratégia RollingUpdate
 
 A estratégia **RollingUpdate** é a **padrão** utilizada pelo Kubernetes para atualizar os Pods de um Deployment de forma **gradual** — ou seja, ela atualiza um Pod por vez ou em pequenos grupos, sem interromper todo o serviço de uma só vez.
 
@@ -17,7 +17,7 @@ Essa abordagem é ideal para garantir **alta disponibilidade** durante atualiza�
 
 ---
 
-## 🔧 Exemplo de Configuração
+### 🔧 Exemplo de Configuração
 
 ```yaml
 apiVersion: apps/v1
@@ -58,7 +58,7 @@ spec:
 
 ## Estratégia Recreate
 
-Ao contrário da RollingUpdate, a **Estratégia Recreate**interrompe todos os Pods atuais antes de iniciar novos. Isso significa que haverá um período em que nenhum Pod estará disponível.
+Ao contrário da RollingUpdate, a **Estratégia Recreate** interrompe todos os Pods atuais antes de iniciar novos. Isso significa que haverá um período em que nenhum Pod estará disponível.
 
 Essa abordagem pode ser útil quando:
 
