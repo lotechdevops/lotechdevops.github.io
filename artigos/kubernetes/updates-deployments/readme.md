@@ -44,3 +44,6 @@ spec:
           image: nginx:latest
 ```
 
+### Explicação dos campos (type, maxSurge, maxUnavailable)
+
+**type:** Define o tipo de estratégia de atualização utilizada, neste caso, RollingUpdate.
