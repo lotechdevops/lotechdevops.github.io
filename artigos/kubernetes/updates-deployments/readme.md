@@ -46,4 +46,8 @@ spec:
 
 ### Explicação dos campos (type, maxSurge, maxUnavailable)
 
-**type:** Define o tipo de estratégia de atualização utilizada, neste caso, RollingUpdate.
+**type:** - Define o tipo de estratégia de atualização utilizada, neste caso, RollingUpdate.
+
+**maxSurge: 5** - Durante o processo de atualização, o Kubernetes **pode criar até 5 Pods adicionais acima do número especificado em réplicas**. Isso significa que, temporariamente, **podemos ter até 15 Pods em execução (10 réplicas + 5 pods adicionais)** para acelerar a atualização sem aguardar os pods antigos sejam completamente encerrados.
+
+**maxUnavailable: 5** - Define que, durante a atualização, **até 5 pods podem estar indisponíveis simultaneamente**. Isso significa que o Kubernetes **pode encerrar até metade dos pods antigos enquanto cria os novos**, mantendo um balanço entre disponibilidade e velocidade.
