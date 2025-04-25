@@ -51,3 +51,7 @@ spec:
 **maxSurge: 5** - Durante o processo de atualização, o Kubernetes **pode criar até 5 Pods adicionais acima do número especificado em réplicas**. Isso significa que, temporariamente, **podemos ter até 15 Pods em execução (10 réplicas + 5 pods adicionais)** para acelerar a atualização sem aguardar os pods antigos sejam completamente encerrados.
 
 **maxUnavailable: 5** - Define que, durante a atualização, **até 5 pods podem estar indisponíveis simultaneamente**. Isso significa que o Kubernetes **pode encerrar até metade dos pods antigos enquanto cria os novos**, mantendo um balanço entre disponibilidade e velocidade.
+
+- Abaixo um exemplo de quando aplicamos uma atualização do Deployment utilizando a estratégia RollingUpdate.
+
+![Exemplo RollingUpdate](./images/exemplo-rolling-update.png)
