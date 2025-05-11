@@ -70,3 +70,9 @@ spec:
 - **requests.cpu: “1” e request.memory: “512Mi”:** Limita o uso total de requests para CPU e memória no namespace.
 - **limits.cpu: “2” e limits.memory: “2Gi”:** Limita o uso total de limites para CPU e memória no namespace.
 
+### Verificando os detalhes do ResourceQuota
+
+```bash
+kubectl describe resourcequota -n dev
+```
+![Describe ResourceQuota](./images/verificacao-resourcequota.png)
