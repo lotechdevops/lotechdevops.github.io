@@ -126,3 +126,13 @@ No nosso manifesto colocamos que queremos subir 6 réplicas da aplicação.
 Ao verificar os pods em execução foi notado que subiu apenas 4 réplicas. Vamos entender o que aconteceu.
 
 ![Deploy Criado](./images/deploy-criado.png)
+
+#### Cálculo total dos recursos:
+
+- **requests.cpu total:** 6 x 0.2 (200m) = 1200m (1.2 cores)
+- **requests.memory total:** 6 x 64Mi = 384Mi.
+- **limits.cpu total:** 6 x 0.5 (500m) = 3000m (3 cores)
+- **limits.memory total:** 6 x 512Mi = 3072Mi (3Gi)
+
+### Comparação com o ResourceQuota
+
