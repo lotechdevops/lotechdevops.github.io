@@ -35,3 +35,31 @@ Você pode incluir diferentes tipos de recursos no ResourceQuota
 
 ## Como ResouceQuota interage com Requests e Limits?
 
+O ResouceQuota funciona como uma política agregada no nível do namespace, enquanto Requests e Limits são aplicados no nível do pod ou contêiner. Se as somas dos requests ou limits de todos os pods no namespace ultrapassarem os valores configurados no ResourceQuota, novos pods não serão criados.
+
+### Configurando ResourceQuota com requests e limits
+
+- Primeiro, é necessário ter um namespace onde a quota será aplicada.
+
+```bash
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: dev
+```
+- Definindo a ResourceQuota com requests e limits
+
+```bash
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: resource-quota-dev
+  namespace: dev
+spec:
+  hard:
+    pods: "6"
+    requests.cpu: "1"
+    requests.memory: "512Mi"
+    limits.cpu: "2"
+    limits.memory: "2Gi"
+```
