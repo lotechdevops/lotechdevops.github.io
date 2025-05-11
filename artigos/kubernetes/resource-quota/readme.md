@@ -63,3 +63,10 @@ spec:
     limits.cpu: "2"
     limits.memory: "2Gi"
 ```
+
+#### Entendendo o ResourceQuota criado
+
+- **pods: “6”:** Permite no máximo 6 pods no namespace.
+- **requests.cpu: “1” e request.memory: “512Mi”:** Limita o uso total de requests para CPU e memória no namespace.
+- **limits.cpu: “2” e limits.memory: “2Gi”:** Limita o uso total de limites para CPU e memória no namespace.
+
