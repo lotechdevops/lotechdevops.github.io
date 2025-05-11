@@ -64,7 +64,7 @@ spec:
     limits.memory: "2Gi"
 ```
 
-#### Entendendo o ResourceQuota criado
+### Entendendo o ResourceQuota criado
 
 - **pods: “6”:** Permite no máximo 6 pods no namespace.
 - **requests.cpu: “1” e request.memory: “512Mi”:** Limita o uso total de requests para CPU e memória no namespace.
@@ -76,3 +76,47 @@ spec:
 kubectl describe resourcequota -n dev
 ```
 ![Describe ResourceQuota](./images/verificacao-resourcequota.png)
+
+Como pode ser visto acima, ainda não estamos utilizando nenhum recurso no namespace dev.
+
+## Configurando um deployment no namespace dev
+
+```bash
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+      app: myapp
+  name: myapp
+  namespace: dev
+spec:
+  replicas: 6
+  selector:
+    matchLabels:
+      app: myapp
+  template:
+    metadata:
+      labels:
+        app: myapp
+    spec:
+      containers:
+      - image: nginx
+        name: nginx
+        resources:
+          limits:
+            cpu: "0.5"
+            memory: "512Mi"
+          requests:
+            cpu: "0.2"
+```
+
+#### Valores declarados no YAML
+
+- **limits.cpu:** “0.5” (500m) por pod.
+- **limits.memory:** “512Mi” por pod.
+- **requests.cpu:** “0.2” (200m) por pod.
+- **requests.memory:** “64Mi” por pod.
+
+No nosso manifesto colocamos que queremos subir 6 réplicas da aplicação.
+
+
