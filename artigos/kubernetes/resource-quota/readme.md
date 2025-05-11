@@ -7,11 +7,28 @@ Isso é útil em ambientes com múltiplos usuários ou aplicações, prevenindo 
 
 Você pode incluir diferentes tipos de recursos no ResourceQuota
 
-### Tipos de Recursos Suportados
-
-Você pode incluir diferentes tipos de recursos no ResourceQuota
-
 #### Recursos computacionais
 
 - requests.cpu, requests.memory
 - limits.cpu, limits.memory
+
+#### Recursos de armazenamento
+
+- requests.storage
+- Limite por StorageClass (persistentVolumeClaims, storageclass.<name>.resquests.storage)
+
+#### Quantidade de objetos
+
+- Número máximo de pods (pods), serviços (services), ingress (ingresses), ConfigMaps (configmaps), Secrets (secrets), entre outros.
+
+### Principais Benefícios
+
+- Controle de recursos no nível de namespace.
+- Prevenção contra abuso de recursos.
+- Melhor gerenciamento de custos em clusters compartilhados.
+
+### Recomendações
+
+- **Analise o uso do namespace:** Garanta que os limites do ResourceQuota atendem à carga esperada.
+- **Planeje os recursos dos pods:** Certifique-se de que os requests e limits sejam otimizados para evitar disperdício ou restrições desnecessárias.
+- Use ferramentas como o kubectl describe quota <quota-name> para verificar o consumo atual e entender melhor os limites impostos.
