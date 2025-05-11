@@ -64,7 +64,7 @@ spec:
     limits.memory: "2Gi"
 ```
 
-### Entendendo o ResourceQuota criado
+#### Entendendo o ResourceQuota criado
 
 - **pods: “6”:** Permite no máximo 6 pods no namespace.
 - **requests.cpu: “1” e request.memory: “512Mi”:** Limita o uso total de requests para CPU e memória no namespace.
@@ -119,4 +119,10 @@ spec:
 
 No nosso manifesto colocamos que queremos subir 6 réplicas da aplicação.
 
+### Entendendo os limits e requests após subir a aplicação no namespace
 
+![Entendendo ResourceQuota](./images/entendendo-resourcequota.png)
+
+Ao verificar os pods em execução foi notado que subiu apenas 4 réplicas. Vamos entender o que aconteceu.
+
+![Deploy Criado](./images/deploy-criado.png)
