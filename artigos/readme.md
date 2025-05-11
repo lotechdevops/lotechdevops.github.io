@@ -18,6 +18,7 @@ Repositório com meus artigos, tutoriais e guias práticos sobre DevOps, Cloud e
 ### Kubernetes
 - [Certificados SSL/TLS para Kubernetes com Cert-Manager e Let’s Encrypt](./kubernetes/certmanager/readme.md)
 - [Como Atualizar Deployments no Kubernetes: Estratégias RollingUpdate e Recreate](./kubernetes/updates-deployments/readme.md)
+- [ResourceQuota no Kubernetes](./kubernetes/resource-quota/readme.md)]
 
 ### AWS
 - Em breve...
