@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkdevopsr_66=self.webpackChunkdevopsr_66||[]).push([[4883],{3058:e=>{e.exports=JSON.parse('{"categoryGeneratedIndex":{"title":"Cloud","description":"Conceitos Kubernetes.","slug":"/category/cloud","permalink":"/docs/category/cloud","sidebar":"tutorialSidebar","navigation":{"next":{"title":"intro","permalink":"/docs/Cloud/intro"}}}}')}}]);
