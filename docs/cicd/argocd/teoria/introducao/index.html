@@ -10,8 +10,8 @@
 
 
 <script src="https://static.cloudflareinsights.com/beacon.min.js" defer="defer" data-cf-beacon="{&quot;token&quot;: &quot;cdf6c45914ab475fb2b617f03b308721&quot;}"></script><link rel="stylesheet" href="/assets/css/styles.e57c0933.css">
-<script src="/assets/js/runtime~main.5bb5ca3d.js" defer="defer"></script>
-<script src="/assets/js/main.593002c7.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.1012df1a.js" defer="defer"></script>
+<script src="/assets/js/main.3fa8c8f9.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -68,12 +68,13 @@
 <hr>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="características-principais-do-argocd">Características principais do ArgoCD<a href="#características-principais-do-argocd" class="hash-link" aria-label="Link direto para Características principais do ArgoCD" title="Link direto para Características principais do ArgoCD" translate="no">​</a></h2>
 <ul>
-<li><strong>Suporte a múltiplos formatos</strong>: YAML puro, <strong>Helm Charts</strong>, <strong>Kustomize</strong>.</li>
+<li><strong>Suporte a múltiplos formatos</strong>: YAML puro, <strong>Helm Charts</strong>, <strong>Kustomize</strong>, <strong>Jsonnet</strong>.</li>
 <li><strong>Interface amigável</strong>: painel web que mostra o status das aplicações em tempo real.</li>
 <li><strong>Autocorreção (self-heal)</strong>: detecta e corrige automaticamente alterações manuais no cluster.</li>
 <li><strong>Multi-cluster</strong>: um único ArgoCD pode controlar vários clusters.</li>
 <li><strong>Integração com GitHub, GitLab, Bitbucket e repositórios privados</strong>.</li>
-<li><strong>Políticas de sincronização</strong>: escolha entre sync manual, automático ou com aprovação.</li>
+<li><strong>Políticas de sincronização</strong>: sincronização manual, automática ou automática com self-heal (autocorreção).</li>
+<li><strong>SSO/OIDC</strong>: integração com sistemas de autenticação corporativa.</li>
 </ul>
 <hr>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="por-que-o-argocd-é-importante">Por que o ArgoCD é importante?<a href="#por-que-o-argocd-é-importante" class="hash-link" aria-label="Link direto para Por que o ArgoCD é importante?" title="Link direto para Por que o ArgoCD é importante?" translate="no">​</a></h2>
@@ -83,12 +84,39 @@
 <li>Toda mudança é feita via <strong>commit e pull request</strong>, nunca manualmente no cluster.</li>
 <li>Os ambientes se tornam <strong>auditáveis, previsíveis e reproduzíveis</strong>.</li>
 </ul>
-<p>Isso traz ganhos diretos em <strong>segurança, compliance e agilidade</strong>.<br>
-<!-- -->Não é à toa que empresas de grande porte em setores como <strong>bancos, telecom e indústrias reguladas</strong> adotam o ArgoCD como padrão de entrega contínua.</p>
+<p>Isso traz ganhos diretos em <strong>segurança, compliance e agilidade</strong>.</p>
+<p>Não é à toa que empresas de grande porte em setores como <strong>bancos, telecom e indústrias reguladas</strong> adotam o ArgoCD como padrão de entrega contínua.</p>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="argocd-vs-outras-ferramentas">ArgoCD vs outras ferramentas<a href="#argocd-vs-outras-ferramentas" class="hash-link" aria-label="Link direto para ArgoCD vs outras ferramentas" title="Link direto para ArgoCD vs outras ferramentas" translate="no">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="argocd-vs-fluxcd">ArgoCD vs FluxCD<a href="#argocd-vs-fluxcd" class="hash-link" aria-label="Link direto para ArgoCD vs FluxCD" title="Link direto para ArgoCD vs FluxCD" translate="no">​</a></h3>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token plain">| Aspecto              | ArgoCD                          | FluxCD                           |</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">| -------------------- | ------------------------------- | -------------------------------- |</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">| Interface            | UI Web completa                 | Apenas CLI e APIs                |</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">| Complexidade         | Mais recursos e configurações   | Mais simples e minimalista       |</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">| Multi-cluster        | Suporte nativo robusto          | Requer configuração adicional    |</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">| Adoção               | Mais popular                    | Crescente na comunidade CNCF     |</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">| Curva de aprendizado | Moderada                        | Mais íngreme (requer conhecimento de Flux Toolkit) |</span><br></span></code></pre></div></div>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="argocd-vs-jenkinsgitlab-ci">ArgoCD vs Jenkins/GitLab CI<a href="#argocd-vs-jenkinsgitlab-ci" class="hash-link" aria-label="Link direto para ArgoCD vs Jenkins/GitLab CI" title="Link direto para ArgoCD vs Jenkins/GitLab CI" translate="no">​</a></h3>
+<p>ArgoCD <strong>não substitui</strong> CI/CD pipelines tradicionais. Eles trabalham juntos:</p>
+<ul>
+<li><strong>Jenkins/GitLab CI</strong>: faz build, testes, gera imagens Docker.</li>
+<li><strong>ArgoCD</strong>: garante que essas imagens estejam rodando corretamente no cluster.</li>
+</ul>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="quando-usar-argocd">Quando usar ArgoCD<a href="#quando-usar-argocd" class="hash-link" aria-label="Link direto para Quando usar ArgoCD" title="Link direto para Quando usar ArgoCD" translate="no">​</a></h2>
+<p><strong>Use ArgoCD quando</strong>:</p>
+<ul>
+<li>Você tem múltiplos ambientes (dev, staging, prod)</li>
+<li>Precisa de auditoria e compliance</li>
+<li>Quer evitar mudanças manuais no cluster</li>
+<li>Gerencia múltiplos microserviços</li>
+<li>Precisa de multi-cluster management</li>
+<li>Quer implementar GitOps</li>
+</ul>
+<p><strong>Considere alternativas quando:</strong></p>
+<ul>
+<li>Você tem apenas um ambiente simples</li>
+<li>Não usa Kubernetes</li>
+<li>Prefere ferramentas mais minimalistas (considere FluxCD)</li>
+</ul>
 <hr>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="conclusão">Conclusão<a href="#conclusão" class="hash-link" aria-label="Link direto para Conclusão" title="Link direto para Conclusão" translate="no">​</a></h2>
 <p>O <strong>ArgoCD</strong> é uma ferramenta essencial para quem deseja levar <strong>Continuous Delivery no Kubernetes</strong> a um nível de <strong>segurança, consistência e governança</strong>.<br>
 <!-- -->Ele resolve dores reais de times que precisam lidar com múltiplos ambientes e microserviços em escala.</p>
-<p>No próximo capítulo, vamos entender o <strong>GitOps</strong>, o conceito central que fundamenta o ArgoCD e explica por que ele é tão poderoso.</p></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col"><a href="https://github.com/lotechdevops/lotechdevops.github.io/tree/main/docs/cicd/argocd/teoria/1.introducao.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Editar esta página</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Páginas de documento"><a class="pagination-nav__link pagination-nav__link--prev" href="/docs/category/conceitos"><div class="pagination-nav__sublabel">Anterior</div><div class="pagination-nav__label">Conceitos</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/docs/cicd/argocd/teoria/gitops"><div class="pagination-nav__sublabel">Próxima</div><div class="pagination-nav__label">2. GitOps</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#contexto" class="table-of-contents__link toc-highlight">Contexto</a></li><li><a href="#o-que-é-argocd" class="table-of-contents__link toc-highlight">O que é ArgoCD?</a></li><li><a href="#problemas-que-o-argocd-resolve" class="table-of-contents__link toc-highlight">Problemas que o ArgoCD resolve</a></li><li><a href="#características-principais-do-argocd" class="table-of-contents__link toc-highlight">Características principais do ArgoCD</a></li><li><a href="#por-que-o-argocd-é-importante" class="table-of-contents__link toc-highlight">Por que o ArgoCD é importante?</a></li><li><a href="#conclusão" class="table-of-contents__link toc-highlight">Conclusão</a></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"></div></footer></div>
+<p>No próximo capítulo, vamos entender o <strong>GitOps</strong>, o conceito central que fundamenta o ArgoCD e explica por que ele é tão poderoso.</p></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col"><a href="https://github.com/lotechdevops/lotechdevops.github.io/tree/main/docs/cicd/argocd/teoria/1.introducao.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Editar esta página</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Páginas de documento"><a class="pagination-nav__link pagination-nav__link--prev" href="/docs/category/conceitos"><div class="pagination-nav__sublabel">Anterior</div><div class="pagination-nav__label">Conceitos</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/docs/cicd/argocd/teoria/gitops"><div class="pagination-nav__sublabel">Próxima</div><div class="pagination-nav__label">2. GitOps</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#contexto" class="table-of-contents__link toc-highlight">Contexto</a></li><li><a href="#o-que-é-argocd" class="table-of-contents__link toc-highlight">O que é ArgoCD?</a></li><li><a href="#problemas-que-o-argocd-resolve" class="table-of-contents__link toc-highlight">Problemas que o ArgoCD resolve</a></li><li><a href="#características-principais-do-argocd" class="table-of-contents__link toc-highlight">Características principais do ArgoCD</a></li><li><a href="#por-que-o-argocd-é-importante" class="table-of-contents__link toc-highlight">Por que o ArgoCD é importante?</a></li><li><a href="#argocd-vs-outras-ferramentas" class="table-of-contents__link toc-highlight">ArgoCD vs outras ferramentas</a><ul><li><a href="#argocd-vs-fluxcd" class="table-of-contents__link toc-highlight">ArgoCD vs FluxCD</a></li><li><a href="#argocd-vs-jenkinsgitlab-ci" class="table-of-contents__link toc-highlight">ArgoCD vs Jenkins/GitLab CI</a></li></ul></li><li><a href="#quando-usar-argocd" class="table-of-contents__link toc-highlight">Quando usar ArgoCD</a></li><li><a href="#conclusão" class="table-of-contents__link toc-highlight">Conclusão</a></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"></div></footer></div>
 </body>
 </html>

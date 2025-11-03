@@ -10,8 +10,8 @@
 
 
 <script src="https://static.cloudflareinsights.com/beacon.min.js" defer="defer" data-cf-beacon="{&quot;token&quot;: &quot;cdf6c45914ab475fb2b617f03b308721&quot;}"></script><link rel="stylesheet" href="/assets/css/styles.e57c0933.css">
-<script src="/assets/js/runtime~main.5bb5ca3d.js" defer="defer"></script>
-<script src="/assets/js/main.593002c7.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.1012df1a.js" defer="defer"></script>
+<script src="/assets/js/main.3fa8c8f9.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -34,7 +34,7 @@
 <li>
 <p><strong>Git como única fonte de verdade</strong></p>
 <ul>
-<li>O repositório Git é o ponto central onde estão armazenados todos os manifests.</li>
+<li>O repositório Git é o ponto central onde estão armazenados todos os manifestos.</li>
 <li>Se algo não está no Git, não existe oficialmente.</li>
 </ul>
 </li>
@@ -60,12 +60,14 @@
 <li><strong>Rollback simples</strong>: voltar para um estado anterior é apenas reverter um commit.</li>
 <li><strong>Colaboração facilitada</strong>: todos os times trabalham a partir do mesmo repositório.</li>
 <li><strong>Escalabilidade</strong>: ideal para gerenciar dezenas ou centenas de microserviços.</li>
+<li><strong>Disaster Recovery</strong>: o Git é o backup natural do seu ambiente.</li>
+<li><strong>Conformidade e compliance</strong>: atende requisitos de auditoria em ambientes regulados.</li>
 </ul>
 <hr>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="fluxo-de-trabalho-gitops">Fluxo de Trabalho GitOps<a href="#fluxo-de-trabalho-gitops" class="hash-link" aria-label="Link direto para Fluxo de Trabalho GitOps" title="Link direto para Fluxo de Trabalho GitOps" translate="no">​</a></h2>
 <p>Um ciclo GitOps típico funciona assim:</p>
 <ol>
-<li>0 <strong>desenvolvedor altera</strong> um manifest ou Helm Chart no repositório Git.</li>
+<li>0 <strong>desenvolvedor altera</strong> um manifesto ou Helm Chart no repositório Git.</li>
 <li>A alteração passa por <strong>revisão e aprovação</strong> via Pull Request.</li>
 <li>Após o merge, o <strong>estado desejado é atualizado</strong> no Git.</li>
 <li>O <strong>agente GitOps</strong> (como o ArgoCD) detecta a mudança e aplica no cluster.</li>
@@ -75,45 +77,105 @@
 <hr>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="gitops-x-cicd-tradicional">GitOps x CI/CD Tradicional<a href="#gitops-x-cicd-tradicional" class="hash-link" aria-label="Link direto para GitOps x CI/CD Tradicional" title="Link direto para GitOps x CI/CD Tradicional" translate="no">​</a></h2>
 <p>É comum confundir <strong>GitOps</strong> com pipelines <strong>CI/CD</strong>, mas eles têm funções diferentes:</p>
-<ul>
-<li>
-<p><strong>CI (Continuos Integration)</strong></p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="ci-continuos-integration">CI (Continuos Integration)<a href="#ci-continuos-integration" class="hash-link" aria-label="Link direto para CI (Continuos Integration)" title="Link direto para CI (Continuos Integration)" translate="no">​</a></h3>
 <ul>
 <li>Foca em <strong>build, testes e validações</strong>.</li>
 <li>Exemplo: compilar código, rodar testes unitários, gerar imagem Docker.</li>
 <li>Ferramentas comuns: Jenkins, GitHub Actions, GitLab CI.</li>
 </ul>
-</li>
-<li>
-<p><strong>GitOps (Continuos Delivery)</strong></p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="cd-tradicional-push-based">CD Tradicional (Push-based)<a href="#cd-tradicional-push-based" class="hash-link" aria-label="Link direto para CD Tradicional (Push-based)" title="Link direto para CD Tradicional (Push-based)" translate="no">​</a></h3>
 <ul>
-<li>Foca em <strong>entregar e manter aplicações em execução</strong></li>
+<li>Pipeline <strong>empurra</strong> mudanças para o ambiente.</li>
+<li>Requer credenciais de acesso ao cluster no CI/CD.</li>
+<li>Menos seguro (credenciais expostas).</li>
+</ul>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token plain">[Git] → [CI Pipeline] → [kubectl apply] → [Kubernetes Cluster]</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">         ↑ possui credenciais do cluster</span><br></span></code></pre></div></div>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="gitops-pull-based-cd">GitOps (Pull-based CD)<a href="#gitops-pull-based-cd" class="hash-link" aria-label="Link direto para GitOps (Pull-based CD)" title="Link direto para GitOps (Pull-based CD)" translate="no">​</a></h3>
+<ul>
+<li>Agente <strong>dentro do cluster</strong> puxa mudanças do Git.</li>
+<li>Não expõe credenciais do cluster.</li>
+<li>Mais seguro e auditável.</li>
 <li>Exemplo: garantir que o cluster esteja rodando a versão da aplicação definida no Git.</li>
 <li>Ferramentas comuns: ArgoCD, FluxCD.</li>
 </ul>
-</li>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token plain">[Git] ← [ArgoCD dentro do cluster] → [Kubernetes Cluster]</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">         ↑ monitora continuamente</span><br></span></code></pre></div></div>
+<p><strong>O ponto-chave é</strong>: CI prepara o pacote, GitOps garante que o pacote esteja rodando corretamente no ambiente.</p>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="estratégias-de-repositório">Estratégias de Repositório<a href="#estratégias-de-repositório" class="hash-link" aria-label="Link direto para Estratégias de Repositório" title="Link direto para Estratégias de Repositório" translate="no">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="mono-repo">Mono-repo<a href="#mono-repo" class="hash-link" aria-label="Link direto para Mono-repo" title="Link direto para Mono-repo" translate="no">​</a></h3>
+<p>Um único repositório contém todos os manifestos de todas as aplicações.</p>
+<p><strong>Vantagens</strong>:</p>
+<ul>
+<li>Simples de gerenciar</li>
+<li>Fácil visualização de todas as apps</li>
+<li>Ideal para times pequenos</li>
 </ul>
-<p>O ponto-chave é: <strong>CI prepara o pacote, GitOps garante que o pacote esteja rodando corretamente no ambiente</strong>.</p>
+<p><strong>Desvantagens</strong>:</p>
+<ul>
+<li>Pode crescer muito</li>
+<li>Difícil controlar permissões granulares</li>
+<li>Commits afetam muitas aplicações</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="multi-repo">Multi-repo<a href="#multi-repo" class="hash-link" aria-label="Link direto para Multi-repo" title="Link direto para Multi-repo" translate="no">​</a></h3>
+<p>Cada aplicação tem seu próprio repositório.</p>
+<p><strong>Vantagens</strong>:</p>
+<ul>
+<li>Isolamento completo entre apps</li>
+<li>Controle de acesso granular</li>
+<li>Escalável para grandes organizações</li>
+</ul>
+<p><strong>Desvantagens</strong>:</p>
+<ul>
+<li>Mais completo de gerenciar</li>
+<li>Múltiplos repositórios para sincronizar</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="hybrid-recomendado">Hybrid (Recomendado)<a href="#hybrid-recomendado" class="hash-link" aria-label="Link direto para Hybrid (Recomendado)" title="Link direto para Hybrid (Recomendado)" translate="no">​</a></h3>
+<p>Repositórios separados para:</p>
+<ul>
+<li><strong>App code</strong> (código da aplicação).</li>
+<li><strong>App config</strong> (manifestos Kubernetes)</li>
+<li><strong>Infraestrutura</strong> (recursos compartilhados)</li>
+</ul>
+<p><strong>Vantagens</strong>:</p>
+<ul>
+<li>Separação de concerns</li>
+<li>Diferentes ciclos de vida</li>
+<li>Diferentes permissões por tipo</li>
+</ul>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="environment-promotion">Environment Promotion<a href="#environment-promotion" class="hash-link" aria-label="Link direto para Environment Promotion" title="Link direto para Environment Promotion" translate="no">​</a></h2>
+<p>Como promover mudanças entre ambientes (dev -&gt; staging -&gt; prod)?</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="opção-1-branches">Opção 1: Branches<a href="#opção-1-branches" class="hash-link" aria-label="Link direto para Opção 1: Branches" title="Link direto para Opção 1: Branches" translate="no">​</a></h3>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token plain">git/</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">├── branches/dev</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">├── branches/staging</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">└── branches/prod</span><br></span></code></pre></div></div>
+<p>Promoção via <strong>merge</strong> ou <strong>cherry-pick</strong>.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="opção-2-diretórios">Opção 2: Diretórios<a href="#opção-2-diretórios" class="hash-link" aria-label="Link direto para Opção 2: Diretórios" title="Link direto para Opção 2: Diretórios" translate="no">​</a></h3>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token plain">git/</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">├── environments/dev/</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">├── environments/staging/</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">└── environments/prod/</span><br></span></code></pre></div></div>
+<p>Promoção via <strong>cópia de arquivos</strong> ou <strong>PR</strong>.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="opção-3-repositórios-separados">Opção 3: Repositórios separados<a href="#opção-3-repositórios-separados" class="hash-link" aria-label="Link direto para Opção 3: Repositórios separados" title="Link direto para Opção 3: Repositórios separados" translate="no">​</a></h3>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token plain">app-dev/</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">app-staging/</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">app-prod/</span><br></span></code></pre></div></div>
+<p>Promoção via <strong>tag</strong> e <strong>atualização de valores</strong>.</p>
 <hr>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="casos-de-uso">Casos de Uso<a href="#casos-de-uso" class="hash-link" aria-label="Link direto para Casos de Uso" title="Link direto para Casos de Uso" translate="no">​</a></h2>
 <ul>
 <li><strong>Times distribuídos</strong> que precisam garantir consistência entre múltiplos ambientes (dev, stage e prod).</li>
-<li><strong>Ambientes regulados</strong> (bancos, saúde, telecom) que exigem **auditoria e rastreabilidade.</li>
+<li><strong>Ambientes regulados</strong> (bancos, saúde, telecom) que exigem <strong>auditoria e rastreabilidade</strong>.</li>
 <li><strong>Escalabilidade de microserviços</strong>, onde cada equipe gerencia suas próprias aplicações.</li>
 <li><strong>Resiliência</strong>: rollback imediato revertendo um commit no Git.</li>
 <li><strong>Governança corporativa</strong>: centralizar políticas e configurações no Git, aplicadas de forma automática.</li>
+<li><strong>Multi-cloud/Hybrid cloud</strong>: gerenciar múltiplos clusters de forma unificada.</li>
 </ul>
 <hr>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="exemplos-práticos">Exemplos Práticos<a href="#exemplos-práticos" class="hash-link" aria-label="Link direto para Exemplos Práticos" title="Link direto para Exemplos Práticos" translate="no">​</a></h2>
-<ul>
-<li><strong>Atualizar uma aplicação</strong>: mudar a versão da imagem no <code>values.yaml</code>, dar commit -&gt; ArgoCD aplica no cluster.</li>
-<li><strong>Rollback rápido</strong>: reverter o commit -&gt; ArgoCD restaura a versão anterior em minutos.</li>
-<li><strong>Clonar ambientes</strong>: apontar clusters diferentes para o mesmo repositório -&gt; replicar staging e produção.</li>
-</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="atualizar-uma-aplicação">Atualizar uma aplicação<a href="#atualizar-uma-aplicação" class="hash-link" aria-label="Link direto para Atualizar uma aplicação" title="Link direto para Atualizar uma aplicação" translate="no">​</a></h3>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token plain"># 1. Editar values.yaml</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">image:</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">  tag: v1.2.3  # nova versão</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"># 2. Commit e push</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">git add values.yaml</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">git commit -m &quot;Update app to v1.2.3&quot;</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">git push</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"># 3. ArgoCD detecta e aplica automaticamente</span><br></span></code></pre></div></div>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="rollback-rápido">Rollback rápido<a href="#rollback-rápido" class="hash-link" aria-label="Link direto para Rollback rápido" title="Link direto para Rollback rápido" translate="no">​</a></h3>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token plain"># Reverter commit</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">git revert HEAD</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">git push</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"># ArgoCD restaura a versão anterior em minutos</span><br></span></code></pre></div></div>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="clonar-ambientes">Clonar ambientes<a href="#clonar-ambientes" class="hash-link" aria-label="Link direto para Clonar ambientes" title="Link direto para Clonar ambientes" translate="no">​</a></h3>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token plain"># Mesmo repositório, diferentes Applications no ArgoCD</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"># Production aponta para /prod</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"># Staging aponta para /staging</span><br></span></code></pre></div></div>
 <hr>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="conclusão">Conclusão<a href="#conclusão" class="hash-link" aria-label="Link direto para Conclusão" title="Link direto para Conclusão" translate="no">​</a></h2>
 <p>O <strong>GitOps</strong> é uma forma moderna e confiável de gerenciar aplicações em Kubernetes.</p>
 <p>Ele combina os benefícios do <strong>controle de versão do Git</strong> com a <strong>automação de entrega contínua</strong>, garantindo ambientes mais seguros, auditáveis e previsíveis.</p>
-<p>No próximo capítulo, vamos explorar os <strong>Conceitos Fundamentais do ArgoCD</strong> e entender como ele implementa GitOps na prática.</p></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col"><a href="https://github.com/lotechdevops/lotechdevops.github.io/tree/main/docs/cicd/argocd/teoria/2.gitops.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Editar esta página</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Páginas de documento"><a class="pagination-nav__link pagination-nav__link--prev" href="/docs/cicd/argocd/teoria/introducao"><div class="pagination-nav__sublabel">Anterior</div><div class="pagination-nav__label">1. Introdução</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/docs/cicd/argocd/teoria/conceitos-fundamentais"><div class="pagination-nav__sublabel">Próxima</div><div class="pagination-nav__label">3. Conceitos do ArgoCD</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#conceito" class="table-of-contents__link toc-highlight">Conceito</a></li><li><a href="#princípios-do-gitops" class="table-of-contents__link toc-highlight">Princípios do GitOps</a></li><li><a href="#benefícios-do-gitops" class="table-of-contents__link toc-highlight">Benefícios do GitOps</a></li><li><a href="#fluxo-de-trabalho-gitops" class="table-of-contents__link toc-highlight">Fluxo de Trabalho GitOps</a></li><li><a href="#gitops-x-cicd-tradicional" class="table-of-contents__link toc-highlight">GitOps x CI/CD Tradicional</a></li><li><a href="#casos-de-uso" class="table-of-contents__link toc-highlight">Casos de Uso</a></li><li><a href="#exemplos-práticos" class="table-of-contents__link toc-highlight">Exemplos Práticos</a></li><li><a href="#conclusão" class="table-of-contents__link toc-highlight">Conclusão</a></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"></div></footer></div>
+<p>No próximo capítulo, vamos explorar os <strong>Conceitos Fundamentais do ArgoCD</strong> e entender como ele implementa GitOps na prática.</p></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col"><a href="https://github.com/lotechdevops/lotechdevops.github.io/tree/main/docs/cicd/argocd/teoria/2.gitops.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Editar esta página</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Páginas de documento"><a class="pagination-nav__link pagination-nav__link--prev" href="/docs/cicd/argocd/teoria/introducao"><div class="pagination-nav__sublabel">Anterior</div><div class="pagination-nav__label">1. Introdução</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/docs/cicd/argocd/teoria/conceitos-fundamentais"><div class="pagination-nav__sublabel">Próxima</div><div class="pagination-nav__label">3. Conceitos do ArgoCD</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#conceito" class="table-of-contents__link toc-highlight">Conceito</a></li><li><a href="#princípios-do-gitops" class="table-of-contents__link toc-highlight">Princípios do GitOps</a></li><li><a href="#benefícios-do-gitops" class="table-of-contents__link toc-highlight">Benefícios do GitOps</a></li><li><a href="#fluxo-de-trabalho-gitops" class="table-of-contents__link toc-highlight">Fluxo de Trabalho GitOps</a></li><li><a href="#gitops-x-cicd-tradicional" class="table-of-contents__link toc-highlight">GitOps x CI/CD Tradicional</a><ul><li><a href="#ci-continuos-integration" class="table-of-contents__link toc-highlight">CI (Continuos Integration)</a></li><li><a href="#cd-tradicional-push-based" class="table-of-contents__link toc-highlight">CD Tradicional (Push-based)</a></li><li><a href="#gitops-pull-based-cd" class="table-of-contents__link toc-highlight">GitOps (Pull-based CD)</a></li></ul></li><li><a href="#estratégias-de-repositório" class="table-of-contents__link toc-highlight">Estratégias de Repositório</a><ul><li><a href="#mono-repo" class="table-of-contents__link toc-highlight">Mono-repo</a></li><li><a href="#multi-repo" class="table-of-contents__link toc-highlight">Multi-repo</a></li><li><a href="#hybrid-recomendado" class="table-of-contents__link toc-highlight">Hybrid (Recomendado)</a></li></ul></li><li><a href="#environment-promotion" class="table-of-contents__link toc-highlight">Environment Promotion</a><ul><li><a href="#opção-1-branches" class="table-of-contents__link toc-highlight">Opção 1: Branches</a></li><li><a href="#opção-2-diretórios" class="table-of-contents__link toc-highlight">Opção 2: Diretórios</a></li><li><a href="#opção-3-repositórios-separados" class="table-of-contents__link toc-highlight">Opção 3: Repositórios separados</a></li></ul></li><li><a href="#casos-de-uso" class="table-of-contents__link toc-highlight">Casos de Uso</a></li><li><a href="#exemplos-práticos" class="table-of-contents__link toc-highlight">Exemplos Práticos</a><ul><li><a href="#atualizar-uma-aplicação" class="table-of-contents__link toc-highlight">Atualizar uma aplicação</a></li><li><a href="#rollback-rápido" class="table-of-contents__link toc-highlight">Rollback rápido</a></li><li><a href="#clonar-ambientes" class="table-of-contents__link toc-highlight">Clonar ambientes</a></li></ul></li><li><a href="#conclusão" class="table-of-contents__link toc-highlight">Conclusão</a></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"></div></footer></div>
 </body>
 </html>
