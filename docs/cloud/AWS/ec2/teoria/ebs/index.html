@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="pt-BR" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-cloud/AWS/ec2/teoria/ebs" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.9.1">
+<title data-rh="true">EBS - Elastic Block Store | DevOpsR66</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://www.devopsr66.com/img/social-card.png"><meta data-rh="true" name="twitter:image" content="https://www.devopsr66.com/img/social-card.png"><meta data-rh="true" property="og:url" content="https://www.devopsr66.com/docs/cloud/AWS/ec2/teoria/ebs"><meta data-rh="true" property="og:locale" content="pt_BR"><meta data-rh="true" name="docusaurus_locale" content="pt-BR"><meta data-rh="true" name="docsearch:language" content="pt-BR"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="EBS - Elastic Block Store | DevOpsR66"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://www.devopsr66.com/docs/cloud/AWS/ec2/teoria/ebs"><link data-rh="true" rel="alternate" href="https://www.devopsr66.com/docs/cloud/AWS/ec2/teoria/ebs" hreflang="pt-BR"><link data-rh="true" rel="alternate" href="https://www.devopsr66.com/docs/cloud/AWS/ec2/teoria/ebs" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Cloud","item":"https://www.devopsr66.com/docs/category/cloud"},{"@type":"ListItem","position":2,"name":"EC2 - Elastic Compute Cloud","item":"https://www.devopsr66.com/docs/category/ec2---elastic-compute-cloud"},{"@type":"ListItem","position":3,"name":"Conceitos de Amazon EC2","item":"https://www.devopsr66.com/docs/category/conceitos-de-amazon-ec2"},{"@type":"ListItem","position":4,"name":"6. EBS - Elastic Block Store","item":"https://www.devopsr66.com/docs/cloud/AWS/ec2/teoria/ebs"}]}</script><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="DevOpsR66 RSS Feed">
+<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="DevOpsR66 Atom Feed">
+
+
+
+
+<script src="https://static.cloudflareinsights.com/beacon.min.js" defer="defer" data-cf-beacon="{&quot;token&quot;: &quot;cdf6c45914ab475fb2b617f03b308721&quot;}"></script><link rel="stylesheet" href="/assets/css/styles.e57c0933.css">
+<script src="/assets/js/runtime~main.07d8fb46.js" defer="defer"></script>
+<script src="/assets/js/main.3fa8c8f9.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<svg style="display: none;"><defs>
+<symbol id="theme-svg-external-link" viewBox="0 0 24 24"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"/></symbol>
+</defs></svg>
+<script>!function(){var t=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();document.documentElement.setAttribute("data-theme",t||"dark"),document.documentElement.setAttribute("data-theme-choice",t||"dark")}(),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><link rel="preload" as="image" href="/img/logo.jpeg"><div role="region" aria-label="Pular para o conteúdo principal"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Pular para o conteúdo principal</a></div><nav aria-label="Navegação principal" class="theme-layout-navbar navbar navbar--fixed-top"><div class="navbar__inner"><div class="theme-layout-navbar-left navbar__items"><button aria-label="Alternar painel de navegação" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/"><div class="navbar__logo"><img src="/img/logo.jpeg" alt="Logo DevOpsR66" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src="/img/logo.jpeg" alt="Logo DevOpsR66" class="themedComponent_mlkZ themedComponent--dark_xIcU"></div><b class="navbar__title text--truncate">DevOpsR66</b></a><a class="navbar__item navbar__link" href="/docs/kubernetes/intro">Kubernetes</a><a class="navbar__item navbar__link" href="/docs/cloud/intro">Cloud</a><a class="navbar__item navbar__link" href="/docs/iac/intro">IaC</a><a class="navbar__item navbar__link" href="/docs/observabilidade/intro">Observabilidade</a><a class="navbar__item navbar__link" href="/docs/linux/intro">Linux</a><a class="navbar__item navbar__link" href="/docs/cicd/intro">CI/CD</a></div><div class="theme-layout-navbar-right navbar__items navbar__items--right"><a href="https://github.com/lotechdevops" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link header-github-link"></a><a href="https://www.linkedin.com/in/divino-sabino-moreira-neto-918844108/" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link header-linkedin-link"></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="modo do sistema" aria-label="Mudar entre modo claro e escuro (modo do sistema está ativo)"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP systemToggleIcon_QzmC"><path fill="currentColor" d="m12 21c4.971 0 9-4.029 9-9s-4.029-9-9-9-9 4.029-9 9 4.029 9 9 9zm4.95-13.95c1.313 1.313 2.05 3.093 2.05 4.95s-0.738 3.637-2.05 4.95c-1.313 1.313-3.093 2.05-4.95 2.05v-14c1.857 0 3.637 0.737 4.95 2.05z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="theme-layout-main main-wrapper mainWrapper_z2l0"><div class="docsWrapper_hBAB"><button aria-label="Voltar para o topo" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class="sidebarViewport_aRkj"><div class="sidebar_njMd"><nav aria-label="Painel lateral de documentos" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--active" href="/docs/category/cloud"><span title="Cloud" class="categoryLinkLabel_W154">Cloud</span></a><button aria-label="Recolher a categoria &#x27;Cloud&#x27;" aria-expanded="true" type="button" class="clean-btn menu__caret"></button></div><ul class="menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret menu__link--active" role="button" aria-expanded="true" tabindex="0" href="/docs/category/infraestrutura-global-da-aws"><span title="AWS" class="categoryLinkLabel_W154">AWS</span></a></div><ul class="menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" tabindex="0" href="/docs/category/infraestrutura-global-da-aws"><span title="Infraestrutura Global da AWS" class="categoryLinkLabel_W154">Infraestrutura Global da AWS</span></a><button aria-label="Expandir a categoria &#x27;Infraestrutura Global da AWS&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--active" tabindex="0" href="/docs/category/ec2---elastic-compute-cloud"><span title="EC2 - Elastic Compute Cloud" class="categoryLinkLabel_W154">EC2 - Elastic Compute Cloud</span></a><button aria-label="Recolher a categoria &#x27;EC2 - Elastic Compute Cloud&#x27;" aria-expanded="true" type="button" class="clean-btn menu__caret"></button></div><ul class="menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-4 menu__list-item"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--active" tabindex="0" href="/docs/category/conceitos-de-amazon-ec2"><span title="Conceitos de Amazon EC2" class="categoryLinkLabel_W154">Conceitos de Amazon EC2</span></a><button aria-label="Recolher a categoria &#x27;Conceitos de Amazon EC2&#x27;" aria-expanded="true" type="button" class="clean-btn menu__caret"></button></div><ul class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-5 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud/AWS/ec2/teoria/ec2-introducao"><span title="1. Introdução ao EC2" class="linkLabel_WmDU">1. Introdução ao EC2</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-5 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud/AWS/ec2/teoria/tipos-de-instancia"><span title="2. Tipos de Instância" class="linkLabel_WmDU">2. Tipos de Instância</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-5 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud/AWS/ec2/teoria/tipos-de-compra-ec2"><span title="3. Tipos de Compra de Instâncias" class="linkLabel_WmDU">3. Tipos de Compra de Instâncias</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-5 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud/AWS/ec2/teoria/ami"><span title="4. AMIs" class="linkLabel_WmDU">4. AMIs</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-5 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud/AWS/ec2/teoria/placement-groups"><span title="5. Grupo de Posicionamento" class="linkLabel_WmDU">5. Grupo de Posicionamento</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-5 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" tabindex="0" href="/docs/cloud/AWS/ec2/teoria/ebs"><span title="6. EBS - Elastic Block Store" class="linkLabel_WmDU">6. EBS - Elastic Block Store</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-5 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud/AWS/ec2/teoria/efs"><span title="7. EFS - Elastic File System" class="linkLabel_WmDU">7. EFS - Elastic File System</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-5 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud/AWS/ec2/teoria/elastic-ip"><span title="8. Elastic IP (EIP)" class="linkLabel_WmDU">8. Elastic IP (EIP)</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-5 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud/AWS/ec2/teoria/elastic-network-interface"><span title="9. Elastic Network Interface (ENI)" class="linkLabel_WmDU">9. Elastic Network Interface (ENI)</span></a></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-4 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" tabindex="0" href="/docs/category/aws-ec2-na-prática"><span title="AWS EC2 na Prática" class="categoryLinkLabel_W154">AWS EC2 na Prática</span></a><button aria-label="Expandir a categoria &#x27;AWS EC2 na Prática&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" tabindex="0" href="/docs/category/iam---identity-and-access-management"><span title="IAM - Identity and Access Management" class="categoryLinkLabel_W154">IAM - Identity and Access Management</span></a><button aria-label="Expandir a categoria &#x27;IAM - Identity and Access Management&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" tabindex="0" href="/docs/category/amazon-route-53"><span title="Amazon Route 53" class="categoryLinkLabel_W154">Amazon Route 53</span></a><button aria-label="Expandir a categoria &#x27;Amazon Route 53&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" tabindex="0" href="/docs/category/amazon-s3"><span title="Amazon S3" class="categoryLinkLabel_W154">Amazon S3</span></a><button aria-label="Expandir a categoria &#x27;Amazon S3&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" tabindex="0" href="/docs/category/amazon-elastic-beanstalk"><span title="Amazon Elastic Beanstalk" class="categoryLinkLabel_W154">Amazon Elastic Beanstalk</span></a><button aria-label="Expandir a categoria &#x27;Amazon Elastic Beanstalk&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" tabindex="0" href="/docs/category/elastic-load-balancing-e-auto-scaling-groups"><span title="Elastic Load Balancing e Auto Scaling Groups" class="categoryLinkLabel_W154">Elastic Load Balancing e Auto Scaling Groups</span></a><button aria-label="Expandir a categoria &#x27;Elastic Load Balancing e Auto Scaling Groups&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" tabindex="0" href="/docs/category/aws-client-vpn-endpoints"><span title="AWS Client VPN Endpoints" class="categoryLinkLabel_W154">AWS Client VPN Endpoints</span></a><button aria-label="Expandir a categoria &#x27;AWS Client VPN Endpoints&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li></ul></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud/intro"><span title="intro" class="linkLabel_WmDU">intro</span></a></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" href="/docs/category/kubernetes"><span title="Kubernetes" class="categoryLinkLabel_W154">Kubernetes</span></a><button aria-label="Expandir a categoria &#x27;Kubernetes&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" href="/docs/category/iac"><span title="IaC" class="categoryLinkLabel_W154">IaC</span></a><button aria-label="Expandir a categoria &#x27;IaC&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" href="/docs/category/linux"><span title="Linux" class="categoryLinkLabel_W154">Linux</span></a><button aria-label="Expandir a categoria &#x27;Linux&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" href="/docs/category/observabilidade"><span title="Observabilidade" class="categoryLinkLabel_W154">Observabilidade</span></a><button aria-label="Expandir a categoria &#x27;Observabilidade&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" href="/docs/category/cicd"><span title="CI/CD" class="categoryLinkLabel_W154">CI/CD</span></a><button aria-label="Expandir a categoria &#x27;CI/CD&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li></ul></nav></div></div></aside><main class="docMainContainer_TBSr"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_VOVn"><div class="docItemContainer_Djhp"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_Z_bl" aria-label="Trilha"><ul class="breadcrumbs"><li class="breadcrumbs__item"><a aria-label="Página Inicial" class="breadcrumbs__link" href="/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_YNFT"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li class="breadcrumbs__item"><a class="breadcrumbs__link" href="/docs/category/cloud"><span>Cloud</span></a></li><li class="breadcrumbs__item"><span class="breadcrumbs__link">AWS</span></li><li class="breadcrumbs__item"><a class="breadcrumbs__link" href="/docs/category/ec2---elastic-compute-cloud"><span>EC2 - Elastic Compute Cloud</span></a></li><li class="breadcrumbs__item"><a class="breadcrumbs__link" href="/docs/category/conceitos-de-amazon-ec2"><span>Conceitos de Amazon EC2</span></a></li><li class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link">6. EBS - Elastic Block Store</span></li></ul></nav><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">Nesta página</button></div><div class="theme-doc-markdown markdown"><header><h1>EBS - Elastic Block Store</h1></header><p>O <strong>Amazon Elastic Block Store (Amazon EBS)</strong> é um serviço de armazenamento em bloco escalável e de alta performance que pode ser utilizado em instâncias do Amazon EC2. Ele fornece volumes de armazenamento que funcionam de forma semelhante a um disco local, mas com a flexibilidade de serem criados, gerenciados e movidos dentro da nuvem AWS.</p>
+<p>Com o EBS, é possível criar volumes e anexá-las a instâncias EC2 em execução, permitindo que a aplicação intereja com eles como faria com qualquer unidade física. Esses volumes são independente do ciclo de vida da instância, ou seja, podem ser desanexados e reanexados a qualquer momento, inclusive a outras instâncias na mesma zona de disponibilidade. Também é possível aumentar o tamanho, ajustar a performance ou mudar o tipo do volume sem precisar desanexá-lo ou reiniciar a instância.</p>
+<p>Outro recurso essencial do EBS são os <strong>snapshots</strong>, que são backups pontuais dos volumes e permanecem armazenados de forma independente, mesmo que o volume original seja excluído. Os snaphshots podem ser criados a qualquer momento e usados para restaurar novos volumes de forma rápida. Além disso, permitem a migração de dados entre contas AWS, regiões e zonas de disponibilidade. Para simplificar a gestão de backups, é possível automatizar a criação, retenção e exclusão de snapshots utilizando o <strong>Amazon Data Lifecycle Manager</strong> ou o <strong>AWS Backup</strong>.</p>
+<p>Em alguns cenários, o EBS pode ser <strong>gerenciado automaticamente</strong> por outros serviços da AWS, como o no modo automático do Amazon EKS. Nesses casos, o volume é identificado como &quot;gerenciado&quot; e suas configurações não podem ser alteradas diretamente pelo usuário, pois o próprio serviço controla seu provisionamento e uso.</p>
+<p>Graças à sua integração com o EC2, flexibilidade operacional e variedade de opções de performance, o Amazon EBS é amplamente utilizado para armazenar desde dados de aplicações críticas até backups de longo prazo, atendendo a diferentes requisitos de custo, velocidade e disponibilidade.</p>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="tipos-de-volumes-do-amazon-ebs">Tipos de Volumes do Amazon EBS<a href="#tipos-de-volumes-do-amazon-ebs" class="hash-link" aria-label="Link direto para Tipos de Volumes do Amazon EBS" title="Link direto para Tipos de Volumes do Amazon EBS" translate="no">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="gp3---general-purpose-ssd">gp3 - General Purpose SSD<a href="#gp3---general-purpose-ssd" class="hash-link" aria-label="Link direto para gp3 - General Purpose SSD" title="Link direto para gp3 - General Purpose SSD" translate="no">​</a></h3>
+<p>Os <strong>volumes gp3</strong> são a geração mais recente de SSDs de uso geral no Amazon EBS e representam a opção de menor custo por GiB dessa categoria. Eles foram projetados para oferecer um <strong>equilibrio ideal entre preço e performance</strong> para a maioria das aplicações, permitindo <strong>escalar performance independentemente da capacidade</strong> do volume; o seja, você pode aumentar IOPS e throughput sem precisar aumentar o tamanho do volume.</p>
+<p>Comparados aos volumes <strong>gp2</strong>, oferecem <strong>até 20% de economia</strong> no preço por GiB. Eles apresentam <strong>latência de milissegundos de um dígito</strong> e <strong>durabilidade de 99,8%</strong> a <strong>99,9%</strong>, com taxa anual de falhas (AFR) de até 0,2% (equivalente a até 2 falhas por 1.000 volumes/ano). A AWS projeta os gp3 para entregar a performance provisionada <strong>99% do tempo</strong>.</p>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="performance">Performance<a href="#performance" class="hash-link" aria-label="Link direto para Performance" title="Link direto para Performance" translate="no">​</a></h4>
+<p>Diferente do gp2, os gp3 <strong>não dependem de créditos de performance (burst)</strong>, eles sustentam a performance provisionada de forma contínua.</p>
+<ul>
+<li><strong>IOPS base:</strong> 3.000 IOPS incluídos no preço do armazenamento.</li>
+<li><strong>IOPS máxima:</strong> até 16.000 IOPS (provisionáveis independentemente do tamanho, desde que ≥ 32 GB).</li>
+<li><strong>Throughput base:</strong> 125 MB/s incluídos no preço.</li>
+<li><strong>Throughput máxima:</strong> até 1.000 MB/s, proporcional às IOPS provisionadas (0,25 MB/s por IOPS, alcançado com ≥ 4.000 IOPS e ≥ 8 GB)</li>
+</ul>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="tamanho">Tamanho<a href="#tamanho" class="hash-link" aria-label="Link direto para Tamanho" title="Link direto para Tamanho" translate="no">​</a></h4>
+<ul>
+<li><strong>Mínimo:</strong> 1 GB</li>
+<li><strong>Máximo:</strong> 16 TB</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="gp2---gerenal-purpose-ssd">gp2 - Gerenal Purpose SSD<a href="#gp2---gerenal-purpose-ssd" class="hash-link" aria-label="Link direto para gp2 - Gerenal Purpose SSD" title="Link direto para gp2 - Gerenal Purpose SSD" translate="no">​</a></h3>
+<p>Os <strong>volumes gp2</strong> oferecem armazenamento com bom custo-benefício, sendo ideais para uma ampla gama de workloads transacionais, como bancos de dados pequenos e médios, sistemas de boot, aplicações corporativas e ambientes de desenvolvimento. Diferente dos <strong>gp3</strong>, a performance do gp2 <strong>escala linearmente com o tamanho do volume</strong>, o que significa que volumes maiores oferecem mais IOPS e throughput.</p>
+<p>Assim como outros SSDs do Amazon EBS, apresentam <strong>latência de milissegundos de um dígito</strong> e <strong>durabilidade de 99,8%</strong> a <strong>99,9%</strong>, com taxa anual de falhas (AFR) de até 0,2% (equivalente a até 2 falhas por 1.000 volumes/ano). A AWS projeta os gp2 para entregar a performance provisionada <strong>99% do tempo</strong>.</p>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="iops">IOPS<a href="#iops" class="hash-link" aria-label="Link direto para IOPS" title="Link direto para IOPS" translate="no">​</a></h4>
+<ul>
+<li><strong>Escala linear:</strong> 3 IOPS por GB de volume.</li>
+<li><strong>Mínimo:</strong> 100 IOPS (para volumes ≤ 33,33 GB).</li>
+<li><strong>Máximo:</strong> 16.000 IOPS (atingido a partir de 5.334 GB)</li>
+<li>Volumes menores que 1 TB (com menos de 3.000 IOPS de base) podem <strong>burst</strong> até 3.000 IOPS usando créditos de E/S.</li>
+<li><strong>Créditos de E/S:</strong> Acumulam até 5,4 milhões, permitindo sustentar o pico de 3.000 IOPS por até 30 minutos.</li>
+</ul>
+<p><strong>Cálculo da duração do burst</strong></p>
+<div class="language-txt codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-txt codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token plain">Duração (segundos) = Créditos de E/S disponíveis ÷ (IOPS de pico - IOPS de base)</span><br></span></code></pre></div></div>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="throughput">Throughput<a href="#throughput" class="hash-link" aria-label="Link direto para Throughput" title="Link direto para Throughput" translate="no">​</a></h4>
+<ul>
+<li><strong>Mínimo:</strong> 128 MB/s (até 170 GB)</li>
+<li><strong>Burst:</strong> até 250 MB/s (entre 170 GB e 334 GB)</li>
+<li><strong>Máximo:</strong> 250 MB/s (a partir de 334 GB)</li>
+<li>Fórmula de cálculo:</li>
+</ul>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token plain">Throughput (MiB/s) = (IOPS × Tamanho da E/S em KiB) ÷ 1.024</span><br></span></code></pre></div></div>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="tamanho-1">Tamanho<a href="#tamanho-1" class="hash-link" aria-label="Link direto para Tamanho" title="Link direto para Tamanho" translate="no">​</a></h4>
+<ul>
+<li><strong>Mínimo:</strong> 1 GB</li>
+<li><strong>Máximo:</strong> 16 TB</li>
+<li>A performance é proporcional ao tamanho do volume.</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="io2---provisioned-iops-ssd">io2 - Provisioned IOPS SSD<a href="#io2---provisioned-iops-ssd" class="hash-link" aria-label="Link direto para io2 - Provisioned IOPS SSD" title="Link direto para io2 - Provisioned IOPS SSD" translate="no">​</a></h3>
+<p>Os <strong>volumes io2 Block Express</strong> representam a mais recente geração da arquitetura de servidor de armazenamento do Amazon EBS, projetados especificamente para atender workloads I/O intensivas e críticas que rodam em <strong>instâncias baseadas no Sistema Nitro</strong>.</p>
+<p>Com <strong>altíssima durabilidade (99,999%), latência inferior a 1 milessegundos</strong> e <strong>baixa variação de desempenho</strong>, são ideais para aplicações como <strong>Oracle, SAP HANA, Microsoft SQL Server</strong> e <strong>SAS Analytics</strong>, onde a consistência e a performance são fundamentais.</p>
+<p>Essa arquitetura utiliza o protocolo <strong>Scalable Reliable Datagram (SRD)</strong> para comunicação direta entre o hardware Nitro e os volumes EBS, minimizando atrasos e instabilidade de rede, resultando em I/O mais rápido e previsível.</p>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="características-e-performance">Características e Performance<a href="#características-e-performance" class="hash-link" aria-label="Link direto para Características e Performance" title="Link direto para Características e Performance" translate="no">​</a></h4>
+<ul>
+<li><strong>Durabilidade:</strong> 99,999% (AFR ≤ 0,001%, equivalente a uma falha por 100.000 volumes/ano).</li>
+<li><strong>Latência:</strong> Abaixo de 1 ms na média.</li>
+<li><strong>Capacidade:</strong> Até <strong>64 TB (65.536 GB)</strong> por volume.</li>
+<li><strong>IOPS Provisionadas:</strong>
+<ul>
+<li><strong>Até 256.000 IOPS</strong> em instâncias Nitro (relação de até 1.000:1 GB).</li>
+<li><strong>Até 64.000 IOPS</strong> em outros tipos de instância (limitadas a 32.000 IOPS efetivas).</li>
+</ul>
+</li>
+<li><strong>Throughput:</strong>
+<ul>
+<li>Até <strong>4.000 MB/s</strong></li>
+<li>Escala proporcionalmente a <strong>0,256 MB/s por IOPS provisionado</strong>.</li>
+<li>Throughput máxima atingida a partir de 16.000 IOPS.</li>
+</ul>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="io1---provisioned-iops-ssd">io1 - Provisioned IOPS SSD<a href="#io1---provisioned-iops-ssd" class="hash-link" aria-label="Link direto para io1 - Provisioned IOPS SSD" title="Link direto para io1 - Provisioned IOPS SSD" translate="no">​</a></h3>
+<p>Os <strong>volumes io1</strong> são projetados para workloads com <strong>altas demandas de E/S</strong> e que exigem <strong>baixa latência e alta consistência de performance</strong>, como <strong>bancos de dados transacionais</strong> e aplicações críticas. Ao contrário de volumes de uso geral (gp2 e gp3), nos io1 a quantidade de <strong>IOPS</strong> é definida pelo usuário no momento da criação, garantindo performance estável <strong>99,9% do tempo</strong>.</p>
+<p>Eles apresentam <strong>durabilidade entre 99,8% e 99,9%</strong>, com uma <strong>Taxa Anual de Falhas (AFR)</strong> de até 0,2% (equivalente a 2 falhas por 1.000 volumes/ano).</p>
+<p>Os volumes io1 estão disponíveis para <strong>todos os tipos de instância EC2</strong>.</p>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="características-e-performance-1">Características e Performance<a href="#características-e-performance-1" class="hash-link" aria-label="Link direto para Características e Performance" title="Link direto para Características e Performance" translate="no">​</a></h4>
+<ul>
+<li><strong>Capacidade:</strong> de <strong>4 GB a 16 TB</strong></li>
+<li><strong>IOPS provisionadas:</strong> de <strong>100</strong> até <strong>64.000</strong> por volume.<!-- -->
+<ul>
+<li>Relação máxima: <strong>50 IOPS por GB</strong>.</li>
+<li>Exemplo: um volume de 100 GB pode ter até <strong>5.000 IOPS</strong>.</li>
+<li>Para atingir <strong>64.000 IOPS</strong>, é necessário um volume de pelo menos <strong>1.280 GB</strong>.</li>
+</ul>
+</li>
+<li><strong>Throughput:</strong>
+<ul>
+<li>Volumes com até <strong>32.000 IOPS</strong> suportam tamanho de E/S de 256 KB e throughput máximo de 500 MB/s (atingido em 2.000 IOPS).</li>
+<li>Volumes acima de <strong>32.000 IOPS</strong> aumentam o throughput linearmente a uma taxa de <strong>16 KB por IOPS</strong>, podendo chegar a <strong>1.000 MB/s</strong> com <strong>64.000 IOPS</strong>.</li>
+</ul>
+</li>
+<li><strong>Compatibilidade de instâncias:</strong>
+<ul>
+<li>Até <strong>64.000 IOPS</strong> em instâncias baseadas em <strong>Nitro</strong></li>
+<li>Até <strong>32.000 IOPS</strong> em instâncias que não sejam Nitro.</li>
+</ul>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="st1---throughput-optimized-hdd">st1 - Throughput Optimized HDD<a href="#st1---throughput-optimized-hdd" class="hash-link" aria-label="Link direto para st1 - Throughput Optimized HDD" title="Link direto para st1 - Throughput Optimized HDD" translate="no">​</a></h3>
+<p>Volume baseado em HDD otimizado para throughput sequencial, ideal para grandes volumes de dados processados continuamente.</p>
+<p><strong>Principais características</strong></p>
+<ul>
+<li><strong>Tamanho:</strong> 125 GiB a 16 TiB</li>
+<li><strong>Throughput:</strong> Até 500 MB/s</li>
+<li><strong>IOPS:</strong> Até 500 IOPS</li>
+<li><strong>Casos de uso:</strong> Big data, Data warehouses, ETL</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="sc1---cold-hdd">SC1 - Cold HDD<a href="#sc1---cold-hdd" class="hash-link" aria-label="Link direto para SC1 - Cold HDD" title="Link direto para SC1 - Cold HDD" translate="no">​</a></h3>
+<p>Volume HDD de baixo custo para dados acessados raramente</p>
+<p><strong>Principais características</strong></p>
+<ul>
+<li><strong>Tamanho:</strong> 125 GiB a 16 TiB</li>
+<li><strong>Throughput:</strong> Até 250 MB/s</li>
+<li><strong>IOPS:</strong> Até 250 IOPS</li>
+<li><strong>Casos de uso:</strong> Backups, Arquivos frios, Dados de retenção longa.</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="standard-hdd">Standard HDD<a href="#standard-hdd" class="hash-link" aria-label="Link direto para Standard HDD" title="Link direto para Standard HDD" translate="no">​</a></h3>
+<p>Opção mais antiga de armazenamento EBS, baseada em HDD magnético, usada principalmente para workloads legados.</p>
+<p><strong>Principais características</strong></p>
+<ul>
+<li><strong>Tamanho:</strong> 1 GiB a 1 TiB</li>
+<li><strong>IOPS:</strong> 40-200 IOPS</li>
+<li><strong>Latência:</strong> Mais alta que SSDs e outros HDDs EBS</li>
+<li><strong>Casos de uso:</strong> Sistemas antigos, Dados raramente acessados</li>
+</ul>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="limites-de-volumes-do-amazon-ebs">Limites de Volumes do Amazon EBS<a href="#limites-de-volumes-do-amazon-ebs" class="hash-link" aria-label="Link direto para Limites de Volumes do Amazon EBS" title="Link direto para Limites de Volumes do Amazon EBS" translate="no">​</a></h2>
+<p>O número máximo de volumes do Amazon EBS que é possível anexar a uma instância depende do <strong>tipo</strong> e <strong>tamanho</strong> da instância. Se o limite de associações for excedido, a solicitação falhará com o erro:</p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token plain">AttachmentLimitExceeded</span><br></span></code></pre></div></div>
+<p>Ao planejar quantos volumes adicionar, é importante avaliar se a necessidade principal é <strong>maior largura de banda E/S</strong> ou <strong>mais capacidade de armazenamento</strong>.</p>
+<ul>
+<li><strong>Largura de banda previsível:</strong> Prefira instâncias <strong>otimizadas para Amazon EBS</strong> com volumes SSD de finalidade geral <strong>(gp3/gp2)</strong> ou volumes SSD com IOPS provisionados <strong>(io2/io3)</strong>.</li>
+<li><strong>Performance máxima:</strong> Ajuste as IOPS provisionadas de forma que correspondam à largura de banda máxima suportada pelo tipo de instância.</li>
+<li><strong>RAID:</strong> Em alguns casos, configurações com <strong>mais de 8 volumes</strong> podem <strong>reduzir</strong> a performance devido à sobrecarga de E/S. É essencial testar e ajustar conforme necessário.</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="limites-de-volume-para-instâncias-no-nitro-system">Limites de volume para instâncias no Nitro System<a href="#limites-de-volume-para-instâncias-no-nitro-system" class="hash-link" aria-label="Link direto para Limites de volume para instâncias no Nitro System" title="Link direto para Limites de volume para instâncias no Nitro System" translate="no">​</a></h3>
+<p>Os limites variam conforme o tipo de instância:</p>
+<p><strong>1. Limite de volume dedicado do EBS:</strong> Permitido anexar qualquer número de volumes até o limite, sem compartilhar com outros dispositivos.</p>
+<p>Modelos com limite dedicado incluem:</p>
+<ul>
+<li><strong>Uso geral:</strong> M7a, M7i, M7i-flex, M8g, M8gd</li>
+<li><strong>Otimizada para computação:</strong> C7a, C7i, C7i-flex, C8g, C8gd, C8gn</li>
+<li><strong>Otimizada para memória:</strong> R7a, R7i, R7iz, R8g, R8gd, U7i-6tb, U7i-8tb, U7i-12tb, U7in-16tb, U7in-24tb, U7in-32tb, U7inh-32tb, X8g</li>
+<li><strong>Otimizida para armazenamento:</strong> I7i, I7ie, I8g</li>
+<li><strong>Computação acelerada:</strong> F2, G6, G6e, Gr6, P4d, P4de, P5, P5e, P5en, P6-B200, P6e-GB200, Trn2, Trn2u</li>
+<li><strong>Alta performance:</strong> Hpc7a</li>
+</ul>
+<p><strong>2. Limite de volume compartilhado do EBS:</strong> Compartilhado com interfaces de rede e volumes de instância NVMe.</p>
+<p>A maioria suporta até <strong>28 anexos</strong> no total.</p>
+<p>Exemplo de cálculo:</p>
+<ul>
+<li>m5.xlarge com 1 ENI principal -&gt; 27 volumes do EBS (28 - 1 = 27).</li>
+<li>m5d.xlarge com 2 ENIs adicionais e 1 volume NVMe -&gt; 24 volumes do EBS (28 - 3 - 1 = 24)</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="limites-para-instâncias-linux-baseadas-em-xen">Limites para Instâncias Linux baseadas em XEN<a href="#limites-para-instâncias-linux-baseadas-em-xen" class="hash-link" aria-label="Link direto para Limites para Instâncias Linux baseadas em XEN" title="Link direto para Limites para Instâncias Linux baseadas em XEN" translate="no">​</a></h3>
+<ul>
+<li>Máximo de <strong>40 volumes</strong> (incluindo o volume raiz, EBS adicionais e volumes de instância local).</li>
+<li>Acima desse limite, a inicialização pode falhar.</li>
+<li>O anexo acima de 40 volumes é feito em <strong>melhor esforço</strong> e <strong>não é garantido</strong>.</li>
+<li>Caso ocorra falha de boot, remove volumes não essenciais, inicialize e reconecte depois.</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="limites-para-instâncias-windows-baseadas-em-xen">Limites para Instâncias Windows baseadas em Xen<a href="#limites-para-instâncias-windows-baseadas-em-xen" class="hash-link" aria-label="Link direto para Limites para Instâncias Windows baseadas em Xen" title="Link direto para Limites para Instâncias Windows baseadas em Xen" translate="no">​</a></h3>
+<p>O número máximo varia pelo driver PV utilizado:</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token plain">| Driver PV  | Limite de Volumes |</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">| ---------- | ----------------- |</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">| AWS PV     | 26 volumes        |</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">| Citrix PV  | 26 volumes        |</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">| Red Hat PV | 17 volumes        |</span><br></span></code></pre></div></div>
+<blockquote>
+<p>Incluir volume raiz + EBS adicionais + volumes de instância local</p>
+</blockquote>
+<blockquote>
+<p>Recomenda-se não ultrapssar <strong>26 volumes</strong> em drivers <strong>AWS PV</strong> ou <strong>Citrix PV</strong> para evitar degradação de performance.</p>
+</blockquote>
+<blockquote>
+<p>O limite para <strong>Red Hat PV</strong> é menor (<strong>17 volumes</strong>).
+Assim como no Linux, volumes acima desses números são anexados <strong>em melhor esforço</strong>.</p>
+</blockquote>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="snapshots-do-ebs">Snapshots do EBS<a href="#snapshots-do-ebs" class="hash-link" aria-label="Link direto para Snapshots do EBS" title="Link direto para Snapshots do EBS" translate="no">​</a></h2>
+<p>Os snapshots do Amazon EBS são cópias de segurança pontuais (point-in-time) do seus volumes EBS. Eles funcionam de forma incremental, ou seja, apenas os blocos de dados que sofrem alterações desde o último snapshot são alvos. Esse modelo reduz o tempo de criação e otimiza os custos, evitando a duplicação desnecessária de dados.</p>
+<p>É importante destacar que a AWS <strong>não realiza backups automáticos</strong> dos volumes EBS. Portante é responsabilidade do usuário configurar a criação regular de snapshots para garantir a resiliência dos dados e a recuperação em caso de desastres. Isso pode ser feito manualmente ou de forma automática usando o <strong>Amazon Data Lifecycle Manager</strong> ou o <strong>AWS Backup</strong>.</p>
+<p>Os snapshots são armazenados no <strong>Amazon S3</strong>, mas em buckets internos que não podem ser acessados diretamente pelo usuário. Toda a gestão é feita pelo <strong>Console do EC2</strong> ou pela <strong>API do EC2</strong>, não sendo possível interagir com eles via Console ou API do Amazon S3.</p>
+<p>Para garantir alta disponibilidade e durabilidade, os dados dos snapshots são replicados automaticamente em todas as zonas de disponibilidade (AZs) dentro da mesma região, permitindo que você restaure volumes EBS em qualquer AZ daquela região.</p>
+<p>Quando um volume é criado a partir de um snapshot, ele inicia como uma réplica exata do volume original, no estado em que você estava no momento da captura.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="características-dos-snapshots">Características dos Snapshots<a href="#características-dos-snapshots" class="hash-link" aria-label="Link direto para Características dos Snapshots" title="Link direto para Características dos Snapshots" translate="no">​</a></h3>
+<ul>
+<li><strong>Backup Incremental:</strong> Apenas blocos modificados desde o último snapshot são armazenados, reduzindo tempo e custo.</li>
+<li><strong>Armazenamento no Amazon S3:</strong> Snapshots são salvos em buckets internos e não acessíveis diretamente pelo usuário.</li>
+<li><strong>Alta disponibilidade:</strong> Dados replicados automaticamente entre todas as zonas de disponibilidade da mesma região.</li>
+<li><strong>Restauração completa:</strong> É possível criar novos volumes EBS idênticos ao original a partir de qualquer snapshot.</li>
+<li><strong>Gerenciamento Flexível:</strong> Criação e exclusão via Console do EC2, API do EC2, Amazon Data Lifecycle Manager ou AWS Backup.</li>
+<li><strong>Monitoramento:</strong> Status dos snapshots pode ser acompanhado via <strong>Amazon CloudWatch Events</strong></li>
+<li><strong>Cobrança baseada no armazenamento:</strong> Preço depende da quantidade total de dados armazenados; exclusão nem sempre reduz custo, pois dados compartilhados com outros snapshots são preservados.</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="como-funcionam-os-snapshots">Como funcionam os snapshots<a href="#como-funcionam-os-snapshots" class="hash-link" aria-label="Link direto para Como funcionam os snapshots" title="Link direto para Como funcionam os snapshots" translate="no">​</a></h3>
+<p>O <strong>primeiro snapshot</strong> de volume é sempre <strong>completo</strong>, copiando todos os blocos com dados no momento da criação. Os <strong>snapshots seguintes</strong> são incrementais, contendo apenas os blocos que foram alterados ou adicionados desde o último snapshot.</p>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="exemplo">Exemplo<a href="#exemplo" class="hash-link" aria-label="Link direto para Exemplo" title="Link direto para Exemplo" translate="no">​</a></h4>
+<ul>
+<li>Volume de <strong>200 GB</strong> com <strong>50 GB de dados</strong> -&gt; Snap 1: backup completo de <strong>50 GB</strong>.</li>
+<li>Alterações de <strong>20 GB</strong> + acréscimo de <strong>10 GB</strong> -&gt; Snap 2: backup incremental de <strong>30 GB</strong></li>
+</ul>
+<p>O custo de armazenamento é calculado pelo <strong>tamanho real dos dados</strong> no snapshot, não pelo tamanho do volume.</p>
+<blockquote>
+<p>Ao <strong>arquivar</strong> um snapshot incremental, ele é convertido em um snapshot completo, movido para o <strong>nível de arquivamento do Amazon EBS</strong>, que tem precificação diferente no nível padrão.</p>
+</blockquote>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="múltiplos-snapshots-do-mesmo-volume">Múltiplos snapshots do mesmo volume<a href="#múltiplos-snapshots-do-mesmo-volume" class="hash-link" aria-label="Link direto para Múltiplos snapshots do mesmo volume" title="Link direto para Múltiplos snapshots do mesmo volume" translate="no">​</a></h4>
+<p>Considere um volume de <strong>15 GB</strong> em três momentos diferentes</p>
+<p><strong>1. Estado 1:</strong> 10 GB de dados -&gt; Snap A (completo): copia todos os 10 GB.</p>
+<p><strong>2. Estado 2:</strong> 4 GB modificados -&gt; Snap B (incremental): copia apenas esses 4 GB, referenciando os 6 GB inalterados do Snap A.</p>
+<p><strong>3. Estado 3:</strong> 2 GB adicionais -&gt; Snap C (incremental): copia apenas os 2 GB, referenciando os dados inalterados dos snaps anteriores.</p>
+<p><strong>Armazenamento total:</strong></p>
+<p>10 GB (Snap A) + 4 GB (Snap B) + 2 GB (Snap C) = 16 GB</p>
+<p><img decoding="async" loading="lazy" alt="Snapshot do mesmo volume" src="/assets/images/snapshot_1a-3ae19f854bbc88228dbeff1ed8c8210a.png" width="782" height="774" class="img_ev3q"></p>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="snapsthos-incrementais-de-volumes-diferentes">Snapsthos incrementais de volumes diferentes<a href="#snapsthos-incrementais-de-volumes-diferentes" class="hash-link" aria-label="Link direto para Snapsthos incrementais de volumes diferentes" title="Link direto para Snapsthos incrementais de volumes diferentes" translate="no">​</a></h4>
+<p>Snapshtos incrementais também podem ser gerados a partir de <strong>volumes dinstintos</strong>, desde que haja relação com um snapshot original</p>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="exemplo-1">Exemplo:<a href="#exemplo-1" class="hash-link" aria-label="Link direto para Exemplo:" title="Link direto para Exemplo:" translate="no">​</a></h4>
+<p><strong>- Volume 1:</strong> 14 GB, com 10 GB de dados -&gt; Snap A (completo) copia todos os 10 GB.</p>
+<p><strong>- Volume 2</strong> criado a partir do Snap A -&gt; recebe novos 4 GB de dados.</p>
+<p><strong>- Snap B</strong> criado do Volume 2 copia apenas esses 4 GB adicionais, referenciando os 10 GB do Snap A.</p>
+<blockquote>
+<p>Para ser incremental, o Snap B deve usar <strong>a mesma chave KMS</strong> e estar sob <strong>o mesmo proprietário</strong> do Snap A.</p>
+</blockquote>
+<blockquote>
+<p>Caso seja de outra conta ou use chave KMS diferente, o Snap B será <strong>completo</strong>, não incremental.</p>
+</blockquote>
+<p><img decoding="async" loading="lazy" alt="Snapshot de volumes diferentes" src="/assets/images/snapshot_1c-b9637ce5ffa6898f20adb8b099d07d58.png" width="690" height="596" class="img_ev3q"></p>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="criptografia-do-ebs">Criptografia do EBS<a href="#criptografia-do-ebs" class="hash-link" aria-label="Link direto para Criptografia do EBS" title="Link direto para Criptografia do EBS" translate="no">​</a></h2>
+<p>A <strong>criptografia do Amazon EBS</strong> fornece solução simples e integrada para proteger seus volumes e snapshots, sem a necessidade de criar ou gerenciar sua própria infraestrutura de chaves. Ela utiliza <strong>chaves do AWS KMS (AWS Key Management Service)</strong> para criptografar dados durante a criação de volumes e snapshots.</p>
+<p>A criptografia é aplicada tanto <strong>em repouso</strong> (data-at-rest) quanto <strong>em trânsito</strong> (data-in-transit) entre a instância EC2 e o armazenamento EBS conectado.</p>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="principais-pontos">Principais pontos<a href="#principais-pontos" class="hash-link" aria-label="Link direto para Principais pontos" title="Link direto para Principais pontos" translate="no">​</a></h4>
+<ul>
+<li>Compatível com <strong>todos os tipos de instâncias EC2</strong>.</li>
+<li>Permite anexar volumes criptografados e não criptografados simultaneamente à mesma instância.</li>
+<li>Não requer mudanças no código das aplicações para uso.</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="criptografar-recursos-do-ebs">Criptografar recursos do EBS<a href="#criptografar-recursos-do-ebs" class="hash-link" aria-label="Link direto para Criptografar recursos do EBS" title="Link direto para Criptografar recursos do EBS" translate="no">​</a></h3>
+<p>Você pode criptografar volumes e snapshots de três maneiras:</p>
+<p><strong>1. Habilitando a criptografia durante a criação do recurso</strong>.
+<strong>2. Ativando a criptografia por padrão</strong> na conta AWS.
+<strong>3. Especificando a chave KMS</strong> desejada durante a criação.</p>
+<p>Se nenhuma chave for especificada:</p>
+<ul>
+<li>O AWS KMS utilizará a chave padrão da sua conta ou herdará a configuração de criptografia do snapshot de origem.</li>
+</ul>
+<blockquote>
+<p>Ao usar a AWS CLI ou API, a validação da chave KMS é feita de forma <strong>assíncrona</strong>. Caso a chave (ID, Alias ou ARN) seja inválida, a criação pode parecer bem-sucedida inicialmente, mas falhará posteriormente.</p>
+</blockquote>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="importante">Importante:<a href="#importante" class="hash-link" aria-label="Link direto para Importante:" title="Link direto para Importante:" translate="no">​</a></h4>
+<ul>
+<li>Não é possível <strong>alterar a chave KMS</strong> associada a um volume ou snapshot existente.</li>
+<li>É possível mudar a chave <strong>apenas</strong> ao <strong>copiar</strong> um snasphot, resultando em um novo snapshot criptografado com a nova chave.</li>
+<li>Snapshots públicos <strong>não são suportados</strong> para volumes criptografados, mas você pode compartilhar com contas AWS específicas.</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="criptografar-volumes-vazio-na-criação">Criptografar volumes vazio na criação<a href="#criptografar-volumes-vazio-na-criação" class="hash-link" aria-label="Link direto para Criptografar volumes vazio na criação" title="Link direto para Criptografar volumes vazio na criação" translate="no">​</a></h3>
+<p>Ao criar um volume do EBS vazio, você pode:</p>
+<ul>
+<li><strong>Ativar a criptografia manualmente</strong> no momento da criação.</li>
+<li>Usar a <strong>criptografia por padrão</strong> para aplicar automaticamente.</li>
+<li><strong>Definir uma chave KMS personalizada</strong> para aquela operação.</li>
+</ul>
+<p><strong>Por padrão:</strong></p>
+<ul>
+<li>A chave selecionada também criptografa <strong>todos os snapshots</strong> criados a partir desse volume.</li>
+<li>Volumes restaurados de snapshots criptografados <strong>sempre serão criptografados</strong>.</li>
+<li><strong>Não é possível remover</strong> a criptografia de um volume ou snapshot criptografado.</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="criptografar-recursos-não-criptografados">Criptografar recursos não criptografados<a href="#criptografar-recursos-não-criptografados" class="hash-link" aria-label="Link direto para Criptografar recursos não criptografados" title="Link direto para Criptografar recursos não criptografados" translate="no">​</a></h3>
+<p>Você <strong>não pode</strong> aplicar criptografia diretamente a um volume ou snapshot já existente que não esteja criptografado.</p>
+<p>Para criptografar:</p>
+<p><strong>1. Volumes não criptografados</strong></p>
+<ul>
+<li>Crie um snapshot do volume.</li>
+<li>Use esse snapshot para criar um novo volume <strong>criptografado</strong></li>
+</ul>
+<p><strong>2. Snapshots não criptografados</strong></p>
+<ul>
+<li>Crie uma <strong>cópia criptografada</strong> do snapshot.</li>
+</ul>
+<blockquote>
+<p>Se a <strong>criptografia por padrão</strong> estiver ativada, quaisquer novos volumes ou cópias de snapshots criados <strong>a partir de recursos não criptografados</strong> serão automaticamente criptografados.</p>
+</blockquote>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="como-funciona-a-criptografia-do-amazon-ebs">Como funciona a criptografia do Amazon EBS<a href="#como-funciona-a-criptografia-do-amazon-ebs" class="hash-link" aria-label="Link direto para Como funciona a criptografia do Amazon EBS" title="Link direto para Como funciona a criptografia do Amazon EBS" translate="no">​</a></h3>
+<p>A criptografia do Amazon EBS oferece proteção completa para volumes de <strong>inicialização</strong> e <strong>dados</strong> de uma instância Amazon EC2, cobrindo:</p>
+<ul>
+<li><strong>Dados em repouso</strong> dentro do volume.</li>
+<li><strong>Dados em trânsito</strong> entre o volume e a instância.</li>
+<li><strong>Todos os snapshots</strong> criados a partir do volume.</li>
+<li><strong>Todos os volumes</strong> restaurados a partir desses snapshots.</li>
+</ul>
+<p>Essa proteção é feita usando <strong>AES-256</strong> padrão do setor, com chaves de dados gerados pelo <strong>AWS Key Management Service (KMS)</strong>.</p>
+<p>Por padrão, o Amazon EBS utiliza uma <strong>Chave Gerenciada pela AWS</strong> exclusiva para cada região (<strong>alias/aws/ebs</strong>), mas você também pode usar uma <strong>Chave Gerenciada pelo Cliente (CMK)</strong> para maior controle, incluindo rotação, habilitação ou desativação da chave.</p>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="como-a-criptografia-é-aplicada">Como a criptografia é aplicada:<a href="#como-a-criptografia-é-aplicada" class="hash-link" aria-label="Link direto para Como a criptografia é aplicada:" title="Link direto para Como a criptografia é aplicada:" translate="no">​</a></h4>
+<p><strong>1. Criação do volume criptografado</strong></p>
+<ul>
+<li>O Amazon EC2 solicita ao AWS KMS a geração de uma chave de dados única para o volume.</li>
+<li>Essa chave de dados é criptografada com a chave KMS especificada (padrão ou personalizada).</li>
+<li>O EBS armazena apenas a <strong>versão criptografada</strong> da chave de dados junto aos metadados do volume.</li>
+</ul>
+<p><strong>2. Gravação de dados no volume</strong></p>
+<ul>
+<li>Os dados são criptografados <strong>no hardware do Nitro System</strong> usando a chave de dados em texto simples, mantida apenas na memória enquanto o volume estiver anexado.</li>
+<li>Essa chave nunca é gravada em disco.</li>
+</ul>
+<p><strong>3. Leitura de dados</strong></p>
+<ul>
+<li>Os dados são lidos criptografados do disco e descriptografados na memória antes de serem enviados à latência.</li>
+</ul>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="ebs-multi-attach">EBS Multi-Attach<a href="#ebs-multi-attach" class="hash-link" aria-label="Link direto para EBS Multi-Attach" title="Link direto para EBS Multi-Attach" translate="no">​</a></h2>
+<p>O <strong>Amazon EBS Multi-Attach</strong> permite que você <strong>anexe um mesmo volume EBS a várias instâncias EC2 ao mesmo tempo</strong> dentro da <strong>mesma Zona de Disponibilidade (AZ)</strong>.</p>
+<p>Esse recurso é compatível apenas com <strong>volumes do tipo io1 e io2</strong> e é projetado para <strong>cargas de trabalho em cluster</strong> que precisam de acesso simultâneo de leitura/gravação compartilhada ao mesmo volume.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="principais-características">Principais características<a href="#principais-características" class="hash-link" aria-label="Link direto para Principais características" title="Link direto para Principais características" translate="no">​</a></h3>
+<ul>
+<li><strong>Anexo simultâneos:</strong> É possível anexar o mesmo volume a <strong>até 16 instâncias EC2</strong> na mesma AZ.</li>
+<li><strong>Acesso em leitura e gravação:</strong> Todas as instâncias podem ler e gravar no volume ao mesmo tempo.</li>
+<li><strong>Compatibilidade:</strong> Somente disponível para <strong>io1</strong> e <strong>io2</strong> (não disponível para gp2, gp3, st1 e sc1).</li>
+<li><strong>Mesma AZ:</strong> Todas as instâncias devem estar na mesma Zona de Disponibilidade do volume.</li>
+<li><strong>Desempenho:</strong> O desempenho do volume é compartilhado entre todas as instâncias anexadas.</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="restrições">Restrições<a href="#restrições" class="hash-link" aria-label="Link direto para Restrições" title="Link direto para Restrições" translate="no">​</a></h3>
+<ul>
+<li>Não é possível anexar volumes Multi-Attach em <strong>modos de inicialização</strong> (boot volumes).</li>
+<li>Apenas <strong>volumes io1 e io2</strong> com tamanho <strong>≥ 4 GB</strong> podem ter Multi-Attach habilitado.</li>
+<li>Não é possível mudar um volume existente para Multi-Attach após a criação; essa opção deve ser definida na criação do volume.</li>
+<li>Instâncias <strong>Spot</strong> não são suportadas.</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="boas-práticas">Boas práticas<a href="#boas-práticas" class="hash-link" aria-label="Link direto para Boas práticas" title="Link direto para Boas práticas" translate="no">​</a></h3>
+<ul>
+<li>Utilize <strong>sistemas de arquivos cluster-aware</strong> como <strong>GFS2</strong> ou <strong>OCFS2</strong> para evitar corrupção de dados.</li>
+<li>Implemente mecanismos de <strong>controle de bloqueio</strong> para coordenar gravações simultâneas.</li>
+<li>Monitore o desempenho do volume com <strong>Amazon CloudWatch</strong> para identificar gargalos de performance.</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="preço">Preço<a href="#preço" class="hash-link" aria-label="Link direto para Preço" title="Link direto para Preço" translate="no">​</a></h3>
+<ul>
+<li><strong>Sem custo adicional</strong> para habiliar o Multi-Attach, você paga apenas pela capacidade e performance provisionada do volume EBS.</li>
+<li>**Instâncias EC2 associadas ao volume são cobradas normalmente.</li>
+</ul></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col"><a href="https://github.com/lotechdevops/lotechdevops.github.io/tree/main/docs/cloud/AWS/ec2/teoria/6.ebs.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Editar esta página</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Páginas de documento"><a class="pagination-nav__link pagination-nav__link--prev" href="/docs/cloud/AWS/ec2/teoria/placement-groups"><div class="pagination-nav__sublabel">Anterior</div><div class="pagination-nav__label">5. Grupo de Posicionamento</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/docs/cloud/AWS/ec2/teoria/efs"><div class="pagination-nav__sublabel">Próxima</div><div class="pagination-nav__label">7. EFS - Elastic File System</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#tipos-de-volumes-do-amazon-ebs" class="table-of-contents__link toc-highlight">Tipos de Volumes do Amazon EBS</a><ul><li><a href="#gp3---general-purpose-ssd" class="table-of-contents__link toc-highlight">gp3 - General Purpose SSD</a></li><li><a href="#gp2---gerenal-purpose-ssd" class="table-of-contents__link toc-highlight">gp2 - Gerenal Purpose SSD</a></li><li><a href="#io2---provisioned-iops-ssd" class="table-of-contents__link toc-highlight">io2 - Provisioned IOPS SSD</a></li><li><a href="#io1---provisioned-iops-ssd" class="table-of-contents__link toc-highlight">io1 - Provisioned IOPS SSD</a></li><li><a href="#st1---throughput-optimized-hdd" class="table-of-contents__link toc-highlight">st1 - Throughput Optimized HDD</a></li><li><a href="#sc1---cold-hdd" class="table-of-contents__link toc-highlight">SC1 - Cold HDD</a></li><li><a href="#standard-hdd" class="table-of-contents__link toc-highlight">Standard HDD</a></li></ul></li><li><a href="#limites-de-volumes-do-amazon-ebs" class="table-of-contents__link toc-highlight">Limites de Volumes do Amazon EBS</a><ul><li><a href="#limites-de-volume-para-instâncias-no-nitro-system" class="table-of-contents__link toc-highlight">Limites de volume para instâncias no Nitro System</a></li><li><a href="#limites-para-instâncias-linux-baseadas-em-xen" class="table-of-contents__link toc-highlight">Limites para Instâncias Linux baseadas em XEN</a></li><li><a href="#limites-para-instâncias-windows-baseadas-em-xen" class="table-of-contents__link toc-highlight">Limites para Instâncias Windows baseadas em Xen</a></li></ul></li><li><a href="#snapshots-do-ebs" class="table-of-contents__link toc-highlight">Snapshots do EBS</a><ul><li><a href="#características-dos-snapshots" class="table-of-contents__link toc-highlight">Características dos Snapshots</a></li><li><a href="#como-funcionam-os-snapshots" class="table-of-contents__link toc-highlight">Como funcionam os snapshots</a></li></ul></li><li><a href="#criptografia-do-ebs" class="table-of-contents__link toc-highlight">Criptografia do EBS</a><ul><li><a href="#criptografar-recursos-do-ebs" class="table-of-contents__link toc-highlight">Criptografar recursos do EBS</a></li><li><a href="#criptografar-volumes-vazio-na-criação" class="table-of-contents__link toc-highlight">Criptografar volumes vazio na criação</a></li><li><a href="#criptografar-recursos-não-criptografados" class="table-of-contents__link toc-highlight">Criptografar recursos não criptografados</a></li><li><a href="#como-funciona-a-criptografia-do-amazon-ebs" class="table-of-contents__link toc-highlight">Como funciona a criptografia do Amazon EBS</a></li></ul></li><li><a href="#ebs-multi-attach" class="table-of-contents__link toc-highlight">EBS Multi-Attach</a><ul><li><a href="#principais-características" class="table-of-contents__link toc-highlight">Principais características</a></li><li><a href="#restrições" class="table-of-contents__link toc-highlight">Restrições</a></li><li><a href="#boas-práticas" class="table-of-contents__link toc-highlight">Boas práticas</a></li><li><a href="#preço" class="table-of-contents__link toc-highlight">Preço</a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"></div></footer></div>
+</body>
+</html>
