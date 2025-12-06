@@ -10,8 +10,8 @@
 
 
 <script src="https://static.cloudflareinsights.com/beacon.min.js" defer="defer" data-cf-beacon="{&quot;token&quot;: &quot;cdf6c45914ab475fb2b617f03b308721&quot;}"></script><link rel="stylesheet" href="/assets/css/styles.e57c0933.css">
-<script src="/assets/js/runtime~main.639a2f14.js" defer="defer"></script>
-<script src="/assets/js/main.4325dead.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.504ff5f0.js" defer="defer"></script>
+<script src="/assets/js/main.b630f370.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -217,7 +217,7 @@
 <li>Só então remove a própria Application.</li>
 </ol>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="problema-comum-application-stuck">Problema Comum: Application &quot;stuck&quot;<a href="#problema-comum-application-stuck" class="hash-link" aria-label="Link direto para Problema Comum: Application &quot;stuck&quot;" title="Link direto para Problema Comum: Application &quot;stuck&quot;" translate="no">​</a></h3>
-<p>Se uma Application fica presa em &quot;Deleting&quot;m geralmente é porque:</p>
+<p>Se uma Application fica presa em &quot;Deleting&quot; geralmente é porque:</p>
 <ul>
 <li>Algum recurso no cluster está com finalizer próprio.</li>
 <li>Há dependências circulares.</li>
@@ -227,7 +227,7 @@
 <hr>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="diff-customization">Diff Customization<a href="#diff-customization" class="hash-link" aria-label="Link direto para Diff Customization" title="Link direto para Diff Customization" translate="no">​</a></h2>
 <p>O ArgoCD compara (diff) o estado desejado (Git) com o estado real (cluster).</p>
-<p>Às vexes, certas diferenças são <strong>esperadas e devem ser ignoradas</strong>.</p>
+<p>Às vezes, certas diferenças são <strong>esperadas e devem ser ignoradas</strong>.</p>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="ignorar-diferenças">Ignorar diferenças<a href="#ignorar-diferenças" class="hash-link" aria-label="Link direto para Ignorar diferenças" title="Link direto para Ignorar diferenças" translate="no">​</a></h3>
 <div class="language-yaml codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-yaml codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token key atrule">spec</span><span class="token punctuation" style="color:rgb(248, 248, 242)">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">  </span><span class="token key atrule">ignoreDifferences</span><span class="token punctuation" style="color:rgb(248, 248, 242)">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">  </span><span class="token punctuation" style="color:rgb(248, 248, 242)">-</span><span class="token plain"> </span><span class="token key atrule">group</span><span class="token punctuation" style="color:rgb(248, 248, 242)">:</span><span class="token plain"> apps</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">    </span><span class="token key atrule">kind</span><span class="token punctuation" style="color:rgb(248, 248, 242)">:</span><span class="token plain"> Deployment</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">    </span><span class="token key atrule">jsonPointers</span><span class="token punctuation" style="color:rgb(248, 248, 242)">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">    </span><span class="token punctuation" style="color:rgb(248, 248, 242)">-</span><span class="token plain"> /spec/replicas  </span><span class="token comment" style="color:rgb(98, 114, 164)"># Ignora diferenças no número de réplicas</span><br></span></code></pre></div></div>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="por-que-ignorar-diferenças">Por que ignorar diferenças<a href="#por-que-ignorar-diferenças" class="hash-link" aria-label="Link direto para Por que ignorar diferenças" title="Link direto para Por que ignorar diferenças" translate="no">​</a></h3>
