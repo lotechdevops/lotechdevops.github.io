@@ -1,0 +1,435 @@
+<!doctype html>
+<html lang="pt-BR" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-cloud/AWS/cloudfront/hands-on/lab1" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.9.1">
+<title data-rh="true">Lab 01: Site Estático com S3 e CloudFront | DevOpsR66</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://www.devopsr66.com/img/social-card.png"><meta data-rh="true" name="twitter:image" content="https://www.devopsr66.com/img/social-card.png"><meta data-rh="true" property="og:url" content="https://www.devopsr66.com/docs/cloud/AWS/cloudfront/hands-on/lab1"><meta data-rh="true" property="og:locale" content="pt_BR"><meta data-rh="true" name="docusaurus_locale" content="pt-BR"><meta data-rh="true" name="docsearch:language" content="pt-BR"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Lab 01: Site Estático com S3 e CloudFront | DevOpsR66"><meta data-rh="true" name="description" content="Aprenda a hospedar um site estático no S3 e distribuí-lo globalmente com CloudFront"><meta data-rh="true" property="og:description" content="Aprenda a hospedar um site estático no S3 e distribuí-lo globalmente com CloudFront"><meta data-rh="true" name="keywords" content="AWS,CloudFront,S3,Lab,Prático,Hands-on"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://www.devopsr66.com/docs/cloud/AWS/cloudfront/hands-on/lab1"><link data-rh="true" rel="alternate" href="https://www.devopsr66.com/docs/cloud/AWS/cloudfront/hands-on/lab1" hreflang="pt-BR"><link data-rh="true" rel="alternate" href="https://www.devopsr66.com/docs/cloud/AWS/cloudfront/hands-on/lab1" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Cloud","item":"https://www.devopsr66.com/docs/category/cloud"},{"@type":"ListItem","position":2,"name":"Amazon CloudFront","item":"https://www.devopsr66.com/docs/category/amazon-cloudfront"},{"@type":"ListItem","position":3,"name":"Hands-on CloudFront","item":"https://www.devopsr66.com/docs/category/hands-on-cloudfront"},{"@type":"ListItem","position":4,"name":"Lab 01: Site Estático com S3 e CloudFront","item":"https://www.devopsr66.com/docs/cloud/AWS/cloudfront/hands-on/lab1"}]}</script><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="DevOpsR66 RSS Feed">
+<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="DevOpsR66 Atom Feed">
+
+
+
+
+<script src="https://static.cloudflareinsights.com/beacon.min.js" defer="defer" data-cf-beacon="{&quot;token&quot;: &quot;cdf6c45914ab475fb2b617f03b308721&quot;}"></script><link rel="stylesheet" href="/assets/css/styles.e57c0933.css">
+<script src="/assets/js/runtime~main.03c98535.js" defer="defer"></script>
+<script src="/assets/js/main.99ed753b.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<svg style="display: none;"><defs>
+<symbol id="theme-svg-external-link" viewBox="0 0 24 24"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"/></symbol>
+</defs></svg>
+<script>!function(){var t=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();document.documentElement.setAttribute("data-theme",t||"dark"),document.documentElement.setAttribute("data-theme-choice",t||"dark")}(),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><link rel="preload" as="image" href="/img/logo.jpeg"><div role="region" aria-label="Pular para o conteúdo principal"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Pular para o conteúdo principal</a></div><nav aria-label="Navegação principal" class="theme-layout-navbar navbar navbar--fixed-top"><div class="navbar__inner"><div class="theme-layout-navbar-left navbar__items"><button aria-label="Alternar painel de navegação" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/"><div class="navbar__logo"><img src="/img/logo.jpeg" alt="Logo DevOpsR66" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src="/img/logo.jpeg" alt="Logo DevOpsR66" class="themedComponent_mlkZ themedComponent--dark_xIcU"></div><b class="navbar__title text--truncate">DevOpsR66</b></a><a class="navbar__item navbar__link" href="/docs/kubernetes/intro">Kubernetes</a><a class="navbar__item navbar__link" href="/docs/cloud/intro">Cloud</a><a class="navbar__item navbar__link" href="/docs/iac/intro">IaC</a><a class="navbar__item navbar__link" href="/docs/observabilidade/intro">Observabilidade</a><a class="navbar__item navbar__link" href="/docs/linux/intro">Linux</a><a class="navbar__item navbar__link" href="/docs/cicd/intro">CI/CD</a></div><div class="theme-layout-navbar-right navbar__items navbar__items--right"><a href="https://github.com/lotechdevops" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link header-github-link"></a><a href="https://www.linkedin.com/in/divino-sabino-moreira-neto-918844108/" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link header-linkedin-link"></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="modo do sistema" aria-label="Mudar entre modo claro e escuro (modo do sistema está ativo)"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP systemToggleIcon_QzmC"><path fill="currentColor" d="m12 21c4.971 0 9-4.029 9-9s-4.029-9-9-9-9 4.029-9 9 4.029 9 9 9zm4.95-13.95c1.313 1.313 2.05 3.093 2.05 4.95s-0.738 3.637-2.05 4.95c-1.313 1.313-3.093 2.05-4.95 2.05v-14c1.857 0 3.637 0.737 4.95 2.05z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="theme-layout-main main-wrapper mainWrapper_z2l0"><div class="docsWrapper_hBAB"><button aria-label="Voltar para o topo" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class="sidebarViewport_aRkj"><div class="sidebar_njMd"><nav aria-label="Painel lateral de documentos" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--active" href="/docs/category/cloud"><span title="Cloud" class="categoryLinkLabel_W154">Cloud</span></a><button aria-label="Recolher a categoria &#x27;Cloud&#x27;" aria-expanded="true" type="button" class="clean-btn menu__caret"></button></div><ul class="menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret menu__link--active" role="button" aria-expanded="true" tabindex="0" href="/docs/category/infraestrutura-global-da-aws"><span title="AWS" class="categoryLinkLabel_W154">AWS</span></a></div><ul class="menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" tabindex="0" href="/docs/category/infraestrutura-global-da-aws"><span title="Infraestrutura Global da AWS" class="categoryLinkLabel_W154">Infraestrutura Global da AWS</span></a><button aria-label="Expandir a categoria &#x27;Infraestrutura Global da AWS&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" tabindex="0" href="/docs/category/ec2---elastic-compute-cloud"><span title="EC2 - Elastic Compute Cloud" class="categoryLinkLabel_W154">EC2 - Elastic Compute Cloud</span></a><button aria-label="Expandir a categoria &#x27;EC2 - Elastic Compute Cloud&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" tabindex="0" href="/docs/category/iam---identity-and-access-management"><span title="IAM - Identity and Access Management" class="categoryLinkLabel_W154">IAM - Identity and Access Management</span></a><button aria-label="Expandir a categoria &#x27;IAM - Identity and Access Management&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" tabindex="0" href="/docs/category/amazon-route-53"><span title="Amazon Route 53" class="categoryLinkLabel_W154">Amazon Route 53</span></a><button aria-label="Expandir a categoria &#x27;Amazon Route 53&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" tabindex="0" href="/docs/category/amazon-s3"><span title="Amazon S3" class="categoryLinkLabel_W154">Amazon S3</span></a><button aria-label="Expandir a categoria &#x27;Amazon S3&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" tabindex="0" href="/docs/category/amazon-elastic-beanstalk"><span title="Amazon Elastic Beanstalk" class="categoryLinkLabel_W154">Amazon Elastic Beanstalk</span></a><button aria-label="Expandir a categoria &#x27;Amazon Elastic Beanstalk&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--active" tabindex="0" href="/docs/category/amazon-cloudfront"><span title="Amazon CloudFront" class="categoryLinkLabel_W154">Amazon CloudFront</span></a><button aria-label="Recolher a categoria &#x27;Amazon CloudFront&#x27;" aria-expanded="true" type="button" class="clean-btn menu__caret"></button></div><ul class="menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-4 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" tabindex="0" href="/docs/category/conceitos-cloudfront"><span title="Conceitos CloudFront" class="categoryLinkLabel_W154">Conceitos CloudFront</span></a><button aria-label="Expandir a categoria &#x27;Conceitos CloudFront&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-4 menu__list-item"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--active" tabindex="0" href="/docs/category/hands-on-cloudfront"><span title="Hands-on CloudFront" class="categoryLinkLabel_W154">Hands-on CloudFront</span></a><button aria-label="Recolher a categoria &#x27;Hands-on CloudFront&#x27;" aria-expanded="true" type="button" class="clean-btn menu__caret"></button></div><ul class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-5 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" tabindex="0" href="/docs/cloud/AWS/cloudfront/hands-on/lab1"><span title="Lab 01: Site Estático com S3 e CloudFront" class="linkLabel_WmDU">Lab 01: Site Estático com S3 e CloudFront</span></a></li></ul></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" tabindex="0" href="/docs/category/elastic-load-balancing-e-auto-scaling-groups"><span title="Elastic Load Balancing e Auto Scaling Groups" class="categoryLinkLabel_W154">Elastic Load Balancing e Auto Scaling Groups</span></a><button aria-label="Expandir a categoria &#x27;Elastic Load Balancing e Auto Scaling Groups&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" tabindex="0" href="/docs/category/aws-client-vpn-endpoints"><span title="AWS Client VPN Endpoints" class="categoryLinkLabel_W154">AWS Client VPN Endpoints</span></a><button aria-label="Expandir a categoria &#x27;AWS Client VPN Endpoints&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li></ul></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud/intro"><span title="intro" class="linkLabel_WmDU">intro</span></a></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" href="/docs/category/kubernetes"><span title="Kubernetes" class="categoryLinkLabel_W154">Kubernetes</span></a><button aria-label="Expandir a categoria &#x27;Kubernetes&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" href="/docs/category/iac"><span title="IaC" class="categoryLinkLabel_W154">IaC</span></a><button aria-label="Expandir a categoria &#x27;IaC&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" href="/docs/category/linux"><span title="Linux" class="categoryLinkLabel_W154">Linux</span></a><button aria-label="Expandir a categoria &#x27;Linux&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" href="/docs/category/observabilidade"><span title="Observabilidade" class="categoryLinkLabel_W154">Observabilidade</span></a><button aria-label="Expandir a categoria &#x27;Observabilidade&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" href="/docs/category/cicd"><span title="CI/CD" class="categoryLinkLabel_W154">CI/CD</span></a><button aria-label="Expandir a categoria &#x27;CI/CD&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li></ul></nav></div></div></aside><main class="docMainContainer_TBSr"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_VOVn"><div class="docItemContainer_Djhp"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_Z_bl" aria-label="Trilha"><ul class="breadcrumbs"><li class="breadcrumbs__item"><a aria-label="Página Inicial" class="breadcrumbs__link" href="/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_YNFT"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li class="breadcrumbs__item"><a class="breadcrumbs__link" href="/docs/category/cloud"><span>Cloud</span></a></li><li class="breadcrumbs__item"><span class="breadcrumbs__link">AWS</span></li><li class="breadcrumbs__item"><a class="breadcrumbs__link" href="/docs/category/amazon-cloudfront"><span>Amazon CloudFront</span></a></li><li class="breadcrumbs__item"><a class="breadcrumbs__link" href="/docs/category/hands-on-cloudfront"><span>Hands-on CloudFront</span></a></li><li class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link">Lab 01: Site Estático com S3 e CloudFront</span></li></ul></nav><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">Nesta página</button></div><div class="theme-doc-markdown markdown"><header><h1>Lab 01: Site Estático com S3 e CloudFront</h1></header><h2 class="anchor anchorWithStickyNavbar_LWe7" id="objetivo-do-lab">Objetivo do Lab<a href="#objetivo-do-lab" class="hash-link" aria-label="Link direto para Objetivo do Lab" title="Link direto para Objetivo do Lab" translate="no">​</a></h2>
+<p>Neste laboratório você vai criar um site estático simples, hospedá-lo em um bucket S3 e distribuí-lo globalmente usando CloudFront. Ao final, você terá um site acessível via CloudFront com acesso direto ao S3 bloqueado.</p>
+<p><strong>O que você vai aprender:</strong></p>
+<ul>
+<li>Criar e configurar bucket S3</li>
+<li>Upload de arquivos para S3</li>
+<li>Criar distribuição CloudFront</li>
+<li>Configurar Origin Access Control (OAC)</li>
+<li>Bloquear acesso direto ao S3</li>
+<li>Testar performance do CloudFront</li>
+</ul>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="pré-requisitos">Pré-requisitos<a href="#pré-requisitos" class="hash-link" aria-label="Link direto para Pré-requisitos" title="Link direto para Pré-requisitos" translate="no">​</a></h2>
+<ul>
+<li>Conta AWS ativa</li>
+<li>Conhecimento básico de HTML/CSS (vamos criar arquivos simples)</li>
+<li>Navegador web</li>
+</ul>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="arquitetura-final">Arquitetura Final<a href="#arquitetura-final" class="hash-link" aria-label="Link direto para Arquitetura Final" title="Link direto para Arquitetura Final" translate="no">​</a></h2>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token plain">Usuário → CloudFront (CDN Global) → Bucket S3 (Origem Privada)</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">          ✓ Cache global            ✓ Apenas CloudFront acessa</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">          ✓ Baixa latência          ✗ Acesso direto bloqueado</span><br></span></code></pre></div></div>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="passo-1-criar-o-bucket-s3">Passo 1: Criar o Bucket S3<a href="#passo-1-criar-o-bucket-s3" class="hash-link" aria-label="Link direto para Passo 1: Criar o Bucket S3" title="Link direto para Passo 1: Criar o Bucket S3" translate="no">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="11-acessar-o-console-s3">1.1 Acessar o Console S3<a href="#11-acessar-o-console-s3" class="hash-link" aria-label="Link direto para 1.1 Acessar o Console S3" title="Link direto para 1.1 Acessar o Console S3" translate="no">​</a></h3>
+<p>Faça login no console AWS e procure o serviço <strong>S3</strong>.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="12-criar-novo-bucket">1.2 Criar Novo Bucket<a href="#12-criar-novo-bucket" class="hash-link" aria-label="Link direto para 1.2 Criar Novo Bucket" title="Link direto para 1.2 Criar Novo Bucket" translate="no">​</a></h3>
+<p>Clique em <strong>Create bucket</strong> e configure:</p>
+<p><strong>General configuration:</strong></p>
+<ul>
+<li><strong>Bucket type:</strong> General purpose</li>
+<li><strong>Bucket name:</strong> <code>meu-site-cloudfront-lab</code></li>
+</ul>
+<p><strong>Object Ownership:</strong></p>
+<ul>
+<li>ACLs disabeled</li>
+</ul>
+<p><strong>Block Public Access settings:</strong></p>
+<ul>
+<li>Mantenha TODAS as 4 opções marcadas</li>
+</ul>
+<p><strong>Bucket Versioning:</strong></p>
+<ul>
+<li>Disable</li>
+</ul>
+<p><strong>Default encryption:</strong></p>
+<ul>
+<li>Server-side encryption with Amazon S3 managed keys (SSE-S3)</li>
+<li>Bucket Key: Enable</li>
+</ul>
+<p><strong>Advanced settings:</strong></p>
+<ul>
+<li>Object Lock: Disable</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="Criação Bucket" src="/assets/images/criacao-bucket-c9e43048b43d4d491028783edc5b16fb.gif" width="1917" height="973" class="img_ev3q"></p>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="passo-2-preparar-arquivos-do-site">Passo 2: Preparar Arquivos do Site<a href="#passo-2-preparar-arquivos-do-site" class="hash-link" aria-label="Link direto para Passo 2: Preparar Arquivos do Site" title="Link direto para Passo 2: Preparar Arquivos do Site" translate="no">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="21-criar-arquivos-localmente">2.1 Criar Arquivos Localmente<a href="#21-criar-arquivos-localmente" class="hash-link" aria-label="Link direto para 2.1 Criar Arquivos Localmente" title="Link direto para 2.1 Criar Arquivos Localmente" translate="no">​</a></h3>
+<p>Para este lab, vamos usar um site estático simples já preparado. Os arquivos estão disponíveis no GitHub.</p>
+<p><strong>Faça o download dos arquivos:</strong></p>
+<p>Acesse o repositório: <a href="https://github.com/lotechdevops/config-examples/tree/main/cloudfront/lab1" target="_blank" rel="noopener noreferrer">GitHub</a> e baixe os arquivos <code>index.html</code> e <code>style.css</code>.</p>
+<p><strong>Estrutura do projeto:</strong></p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token plain">lab1/</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">├── index.html    # Página principal do site</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">└── style.css     # Estilos e animações</span><br></span></code></pre></div></div>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="passo-3-upload-dos-arquivos-para-o-s3">Passo 3: Upload dos Arquivos para o S3<a href="#passo-3-upload-dos-arquivos-para-o-s3" class="hash-link" aria-label="Link direto para Passo 3: Upload dos Arquivos para o S3" title="Link direto para Passo 3: Upload dos Arquivos para o S3" translate="no">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="31-fazer-upload">3.1 Fazer Upload<a href="#31-fazer-upload" class="hash-link" aria-label="Link direto para 3.1 Fazer Upload" title="Link direto para 3.1 Fazer Upload" translate="no">​</a></h3>
+<p>No console S3, clique no bucket <code>meu-site-cloudfront-lab-v1</code> que você criou.</p>
+<ul>
+<li>Clique em <strong>Upload</strong></li>
+<li>Arraste os 2 arquivos (index.html e style.css) ou clique em <strong>Add files</strong></li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="Upload Arquivos" src="/assets/images/upload-arquivos-8e77ccc8616c9459ed350a3b92202349.gif" width="1917" height="984" class="img_ev3q"></p>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="passo-4-criar-distribuição-cloudfront">Passo 4: Criar Distribuição CloudFront<a href="#passo-4-criar-distribuição-cloudfront" class="hash-link" aria-label="Link direto para Passo 4: Criar Distribuição CloudFront" title="Link direto para Passo 4: Criar Distribuição CloudFront" translate="no">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="41-acessar-cloudfront">4.1 Acessar CloudFront<a href="#41-acessar-cloudfront" class="hash-link" aria-label="Link direto para 4.1 Acessar CloudFront" title="Link direto para 4.1 Acessar CloudFront" translate="no">​</a></h3>
+<p>No console AWS, navegue até o serviço <strong>CloudFront</strong>.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="42-escolher-o-plano">4.2 Escolher o Plano<a href="#42-escolher-o-plano" class="hash-link" aria-label="Link direto para 4.2 Escolher o Plano" title="Link direto para 4.2 Escolher o Plano" translate="no">​</a></h3>
+<ul>
+<li>
+<p>Clique em <strong>Create distribution</strong>.</p>
+</li>
+<li>
+<p>Na tela &quot;Choose a plan&quot;, selecione <strong>Free</strong> (plano gratuito)</p>
+</li>
+<li>
+<p>Role a página para baixo e clique em <strong>Next</strong></p>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="43-configurar-distribution-options">4.3 Configurar Distribution Options<a href="#43-configurar-distribution-options" class="hash-link" aria-label="Link direto para 4.3 Configurar Distribution Options" title="Link direto para 4.3 Configurar Distribution Options" translate="no">​</a></h3>
+<p><strong>Distribution name:</strong></p>
+<ul>
+<li>Digite um nome para sua distribuição, por exemplo: <code>meu-site-cloudfront-lab</code></li>
+</ul>
+<p><strong>Description (opcional):</strong></p>
+<ul>
+<li>Pode deixar vazio ou adicionar <code>Lab prático de CloudFront com S3</code></li>
+</ul>
+<p><strong>Distribution type:</strong></p>
+<ul>
+<li>Selecione <strong>Single website or app</strong> (já vem selecionado por padrão)</li>
+</ul>
+<p><strong>Domain - Route 53 managed domain (opcional):</strong></p>
+<ul>
+<li>Deixe vazio por enquanto (vamos usar apenas o domínio padrão do CloudFront)</li>
+</ul>
+<p>Role a página para baixo e clique em <strong>Next</strong></p>
+<p><img decoding="async" loading="lazy" alt="Upload Arquivos" src="/assets/images/criacao-distribuicao-f1db7866dc8cd85ac90a02ce9ba4d0bf.gif" width="1917" height="984" class="img_ev3q"></p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="44-configurar-origin">4.4 Configurar Origin<a href="#44-configurar-origin" class="hash-link" aria-label="Link direto para 4.4 Configurar Origin" title="Link direto para 4.4 Configurar Origin" translate="no">​</a></h3>
+<p><strong>Origin type:</strong></p>
+<ul>
+<li>
+<p>Selecione <strong>Amazon S3</strong>.</p>
+</li>
+<li>
+<p>Após selecionar Amazon S3, a seção <strong>S3 Origin</strong> aparecerá logo abaixo.</p>
+</li>
+</ul>
+<p><strong>S3 Origin:</strong></p>
+<ul>
+<li>
+<p>Clique no campo de texto ou no botão <strong>Browse S3</strong>. Uma lista com seus buckets S3 aparecerá.</p>
+</li>
+<li>
+<p>Selecione o bucket <code>meu-site-cloudfront-lab-v1</code> que você criou anteriormente.</p>
+</li>
+</ul>
+<p>O campo será preenchido automaticamente com algo como: <code>meu-site-cloudfront-lab-v1.s3.us-east-1.amazonaws.com</code></p>
+<p><strong>Origin path (opcional):</strong></p>
+<ul>
+<li>Deixe vazio (não precisamos de subdiretórios específico)</li>
+</ul>
+<p><strong>Settings</strong></p>
+<ul>
+<li>Role a página para baixo até a seção <strong>Settings</strong></li>
+</ul>
+<p><strong>Allow private S3 bucket access to CloudFront:</strong></p>
+<ul>
+<li>Mantenha marcado <strong>&quot;Allow private S3 bucket access to CloudFront - Recommended&quot;</strong> (já vem selecionado por padrão)</li>
+</ul>
+<p>Esta opção é fundamental - permite que o CloudFront atualize automaticamente a política do bucket S3 para permitir acesso apenas da distribuição CloudFront</p>
+<p><strong>Origin settings:</strong></p>
+<ul>
+<li>Mantenha <strong>Use recommended origin settings</strong> (já vem selecionado por padrão)</li>
+</ul>
+<p><strong>Cache settings:</strong></p>
+<ul>
+<li>
+<p>Mantenha <strong>Use recommended cache settings tailored to serving S3 content</strong> (já vem selecionado por padrão)</p>
+</li>
+<li>
+<p>Clique em <strong>Next</strong> no canto inferior direito da página, você será direcionado para a tela <strong>Enable security</strong></p>
+</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="Configuração Origin" src="/assets/images/configuracao-origin-bb5a720c81a1e8557fb42dcedad9d307.gif" width="1917" height="984" class="img_ev3q"></p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="45-configurar-segurança-enable-security">4.5 Configurar Segurança (Enable Security)<a href="#45-configurar-segurança-enable-security" class="hash-link" aria-label="Link direto para 4.5 Configurar Segurança (Enable Security)" title="Link direto para 4.5 Configurar Segurança (Enable Security)" translate="no">​</a></h3>
+<p><strong>Web Application Firewall (WAF):</strong></p>
+<p>O WAF oferece proteções de segurança incluídas no plano gratuito sem custo adicional.</p>
+<p><strong>Proteções incluídas:</strong></p>
+<ul>
+<li>Proteção contra vulnerabilidades comuns em aplicações web.</li>
+<li>Proteção contra atores maliciosos descobrindo vulnerabilidades da aplicação.</li>
+<li>Bloqueio de endereços IP de ameaças potenciais baseado em inteligência de ameaças da Amazon.</li>
+</ul>
+<p><strong>Use monitor mode:</strong></p>
+<ul>
+<li>Deixe <strong>desmarcado</strong> (para este lab não precisamos do modo monitor)</li>
+</ul>
+<p>O modo monitor apenas conta quantas requisições seriam bloqueadas, mas não bloqueia de fato. É útil para testar regras antes de ativar.</p>
+<p><strong>Protection against Layer 7 DDoS attacks:</strong></p>
+<p>Esta opção está <strong>desabilitada</strong> (disponível apenas no plano Business)</p>
+<p>No plano free, você já tem proteção básica contra DDoS através do AWS Shield Standard, que é incluído automaticamente.</p>
+<p>Mantenha as configurações padrão e clique em <strong>Next</strong> no canto inferior direito, você será direcionado para a tela <strong>Review and Create</strong></p>
+<p><img decoding="async" loading="lazy" alt="Configuração de Segurança" src="/assets/images/configuracao-seguranca-c27304de925c6d80ba421449eb46f753.png" width="1520" height="599" class="img_ev3q"></p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="46-revisar-e-criar-review-and-create">4.6 Revisar e Criar (Review and Create)<a href="#46-revisar-e-criar-review-and-create" class="hash-link" aria-label="Link direto para 4.6 Revisar e Criar (Review and Create)" title="Link direto para 4.6 Revisar e Criar (Review and Create)" translate="no">​</a></h3>
+<p>Esta tela mostra um resumo de todas as configurações que você fez nos passos anteriores.</p>
+<p><strong>General configuration:</strong></p>
+<ul>
+<li><strong>Distribution name:</strong> <code>meu-site-cloudfront-lab</code></li>
+<li><strong>Description:</strong> Lab prático de CloudFront com S3</li>
+<li><strong>Billing:</strong> Free ($0/month)</li>
+<li><strong>Today&#x27;s pro-rated charge (estimate):</strong> $0</li>
+</ul>
+<p><strong>Origin:</strong>
+Observe o banner azul informativo:</p>
+<blockquote>
+<p>&quot;Because you granted CloudFront access to your origin, CloudFront can write and update S3 bucket policies that restrict access to your S3 origin to CloudFront&quot;.</p>
+</blockquote>
+<p>Isso informa que o CloudFront irá atualizar automaticamente a política do bucket S3 para permitir acesso apenas da distribuição.</p>
+<p>Configurações da origem:</p>
+<ul>
+<li><strong>S3 origin:</strong> <code>meu-site-cloudfront-lab-v1.s3.us-east-1.amazonaws.com</code></li>
+<li><strong>Origin path:</strong> Vazio</li>
+<li><strong>Grant CloudFront access to origin:</strong> Yes</li>
+<li><strong>Enable Origin Shield:</strong> No</li>
+<li><strong>Connection attempts:</strong> 3</li>
+<li><strong>Connection timeout:</strong> 10</li>
+</ul>
+<p><strong>Cache settings:</strong></p>
+<blockquote>
+<p>&quot;CloudFront will apply default cache settings tailored to serving content from a S3 origin. You can customize settings after you create your distribution.&quot;</p>
+</blockquote>
+<p>O CloudFront aplicará automaticamente configurações de cache otimizadas para conteúdo S3.</p>
+<p><strong>Security:</strong></p>
+<ul>
+<li><strong>Security protections:</strong> Enabled (WAF básico incluído)</li>
+<li><strong>Use monitor mode:</strong> No</li>
+</ul>
+<p><strong>Informação importante:</strong></p>
+<p>Na parte inferior da tela você verá a mensagem:</p>
+<blockquote>
+<p>&quot;Usage and transfer limits will be prorated for your first month.&quot;</p>
+</blockquote>
+<p>Isso significa que os limites de uso serão proporcionais ao tempo restante do mês.</p>
+<p>Se tudo estiver correto, clique no botão laranja <strong>&quot;Create distribution&quot;</strong> no canto inferior direito.</p>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="passo-5-verificar-distribuição-criada">Passo 5: Verificar Distribuição Criada<a href="#passo-5-verificar-distribuição-criada" class="hash-link" aria-label="Link direto para Passo 5: Verificar Distribuição Criada" title="Link direto para Passo 5: Verificar Distribuição Criada" translate="no">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="51-verificar-detalhes-da-distribuição">5.1 Verificar Detalhes da Distribuição<a href="#51-verificar-detalhes-da-distribuição" class="hash-link" aria-label="Link direto para 5.1 Verificar Detalhes da Distribuição" title="Link direto para 5.1 Verificar Detalhes da Distribuição" translate="no">​</a></h3>
+<p>Após criar a distribuição, você será redirecionado para a página de detalhes.</p>
+<p>Verifique as informações principais:</p>
+<p><strong>Details (Detalhes):</strong></p>
+<ul>
+<li><strong>Distribution domain name:</strong> <code>d1tmnmb8swn594.cloudfront.net</code> (este será o domínio para acessar seu site)</li>
+<li><strong>Billing:</strong> Free plan ($0/month)</li>
+<li><strong>ARN:</strong> Identificador único da distribuição</li>
+<li><strong>Last modified:</strong> Data e hora da última atualização</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="Detalhes da Distribuição" src="/assets/images/detalhes-distribuicao-1ec3b99862b823d8652df47363180f9a.png" width="1869" height="342" class="img_ev3q"></p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="52-explorar-as-abas-de-configuração">5.2 Explorar as Abas de Configuração<a href="#52-explorar-as-abas-de-configuração" class="hash-link" aria-label="Link direto para 5.2 Explorar as Abas de Configuração" title="Link direto para 5.2 Explorar as Abas de Configuração" translate="no">​</a></h3>
+<p>A página de detalhes contém várias abas com configurações:</p>
+<p><strong>General (Geral):</strong></p>
+<ul>
+<li>Configurações gerais da distribuição</li>
+<li>Nome, descrição, price class</li>
+<li>Supported HTTP versions</li>
+<li>Default root object (ainda não configurado)</li>
+</ul>
+<p><strong>Security (Segurança):</strong></p>
+<ul>
+<li>Core protections: Enabled (proteções WAF básica ativas)</li>
+<li>Advanced DDoS protection: Disponível no plano Business</li>
+</ul>
+<p><strong>Origins (Origens):</strong></p>
+<ul>
+<li>Lista de origens configuradas</li>
+<li>Mostra o bucket S3 conectado: <code>meu-site-cloudfront-lab-v1.s3.us-east-1.amazonaws.com</code></li>
+<li>Origin type: S3</li>
+<li>Origin access: OAC configurado automaticamente</li>
+</ul>
+<p><strong>Behaviors (Comportamentos):</strong></p>
+<ul>
+<li>Cache behaviors configurados</li>
+<li>Path pattern: Default (*)</li>
+<li>Viewer protocol policy: Redirect HTTP to HTTPS</li>
+<li>Cache policy name: Managed-CachingOptimized</li>
+</ul>
+<p><strong>Error pages (Páginas de erro):</strong></p>
+<ul>
+<li>Configurações de páginas de erro personalizadas</li>
+<li>Atualmente vazio (padrão)</li>
+</ul>
+<p><strong>Invalidations (Invalidações):</strong></p>
+<ul>
+<li>Gerenciamento de invalidações de cache</li>
+<li>Usado quando precisar forçar atualização de conteúdo</li>
+</ul>
+<p><strong>Logging:</strong></p>
+<ul>
+<li>Standard logging: Disponível no plano Pro</li>
+<li>Real-time logging: Disponível com contrato</li>
+</ul>
+<p><strong>Tags:</strong></p>
+<ul>
+<li>Tags da distribuição para organização</li>
+<li>Key: Name, Value: meu-site-cloudfront-lab</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="Abas da Distribuição" src="/assets/images/abas-distribuicao-ac7de9885a476d8966f6d17ab0ac66d1.gif" width="1917" height="984" class="img_ev3q"></p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="53-copiar-distribution-domain-name">5.3 Copiar Distribution Domain Name<a href="#53-copiar-distribution-domain-name" class="hash-link" aria-label="Link direto para 5.3 Copiar Distribution Domain Name" title="Link direto para 5.3 Copiar Distribution Domain Name" translate="no">​</a></h3>
+<p>Na seção <strong>Details</strong>, copie o <strong>Distribution domain name</strong>.</p>
+<p>Esse será o domínio que você usará para acessar seu site:</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token plain">https://d1tmnmb8swn594.cloudfront.net</span><br></span></code></pre></div></div>
+<p>(O seu domínio será diferente - cada distribuição tem um ID único)</p>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="passo-6-configurar-default-root-object">Passo 6: Configurar Default Root Object<a href="#passo-6-configurar-default-root-object" class="hash-link" aria-label="Link direto para Passo 6: Configurar Default Root Object" title="Link direto para Passo 6: Configurar Default Root Object" translate="no">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="61-identificar-o-problema">6.1 Identificar o Problema<a href="#61-identificar-o-problema" class="hash-link" aria-label="Link direto para 6.1 Identificar o Problema" title="Link direto para 6.1 Identificar o Problema" translate="no">​</a></h3>
+<p>Ao tentar acessar o site via CloudFront:</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token plain">https://d1tmnmb8swn594.cloudfront.net</span><br></span></code></pre></div></div>
+<p>Você recebe erro <strong>Access Denied</strong></p>
+<p>Mesmo com a política do S3 já configurada automaticamente, o CloudFront não sabe qual arquivo servir quando você acessa apenas o domínio raiz (sem especificar <code>/index.html</code>).</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="62-testar-com-caminho-completo">6.2 Testar com Caminho Completo<a href="#62-testar-com-caminho-completo" class="hash-link" aria-label="Link direto para 6.2 Testar com Caminho Completo" title="Link direto para 6.2 Testar com Caminho Completo" translate="no">​</a></h3>
+<p>Antes de configurar o Default Root Object, teste acessando o arquivo diretamente:</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token plain">https://d1tmnmb8swn594.cloudfront.net/index.html</span><br></span></code></pre></div></div>
+<p>Se funcionar com <code>/index.html</code> mas não sem, o problema é apenas a falta do Default Root Object.</p>
+<p>Se continuar dando erro mesmo <code>/index.html</code>, aguarde 5-10 minutos, a distribuição pode ainda estar propagando globalmente.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="63-configurar-default-root-object">6.3 Configurar Default Root Object<a href="#63-configurar-default-root-object" class="hash-link" aria-label="Link direto para 6.3 Configurar Default Root Object" title="Link direto para 6.3 Configurar Default Root Object" translate="no">​</a></h3>
+<p>No console do <strong>CloudFront</strong>, na página de detalhes da sua distribuição:</p>
+<ul>
+<li>Vá na aba <strong>General</strong>.</li>
+<li>Na seção <strong>Settings</strong>, verifique o campo <strong>Default root object</strong></li>
+<li>Se estiver vazio (mostrar <code>-</code>), você precisa configurá-lo.</li>
+<li>Clique no botão <strong>Edit</strong> no campo superior direito.</li>
+<li>Role até encontrar o campo <strong>Default root object</strong>.</li>
+<li>Digite: <code>index.html</code></li>
+<li>Role até o final e clique em <strong>Save changes</strong></li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="Configurar Default Root Object" src="/assets/images/configurar-default-root-object-682513cd045a89a7b346cb79f6dd9f0b.gif" width="1917" height="984" class="img_ev3q"></p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="64-aguardar-atualização">6.4 Aguardar Atualização<a href="#64-aguardar-atualização" class="hash-link" aria-label="Link direto para 6.4 Aguardar Atualização" title="Link direto para 6.4 Aguardar Atualização" translate="no">​</a></h3>
+<p>O status da distribuição mudará para <strong>Deploying</strong></p>
+<p>Essa atualização geralmente leva 2-5 minutos.</p>
+<p>Aguarde até o status voltar para <strong>Enabled</strong> com data de modificação atualizada.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="65-testar-novamente">6.5 Testar Novamente<a href="#65-testar-novamente" class="hash-link" aria-label="Link direto para 6.5 Testar Novamente" title="Link direto para 6.5 Testar Novamente" translate="no">​</a></h3>
+<p>Após o deploy concluir, acesse novamente:</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token plain">https://d1tmnmb8swn594.cloudfront.net</span><br></span></code></pre></div></div>
+<p>Agora o site deve carregar completamente!</p>
+<p><img decoding="async" loading="lazy" alt="Site Funcionando" src="/assets/images/site-funcionando-56b144a7ac00a0949d41a162d02a80ad.gif" width="1917" height="984" class="img_ev3q"></p>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="passo-7-verificar-performance-e-cache">Passo 7: Verificar Performance e Cache<a href="#passo-7-verificar-performance-e-cache" class="hash-link" aria-label="Link direto para Passo 7: Verificar Performance e Cache" title="Link direto para Passo 7: Verificar Performance e Cache" translate="no">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="71-testar-https">7.1 Testar HTTPS<a href="#71-testar-https" class="hash-link" aria-label="Link direto para 7.1 Testar HTTPS" title="Link direto para 7.1 Testar HTTPS" translate="no">​</a></h3>
+<p>Com o site carregado, clique no <strong>cadeado</strong> ao lado da URL no navegador.</p>
+<p>Você verá que a conexão é <strong>segura</strong> com certificado SSL/TLS válido fornecido automaticamente pelo CloudFront.</p>
+<ul>
+<li>Clique em <strong>A Conexão é Segura</strong> -&gt; <strong>O Certificado é válido</strong> para ver mais detalhes.</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="Certificado SSL" src="/assets/images/certificado-ssl-239ca3e242858a913a23450b4b0d02ba.png" width="562" height="424" class="img_ev3q"></p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="72-abrir-devtools">7.2 Abrir DevTools<a href="#72-abrir-devtools" class="hash-link" aria-label="Link direto para 7.2 Abrir DevTools" title="Link direto para 7.2 Abrir DevTools" translate="no">​</a></h3>
+<ul>
+<li>Pressione <strong>F12</strong> para abrir as ferramentas de desenvolvedor do navegador.</li>
+<li>Vá na aba <strong>Network (Rede)</strong></li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="73-analisar-headers-do-cloudfront">7.3 Analisar Headers do CloudFront<a href="#73-analisar-headers-do-cloudfront" class="hash-link" aria-label="Link direto para 7.3 Analisar Headers do CloudFront" title="Link direto para 7.3 Analisar Headers do CloudFront" translate="no">​</a></h3>
+<ul>
+<li>Recarregue a página</li>
+<li>Você verá todas as requisições sendo feitas</li>
+<li>Clique no arquivo <code>d1tmnmb8swn594.cloudfront.net</code> na lista de requisições.</li>
+<li>Vá na seção <strong>Headers</strong> e role até <strong>Response Headers</strong></li>
+<li>Procure pelos headers do CloudFront:</li>
+</ul>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token plain">X-Cache: Hit from cloudfront</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">X-Amz-Cf-Pop: GRU3-P1</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">X-Amz-Cf-Id: [ID único da requisição]</span><br></span></code></pre></div></div>
+<p><strong>Explicação dos headers:</strong></p>
+<ul>
+<li><strong>X-Cache: Hit from cloudfront</strong> -&gt; Arquivo foi servido do cache (rápido)</li>
+<li><strong>X-Amz-Cf-Pop: GRU3-P1</strong> -&gt; Mostra qual POP atendeu a requisição (ex: GRU3-P1 = Garulhos/São Paulo, GIG=Rio de Janeiro)</li>
+<li><strong>X-Amz-Cf-Id:</strong> ID único da requisição para troubleshooting com suporte AWS</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="Headers CloudFront" src="/assets/images/headers-cloudfront-cab67807ce77f927bc2534639f88e3da.png" width="1089" height="610" class="img_ev3q"></p>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>Entendendo Cache Hit vs Cache Miss</div><div class="admonitionContent_BuS1"><ul>
+<li><strong>x-cache: Miss from cloudfront</strong> → Primeira vez que este POP recebe requisição para este arquivo. CloudFront busca do S3 e armazena em cache.</li>
+<li><strong>x-cache: Hit from cloudfront</strong> → Arquivo já está em cache no POP. Entrega instantânea sem acessar o S3.</li>
+</ul><p>Como você já acessou o site anteriormente, verá &quot;Hit from cloudfront&quot;. Isso é o comportamento ideal - mostra que o cache está funcionando!</p></div></div>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="74-verificar-tempos-de-carregamento">7.4 Verificar Tempos de Carregamento<a href="#74-verificar-tempos-de-carregamento" class="hash-link" aria-label="Link direto para 7.4 Verificar Tempos de Carregamento" title="Link direto para 7.4 Verificar Tempos de Carregamento" translate="no">​</a></h3>
+<p>Ainda na aba Network, observe a coluna <strong>Time</strong></p>
+<p>Com cache hit ativo, os tempos devem estar muito baixos:</p>
+<ul>
+<li><strong>index.html:</strong> ~10-40ms</li>
+<li><strong>style.css:</strong> ~10-40ms</li>
+</ul>
+<p>Isso demonstra a excelente performance do CloudFront servindo conteúdo em cache próximo ao usuário.</p>
+<p><img decoding="async" loading="lazy" alt="Tempos de Carregamento" src="/assets/images/tempos-carregamento-2d7191392e562c0b04939ae673fc087f.png" width="1109" height="187" class="img_ev3q"></p>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="passo-8-testar-bloqueio-de-acesso-direto-ao-s3">Passo 8: Testar Bloqueio de Acesso Direto ao S3<a href="#passo-8-testar-bloqueio-de-acesso-direto-ao-s3" class="hash-link" aria-label="Link direto para Passo 8: Testar Bloqueio de Acesso Direto ao S3" title="Link direto para Passo 8: Testar Bloqueio de Acesso Direto ao S3" translate="no">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="81-tentar-acessar-s3-diretamente">8.1 Tentar Acessar S3 Diretamente<a href="#81-tentar-acessar-s3-diretamente" class="hash-link" aria-label="Link direto para 8.1 Tentar Acessar S3 Diretamente" title="Link direto para 8.1 Tentar Acessar S3 Diretamente" translate="no">​</a></h3>
+<ul>
+<li>Abra uma nova aba no navegador e tente acessar o arquivo diretamente no S3:</li>
+</ul>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token plain">https://meu-site-cloudfront-lab-v1.s3.us-east-1.amazonaws.com/index.html</span><br></span></code></pre></div></div>
+<p>(Substitua <code>meu-site-cloudfront-lab-v1</code> pelo nome do seu bucket e <code>us-east-1</code> pela sua região)</p>
+<ul>
+<li>Você deve receber erro com mensagem XML:</li>
+</ul>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token plain">&lt;Error&gt;</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">&lt;Code&gt;AccessDenied&lt;/Code&gt;</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">&lt;Message&gt;Access Denied&lt;/Message&gt;</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">&lt;RequestId&gt;7A5Z8WRWX997PFJ9&lt;/RequestId&gt;</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">&lt;HostId&gt;zmVYRSPKi5UhDliagRGII7glkOpVy8GlNw3k+4cl/OA/OiSgkJ0rW3dN7l23j80lZDILVZcy1VGWotbXu012buWOo38rdwpHDyMO2v1rTBo=&lt;/HostId&gt;</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">&lt;/Error&gt;</span><br></span></code></pre></div></div>
+<p>Esse erro confirma que a configuração de segurança está funcionando perfeitamente.</p>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="passo-9-limpeza-de-recursos">Passo 9: Limpeza de Recursos<a href="#passo-9-limpeza-de-recursos" class="hash-link" aria-label="Link direto para Passo 9: Limpeza de Recursos" title="Link direto para Passo 9: Limpeza de Recursos" translate="no">​</a></h2>
+<div class="theme-admonition theme-admonition-warning admonition_xJq3 alert alert--warning"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.893 1.5c-.183-.31-.52-.5-.887-.5s-.703.19-.886.5L.138 13.499a.98.98 0 0 0 0 1.001c.193.31.53.501.886.501h13.964c.367 0 .704-.19.877-.5a1.03 1.03 0 0 0 .01-1.002L8.893 1.5zm.133 11.497H6.987v-2.003h2.039v2.003zm0-3.004H6.987V5.987h2.039v4.006z"></path></svg></span>Importante</div><div class="admonitionContent_BuS1"><p>Execute estes passos para evitar cobranças indesejadas na sua conta AWS. Mesmo no free tier, é importante limpar recursos não utilizados.</p></div></div>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="91-desabilitar-e-deletar-distribuição-cloudfront">9.1 Desabilitar e Deletar Distribuição CloudFront<a href="#91-desabilitar-e-deletar-distribuição-cloudfront" class="hash-link" aria-label="Link direto para 9.1 Desabilitar e Deletar Distribuição CloudFront" title="Link direto para 9.1 Desabilitar e Deletar Distribuição CloudFront" translate="no">​</a></h3>
+<p>No console do <strong>CloudFront</strong>, acesse a lista de distribuições.</p>
+<ul>
+<li><strong>Selecione</strong> a distribuição.</li>
+<li>Clique em <strong>Disable</strong>.</li>
+<li>Confirme clicando em <strong>Disable</strong> novamente.</li>
+<li>Aguarde <strong>5-15 minutos</strong> até o status mudar de &quot;Enabled&quot; para <strong>Disabled</strong>.</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="92-cancelar-plano">9.2 Cancelar Plano<a href="#92-cancelar-plano" class="hash-link" aria-label="Link direto para 9.2 Cancelar Plano" title="Link direto para 9.2 Cancelar Plano" translate="no">​</a></h3>
+<p>Se você criou a distribuição com o <strong>plano gratuito</strong>, precisa cancelar o plano antes de deletar</p>
+<ul>
+<li>Na página de detalhes da distribuição, procure pela seção de <strong>Billing</strong> e clique em <strong>Manage plan</strong>.</li>
+<li>Clique em <strong>Cancel plan</strong>.</li>
+<li>Confirme o cancelamento.</li>
+</ul>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>Importante sobre Planos</div><div class="admonitionContent_BuS1"><ul>
+<li><strong>Plano Free:</strong> Precisa cancelar e aguardar até o final do ciclo de cobrança mensal para deletar</li>
+<li><strong>Standard pricing:</strong> Pode deletar imediatamente após desabilitar</li>
+</ul></div></div>
+<p>Após cancelar o plano Free, você precisará aguardar até o <strong>final do ciclo de cobrança mensal</strong>.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="93-deletar-distribuição-após-fim-do-ciclo">9.3 Deletar Distribuição (Após Fim do Ciclo)<a href="#93-deletar-distribuição-após-fim-do-ciclo" class="hash-link" aria-label="Link direto para 9.3 Deletar Distribuição (Após Fim do Ciclo)" title="Link direto para 9.3 Deletar Distribuição (Após Fim do Ciclo)" translate="no">​</a></h3>
+<p>Após o fim do ciclo de cobrança ou se estava em standard pricing:</p>
+<ul>
+<li>Selecione a distribuição (certifique-se que está &quot;Disabled&quot;).</li>
+<li>Clique em <strong>&quot;Delete&quot;</strong>.</li>
+<li>Confirme a exclusão.</li>
+</ul>
+<div class="theme-admonition theme-admonition-warning admonition_xJq3 alert alert--warning"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.893 1.5c-.183-.31-.52-.5-.887-.5s-.703.19-.886.5L.138 13.499a.98.98 0 0 0 0 1.001c.193.31.53.501.886.501h13.964c.367 0 .704-.19.877-.5a1.03 1.03 0 0 0 .01-1.002L8.893 1.5zm.133 11.497H6.987v-2.003h2.039v2.003zm0-3.004H6.987V5.987h2.039v4.006z"></path></svg></span>Custos Durante Espera</div><div class="admonitionContent_BuS1"><p>Enquanto a distribuição estiver <strong>desabilitada</strong> (Disabled), ela <strong>NÃO gera custos</strong>. Você pode aguardar tranquilamente o fim do ciclo para deletar.</p></div></div>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="94-deletar-bucket-s3">9.4 Deletar Bucket S3<a href="#94-deletar-bucket-s3" class="hash-link" aria-label="Link direto para 9.4 Deletar Bucket S3" title="Link direto para 9.4 Deletar Bucket S3" translate="no">​</a></h3>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>Pode Deletar Imediatamente</div><div class="admonitionContent_BuS1"><p>O bucket S3 pode ser deletado a qualquer momento, não precisa aguardar o CloudFront.</p></div></div>
+<ul>
+<li>No console do <strong>S3</strong>, acesse a lista de buckets.</li>
+<li>Selecione o bucket <code>meu-site-cloudfront-lab-v1</code>.</li>
+<li>Clique em <strong>Empty</strong>.</li>
+<li>Digite <code>permanently delete</code> para confirmar.</li>
+<li>Clique em <strong>Empty</strong></li>
+<li>Aguarde até todos os objetos serem removidos.</li>
+<li>Após esvaziar, selecione o bucket novamente.</li>
+<li>Clique em <strong>Delete</strong></li>
+<li>Digite o <strong>nome do bucket</strong> para confirmar.</li>
+<li>Clique em <strong>Delete bucket</strong></li>
+</ul></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col"><a href="https://github.com/lotechdevops/lotechdevops.github.io/tree/main/docs/cloud/AWS/cloudfront/hands-on/lab1.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Editar esta página</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Páginas de documento"><a class="pagination-nav__link pagination-nav__link--prev" href="/docs/category/hands-on-cloudfront"><div class="pagination-nav__sublabel">Anterior</div><div class="pagination-nav__label">Hands-on CloudFront</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/docs/category/elastic-load-balancing-e-auto-scaling-groups"><div class="pagination-nav__sublabel">Próxima</div><div class="pagination-nav__label">Elastic Load Balancing e Auto Scaling Groups</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#objetivo-do-lab" class="table-of-contents__link toc-highlight">Objetivo do Lab</a></li><li><a href="#pré-requisitos" class="table-of-contents__link toc-highlight">Pré-requisitos</a></li><li><a href="#arquitetura-final" class="table-of-contents__link toc-highlight">Arquitetura Final</a></li><li><a href="#passo-1-criar-o-bucket-s3" class="table-of-contents__link toc-highlight">Passo 1: Criar o Bucket S3</a><ul><li><a href="#11-acessar-o-console-s3" class="table-of-contents__link toc-highlight">1.1 Acessar o Console S3</a></li><li><a href="#12-criar-novo-bucket" class="table-of-contents__link toc-highlight">1.2 Criar Novo Bucket</a></li></ul></li><li><a href="#passo-2-preparar-arquivos-do-site" class="table-of-contents__link toc-highlight">Passo 2: Preparar Arquivos do Site</a><ul><li><a href="#21-criar-arquivos-localmente" class="table-of-contents__link toc-highlight">2.1 Criar Arquivos Localmente</a></li></ul></li><li><a href="#passo-3-upload-dos-arquivos-para-o-s3" class="table-of-contents__link toc-highlight">Passo 3: Upload dos Arquivos para o S3</a><ul><li><a href="#31-fazer-upload" class="table-of-contents__link toc-highlight">3.1 Fazer Upload</a></li></ul></li><li><a href="#passo-4-criar-distribuição-cloudfront" class="table-of-contents__link toc-highlight">Passo 4: Criar Distribuição CloudFront</a><ul><li><a href="#41-acessar-cloudfront" class="table-of-contents__link toc-highlight">4.1 Acessar CloudFront</a></li><li><a href="#42-escolher-o-plano" class="table-of-contents__link toc-highlight">4.2 Escolher o Plano</a></li><li><a href="#43-configurar-distribution-options" class="table-of-contents__link toc-highlight">4.3 Configurar Distribution Options</a></li><li><a href="#44-configurar-origin" class="table-of-contents__link toc-highlight">4.4 Configurar Origin</a></li><li><a href="#45-configurar-segurança-enable-security" class="table-of-contents__link toc-highlight">4.5 Configurar Segurança (Enable Security)</a></li><li><a href="#46-revisar-e-criar-review-and-create" class="table-of-contents__link toc-highlight">4.6 Revisar e Criar (Review and Create)</a></li></ul></li><li><a href="#passo-5-verificar-distribuição-criada" class="table-of-contents__link toc-highlight">Passo 5: Verificar Distribuição Criada</a><ul><li><a href="#51-verificar-detalhes-da-distribuição" class="table-of-contents__link toc-highlight">5.1 Verificar Detalhes da Distribuição</a></li><li><a href="#52-explorar-as-abas-de-configuração" class="table-of-contents__link toc-highlight">5.2 Explorar as Abas de Configuração</a></li><li><a href="#53-copiar-distribution-domain-name" class="table-of-contents__link toc-highlight">5.3 Copiar Distribution Domain Name</a></li></ul></li><li><a href="#passo-6-configurar-default-root-object" class="table-of-contents__link toc-highlight">Passo 6: Configurar Default Root Object</a><ul><li><a href="#61-identificar-o-problema" class="table-of-contents__link toc-highlight">6.1 Identificar o Problema</a></li><li><a href="#62-testar-com-caminho-completo" class="table-of-contents__link toc-highlight">6.2 Testar com Caminho Completo</a></li><li><a href="#63-configurar-default-root-object" class="table-of-contents__link toc-highlight">6.3 Configurar Default Root Object</a></li><li><a href="#64-aguardar-atualização" class="table-of-contents__link toc-highlight">6.4 Aguardar Atualização</a></li><li><a href="#65-testar-novamente" class="table-of-contents__link toc-highlight">6.5 Testar Novamente</a></li></ul></li><li><a href="#passo-7-verificar-performance-e-cache" class="table-of-contents__link toc-highlight">Passo 7: Verificar Performance e Cache</a><ul><li><a href="#71-testar-https" class="table-of-contents__link toc-highlight">7.1 Testar HTTPS</a></li><li><a href="#72-abrir-devtools" class="table-of-contents__link toc-highlight">7.2 Abrir DevTools</a></li><li><a href="#73-analisar-headers-do-cloudfront" class="table-of-contents__link toc-highlight">7.3 Analisar Headers do CloudFront</a></li><li><a href="#74-verificar-tempos-de-carregamento" class="table-of-contents__link toc-highlight">7.4 Verificar Tempos de Carregamento</a></li></ul></li><li><a href="#passo-8-testar-bloqueio-de-acesso-direto-ao-s3" class="table-of-contents__link toc-highlight">Passo 8: Testar Bloqueio de Acesso Direto ao S3</a><ul><li><a href="#81-tentar-acessar-s3-diretamente" class="table-of-contents__link toc-highlight">8.1 Tentar Acessar S3 Diretamente</a></li></ul></li><li><a href="#passo-9-limpeza-de-recursos" class="table-of-contents__link toc-highlight">Passo 9: Limpeza de Recursos</a><ul><li><a href="#91-desabilitar-e-deletar-distribuição-cloudfront" class="table-of-contents__link toc-highlight">9.1 Desabilitar e Deletar Distribuição CloudFront</a></li><li><a href="#92-cancelar-plano" class="table-of-contents__link toc-highlight">9.2 Cancelar Plano</a></li><li><a href="#93-deletar-distribuição-após-fim-do-ciclo" class="table-of-contents__link toc-highlight">9.3 Deletar Distribuição (Após Fim do Ciclo)</a></li><li><a href="#94-deletar-bucket-s3" class="table-of-contents__link toc-highlight">9.4 Deletar Bucket S3</a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"></div></footer></div>
+</body>
+</html>
