@@ -2,90 +2,91 @@
 <html lang="pt-BR" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-cloud/AWS/elastic-beanstalk/hands-on/lab-elastic-beanstalk-avancado" data-has-hydrated="false">
 <head>
 <meta charset="UTF-8">
-<meta name="generator" content="Docusaurus v3.9.1">
-<title data-rh="true">Deploy com Application Load Balancer (ALB) no Elastic Beanstalk | DevOpsR66</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://www.devopsr66.com/img/social-card.png"><meta data-rh="true" name="twitter:image" content="https://www.devopsr66.com/img/social-card.png"><meta data-rh="true" property="og:url" content="https://www.devopsr66.com/docs/cloud/AWS/elastic-beanstalk/hands-on/lab-elastic-beanstalk-avancado"><meta data-rh="true" property="og:locale" content="pt_BR"><meta data-rh="true" name="docusaurus_locale" content="pt-BR"><meta data-rh="true" name="docsearch:language" content="pt-BR"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Deploy com Application Load Balancer (ALB) no Elastic Beanstalk | DevOpsR66"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://www.devopsr66.com/docs/cloud/AWS/elastic-beanstalk/hands-on/lab-elastic-beanstalk-avancado"><link data-rh="true" rel="alternate" href="https://www.devopsr66.com/docs/cloud/AWS/elastic-beanstalk/hands-on/lab-elastic-beanstalk-avancado" hreflang="pt-BR"><link data-rh="true" rel="alternate" href="https://www.devopsr66.com/docs/cloud/AWS/elastic-beanstalk/hands-on/lab-elastic-beanstalk-avancado" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Cloud","item":"https://www.devopsr66.com/docs/category/cloud"},{"@type":"ListItem","position":2,"name":"Amazon Elastic Beanstalk","item":"https://www.devopsr66.com/docs/category/amazon-elastic-beanstalk"},{"@type":"ListItem","position":3,"name":"AWS Elastic Beanstalk na Prática","item":"https://www.devopsr66.com/docs/category/aws-elastic-beanstalk-na-prática"},{"@type":"ListItem","position":4,"name":"2. Deploy com Application Load Balancer (ALB)","item":"https://www.devopsr66.com/docs/cloud/AWS/elastic-beanstalk/hands-on/lab-elastic-beanstalk-avancado"}]}</script><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="DevOpsR66 RSS Feed">
+<meta name="generator" content="Docusaurus v3.9.2">
+<title data-rh="true">Deploy com Application Load Balancer (ALB) no Elastic Beanstalk | DevOpsR66</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://www.devopsr66.com/img/social-card.png"><meta data-rh="true" name="twitter:image" content="https://www.devopsr66.com/img/social-card.png"><meta data-rh="true" property="og:url" content="https://www.devopsr66.com/docs/cloud/AWS/elastic-beanstalk/hands-on/lab-elastic-beanstalk-avancado"><meta data-rh="true" property="og:locale" content="pt_BR"><meta data-rh="true" name="docusaurus_locale" content="pt-BR"><meta data-rh="true" name="docsearch:language" content="pt-BR"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Deploy com Application Load Balancer (ALB) no Elastic Beanstalk | DevOpsR66"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://www.devopsr66.com/docs/cloud/AWS/elastic-beanstalk/hands-on/lab-elastic-beanstalk-avancado"><link data-rh="true" rel="alternate" href="https://www.devopsr66.com/docs/cloud/AWS/elastic-beanstalk/hands-on/lab-elastic-beanstalk-avancado" hreflang="pt-BR"><link data-rh="true" rel="alternate" href="https://www.devopsr66.com/docs/cloud/AWS/elastic-beanstalk/hands-on/lab-elastic-beanstalk-avancado" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Cloud","item":"https://www.devopsr66.com/docs/category/cloud"},{"@type":"ListItem","position":2,"name":"Amazon Elastic Beanstalk","item":"https://www.devopsr66.com/docs/category/amazon-elastic-beanstalk"},{"@type":"ListItem","position":3,"name":"Hands-on","item":"https://www.devopsr66.com/docs/category/hands-on-3"},{"@type":"ListItem","position":4,"name":"2. Deploy com Application Load Balancer (ALB)","item":"https://www.devopsr66.com/docs/cloud/AWS/elastic-beanstalk/hands-on/lab-elastic-beanstalk-avancado"}]}</script><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="DevOpsR66 RSS Feed">
 <link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="DevOpsR66 Atom Feed">
 
 
 
 
-<script src="https://static.cloudflareinsights.com/beacon.min.js" defer="defer" data-cf-beacon="{&quot;token&quot;: &quot;cdf6c45914ab475fb2b617f03b308721&quot;}"></script><link rel="stylesheet" href="/assets/css/styles.e57c0933.css">
-<script src="/assets/js/runtime~main.03c98535.js" defer="defer"></script>
-<script src="/assets/js/main.99ed753b.js" defer="defer"></script>
+
+<script src="https://static.cloudflareinsights.com/beacon.min.js" defer="defer" data-cf-beacon="{&quot;token&quot;: &quot;cdf6c45914ab475fb2b617f03b308721&quot;}"></script><link rel="stylesheet" href="/assets/css/styles.ce6f1228.css">
+<script src="/assets/js/runtime~main.966624bf.js" defer="defer"></script>
+<script src="/assets/js/main.51e7389e.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
 <symbol id="theme-svg-external-link" viewBox="0 0 24 24"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"/></symbol>
 </defs></svg>
-<script>!function(){var t=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();document.documentElement.setAttribute("data-theme",t||"dark"),document.documentElement.setAttribute("data-theme-choice",t||"dark")}(),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><link rel="preload" as="image" href="/img/logo.jpeg"><div role="region" aria-label="Pular para o conteúdo principal"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Pular para o conteúdo principal</a></div><nav aria-label="Navegação principal" class="theme-layout-navbar navbar navbar--fixed-top"><div class="navbar__inner"><div class="theme-layout-navbar-left navbar__items"><button aria-label="Alternar painel de navegação" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/"><div class="navbar__logo"><img src="/img/logo.jpeg" alt="Logo DevOpsR66" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src="/img/logo.jpeg" alt="Logo DevOpsR66" class="themedComponent_mlkZ themedComponent--dark_xIcU"></div><b class="navbar__title text--truncate">DevOpsR66</b></a><a class="navbar__item navbar__link" href="/docs/kubernetes/intro">Kubernetes</a><a class="navbar__item navbar__link" href="/docs/cloud/intro">Cloud</a><a class="navbar__item navbar__link" href="/docs/iac/intro">IaC</a><a class="navbar__item navbar__link" href="/docs/observabilidade/intro">Observabilidade</a><a class="navbar__item navbar__link" href="/docs/linux/intro">Linux</a><a class="navbar__item navbar__link" href="/docs/cicd/intro">CI/CD</a></div><div class="theme-layout-navbar-right navbar__items navbar__items--right"><a href="https://github.com/lotechdevops" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link header-github-link"></a><a href="https://www.linkedin.com/in/divino-sabino-moreira-neto-918844108/" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link header-linkedin-link"></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="modo do sistema" aria-label="Mudar entre modo claro e escuro (modo do sistema está ativo)"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP systemToggleIcon_QzmC"><path fill="currentColor" d="m12 21c4.971 0 9-4.029 9-9s-4.029-9-9-9-9 4.029-9 9 4.029 9 9 9zm4.95-13.95c1.313 1.313 2.05 3.093 2.05 4.95s-0.738 3.637-2.05 4.95c-1.313 1.313-3.093 2.05-4.95 2.05v-14c1.857 0 3.637 0.737 4.95 2.05z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="theme-layout-main main-wrapper mainWrapper_z2l0"><div class="docsWrapper_hBAB"><button aria-label="Voltar para o topo" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class="sidebarViewport_aRkj"><div class="sidebar_njMd"><nav aria-label="Painel lateral de documentos" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--active" href="/docs/category/cloud"><span title="Cloud" class="categoryLinkLabel_W154">Cloud</span></a><button aria-label="Recolher a categoria &#x27;Cloud&#x27;" aria-expanded="true" type="button" class="clean-btn menu__caret"></button></div><ul class="menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret menu__link--active" role="button" aria-expanded="true" tabindex="0" href="/docs/category/infraestrutura-global-da-aws"><span title="AWS" class="categoryLinkLabel_W154">AWS</span></a></div><ul class="menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" tabindex="0" href="/docs/category/infraestrutura-global-da-aws"><span title="Infraestrutura Global da AWS" class="categoryLinkLabel_W154">Infraestrutura Global da AWS</span></a><button aria-label="Expandir a categoria &#x27;Infraestrutura Global da AWS&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" tabindex="0" href="/docs/category/ec2---elastic-compute-cloud"><span title="EC2 - Elastic Compute Cloud" class="categoryLinkLabel_W154">EC2 - Elastic Compute Cloud</span></a><button aria-label="Expandir a categoria &#x27;EC2 - Elastic Compute Cloud&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" tabindex="0" href="/docs/category/iam---identity-and-access-management"><span title="IAM - Identity and Access Management" class="categoryLinkLabel_W154">IAM - Identity and Access Management</span></a><button aria-label="Expandir a categoria &#x27;IAM - Identity and Access Management&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" tabindex="0" href="/docs/category/amazon-route-53"><span title="Amazon Route 53" class="categoryLinkLabel_W154">Amazon Route 53</span></a><button aria-label="Expandir a categoria &#x27;Amazon Route 53&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" tabindex="0" href="/docs/category/amazon-s3"><span title="Amazon S3" class="categoryLinkLabel_W154">Amazon S3</span></a><button aria-label="Expandir a categoria &#x27;Amazon S3&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--active" tabindex="0" href="/docs/category/amazon-elastic-beanstalk"><span title="Amazon Elastic Beanstalk" class="categoryLinkLabel_W154">Amazon Elastic Beanstalk</span></a><button aria-label="Recolher a categoria &#x27;Amazon Elastic Beanstalk&#x27;" aria-expanded="true" type="button" class="clean-btn menu__caret"></button></div><ul class="menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-4 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" tabindex="0" href="/docs/category/conceitos-de-amazon-elastic-beanstalk"><span title="Conceitos de Amazon Elastic Beanstalk" class="categoryLinkLabel_W154">Conceitos de Amazon Elastic Beanstalk</span></a><button aria-label="Expandir a categoria &#x27;Conceitos de Amazon Elastic Beanstalk&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-4 menu__list-item"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--active" tabindex="0" href="/docs/category/aws-elastic-beanstalk-na-prática"><span title="AWS Elastic Beanstalk na Prática" class="categoryLinkLabel_W154">AWS Elastic Beanstalk na Prática</span></a><button aria-label="Recolher a categoria &#x27;AWS Elastic Beanstalk na Prática&#x27;" aria-expanded="true" type="button" class="clean-btn menu__caret"></button></div><ul class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-5 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud/AWS/elastic-beanstalk/hands-on/lab-elastic-beanstalk-basico"><span title="1. Deploy Básico" class="linkLabel_WmDU">1. Deploy Básico</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-5 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" tabindex="0" href="/docs/cloud/AWS/elastic-beanstalk/hands-on/lab-elastic-beanstalk-avancado"><span title="2. Deploy com Application Load Balancer (ALB)" class="linkLabel_WmDU">2. Deploy com Application Load Balancer (ALB)</span></a></li></ul></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" tabindex="0" href="/docs/category/amazon-cloudfront"><span title="Amazon CloudFront" class="categoryLinkLabel_W154">Amazon CloudFront</span></a><button aria-label="Expandir a categoria &#x27;Amazon CloudFront&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" tabindex="0" href="/docs/category/elastic-load-balancing-e-auto-scaling-groups"><span title="Elastic Load Balancing e Auto Scaling Groups" class="categoryLinkLabel_W154">Elastic Load Balancing e Auto Scaling Groups</span></a><button aria-label="Expandir a categoria &#x27;Elastic Load Balancing e Auto Scaling Groups&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" tabindex="0" href="/docs/category/aws-client-vpn-endpoints"><span title="AWS Client VPN Endpoints" class="categoryLinkLabel_W154">AWS Client VPN Endpoints</span></a><button aria-label="Expandir a categoria &#x27;AWS Client VPN Endpoints&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li></ul></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud/intro"><span title="intro" class="linkLabel_WmDU">intro</span></a></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" href="/docs/category/kubernetes"><span title="Kubernetes" class="categoryLinkLabel_W154">Kubernetes</span></a><button aria-label="Expandir a categoria &#x27;Kubernetes&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" href="/docs/category/iac"><span title="IaC" class="categoryLinkLabel_W154">IaC</span></a><button aria-label="Expandir a categoria &#x27;IaC&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" href="/docs/category/linux"><span title="Linux" class="categoryLinkLabel_W154">Linux</span></a><button aria-label="Expandir a categoria &#x27;Linux&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" href="/docs/category/observabilidade"><span title="Observabilidade" class="categoryLinkLabel_W154">Observabilidade</span></a><button aria-label="Expandir a categoria &#x27;Observabilidade&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" href="/docs/category/cicd"><span title="CI/CD" class="categoryLinkLabel_W154">CI/CD</span></a><button aria-label="Expandir a categoria &#x27;CI/CD&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li></ul></nav></div></div></aside><main class="docMainContainer_TBSr"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_VOVn"><div class="docItemContainer_Djhp"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_Z_bl" aria-label="Trilha"><ul class="breadcrumbs"><li class="breadcrumbs__item"><a aria-label="Página Inicial" class="breadcrumbs__link" href="/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_YNFT"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li class="breadcrumbs__item"><a class="breadcrumbs__link" href="/docs/category/cloud"><span>Cloud</span></a></li><li class="breadcrumbs__item"><span class="breadcrumbs__link">AWS</span></li><li class="breadcrumbs__item"><a class="breadcrumbs__link" href="/docs/category/amazon-elastic-beanstalk"><span>Amazon Elastic Beanstalk</span></a></li><li class="breadcrumbs__item"><a class="breadcrumbs__link" href="/docs/category/aws-elastic-beanstalk-na-prática"><span>AWS Elastic Beanstalk na Prática</span></a></li><li class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link">2. Deploy com Application Load Balancer (ALB)</span></li></ul></nav><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">Nesta página</button></div><div class="theme-doc-markdown markdown"><header><h1>Deploy com Application Load Balancer (ALB) no Elastic Beanstalk</h1></header><h2 class="anchor anchorWithStickyNavbar_LWe7" id="objetivo">Objetivo<a href="#objetivo" class="hash-link" aria-label="Link direto para Objetivo" title="Link direto para Objetivo" translate="no">​</a></h2>
+<script>!function(){var t=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();document.documentElement.setAttribute("data-theme",t||"dark"),document.documentElement.setAttribute("data-theme-choice",t||"dark")}(),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><link rel="preload" as="image" href="/img/logo.jpeg"><div role="region" aria-label="Pular para o conteúdo principal"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Pular para o conteúdo principal</a></div><nav aria-label="Navegação principal" class="theme-layout-navbar navbar navbar--fixed-top"><div class="navbar__inner"><div class="theme-layout-navbar-left navbar__items"><button aria-label="Alternar painel de navegação" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/"><div class="navbar__logo"><img src="/img/logo.jpeg" alt="Logo DevOpsR66" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src="/img/logo.jpeg" alt="Logo DevOpsR66" class="themedComponent_mlkZ themedComponent--dark_xIcU"></div><b class="navbar__title text--truncate">DevOpsR66</b></a><a class="navbar__item navbar__link" href="/docs/kubernetes/intro">Kubernetes</a><a class="navbar__item navbar__link" href="/docs/cloud/intro">Cloud</a><a class="navbar__item navbar__link" href="/docs/iac/intro">IaC</a><a class="navbar__item navbar__link" href="/docs/observabilidade/intro">Observabilidade</a><a class="navbar__item navbar__link" href="/docs/linux/intro">Linux</a><a class="navbar__item navbar__link" href="/docs/cicd/intro">CI/CD</a></div><div class="theme-layout-navbar-right navbar__items navbar__items--right"><a href="https://github.com/lotechdevops" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link header-github-link"></a><a href="https://www.linkedin.com/in/divino-sabino-moreira-neto-918844108/" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link header-linkedin-link"></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="modo do sistema" aria-label="Mudar entre modo claro e escuro (modo do sistema está ativo)"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP systemToggleIcon_QzmC"><path fill="currentColor" d="m12 21c4.971 0 9-4.029 9-9s-4.029-9-9-9-9 4.029-9 9 4.029 9 9 9zm4.95-13.95c1.313 1.313 2.05 3.093 2.05 4.95s-0.738 3.637-2.05 4.95c-1.313 1.313-3.093 2.05-4.95 2.05v-14c1.857 0 3.637 0.737 4.95 2.05z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="theme-layout-main main-wrapper mainWrapper_z2l0"><div class="docsWrapper_hBAB"><button aria-label="Voltar para o topo" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class="sidebarViewport_aRkj"><div class="sidebar_njMd"><nav aria-label="Painel lateral de documentos" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--active" href="/docs/category/cloud"><span title="Cloud" class="categoryLinkLabel_W154">Cloud</span></a><button aria-label="Recolher a categoria &#x27;Cloud&#x27;" aria-expanded="true" type="button" class="clean-btn menu__caret"></button></div><ul class="menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret menu__link--active" role="button" aria-expanded="true" tabindex="0" href="/docs/category/infraestrutura-global-da-aws"><span title="AWS" class="categoryLinkLabel_W154">AWS</span></a></div><ul class="menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" tabindex="0" href="/docs/category/infraestrutura-global-da-aws"><span title="Infraestrutura Global da AWS" class="categoryLinkLabel_W154">Infraestrutura Global da AWS</span></a><button aria-label="Expandir a categoria &#x27;Infraestrutura Global da AWS&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" tabindex="0" href="/docs/category/ec2---elastic-compute-cloud"><span title="EC2 - Elastic Compute Cloud" class="categoryLinkLabel_W154">EC2 - Elastic Compute Cloud</span></a><button aria-label="Expandir a categoria &#x27;EC2 - Elastic Compute Cloud&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" tabindex="0" href="/docs/category/iam---identity-and-access-management"><span title="IAM - Identity and Access Management" class="categoryLinkLabel_W154">IAM - Identity and Access Management</span></a><button aria-label="Expandir a categoria &#x27;IAM - Identity and Access Management&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" tabindex="0" href="/docs/category/amazon-route-53"><span title="Amazon Route 53" class="categoryLinkLabel_W154">Amazon Route 53</span></a><button aria-label="Expandir a categoria &#x27;Amazon Route 53&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" tabindex="0" href="/docs/category/amazon-s3"><span title="Amazon S3" class="categoryLinkLabel_W154">Amazon S3</span></a><button aria-label="Expandir a categoria &#x27;Amazon S3&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--active" tabindex="0" href="/docs/category/amazon-elastic-beanstalk"><span title="Amazon Elastic Beanstalk" class="categoryLinkLabel_W154">Amazon Elastic Beanstalk</span></a><button aria-label="Recolher a categoria &#x27;Amazon Elastic Beanstalk&#x27;" aria-expanded="true" type="button" class="clean-btn menu__caret"></button></div><ul class="menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-4 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" tabindex="0" href="/docs/category/conceitos-4"><span title="Conceitos" class="categoryLinkLabel_W154">Conceitos</span></a><button aria-label="Expandir a categoria &#x27;Conceitos&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-4 menu__list-item"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--active" tabindex="0" href="/docs/category/hands-on-3"><span title="Hands-on" class="categoryLinkLabel_W154">Hands-on</span></a><button aria-label="Recolher a categoria &#x27;Hands-on&#x27;" aria-expanded="true" type="button" class="clean-btn menu__caret"></button></div><ul class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-5 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud/AWS/elastic-beanstalk/hands-on/lab-elastic-beanstalk-basico"><span title="1. Deploy Básico" class="linkLabel_WmDU">1. Deploy Básico</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-5 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" tabindex="0" href="/docs/cloud/AWS/elastic-beanstalk/hands-on/lab-elastic-beanstalk-avancado"><span title="2. Deploy com Application Load Balancer (ALB)" class="linkLabel_WmDU">2. Deploy com Application Load Balancer (ALB)</span></a></li></ul></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" tabindex="0" href="/docs/category/amazon-cloudfront"><span title="Amazon CloudFront" class="categoryLinkLabel_W154">Amazon CloudFront</span></a><button aria-label="Expandir a categoria &#x27;Amazon CloudFront&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" tabindex="0" href="/docs/category/elastic-load-balancing-e-auto-scaling-groups"><span title="Elastic Load Balancing e Auto Scaling Groups" class="categoryLinkLabel_W154">Elastic Load Balancing e Auto Scaling Groups</span></a><button aria-label="Expandir a categoria &#x27;Elastic Load Balancing e Auto Scaling Groups&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" tabindex="0" href="/docs/category/aws-client-vpn-endpoints"><span title="AWS Client VPN Endpoints" class="categoryLinkLabel_W154">AWS Client VPN Endpoints</span></a><button aria-label="Expandir a categoria &#x27;AWS Client VPN Endpoints&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li></ul></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cloud/intro"><span title="intro" class="linkLabel_WmDU">intro</span></a></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" href="/docs/category/kubernetes"><span title="Kubernetes" class="categoryLinkLabel_W154">Kubernetes</span></a><button aria-label="Expandir a categoria &#x27;Kubernetes&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" href="/docs/category/iac"><span title="IaC" class="categoryLinkLabel_W154">IaC</span></a><button aria-label="Expandir a categoria &#x27;IaC&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" href="/docs/category/linux"><span title="Linux" class="categoryLinkLabel_W154">Linux</span></a><button aria-label="Expandir a categoria &#x27;Linux&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" href="/docs/category/observabilidade"><span title="Observabilidade" class="categoryLinkLabel_W154">Observabilidade</span></a><button aria-label="Expandir a categoria &#x27;Observabilidade&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" href="/docs/category/cicd"><span title="CI/CD" class="categoryLinkLabel_W154">CI/CD</span></a><button aria-label="Expandir a categoria &#x27;CI/CD&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li></ul></nav></div></div></aside><main class="docMainContainer_TBSr"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_VOVn"><div class="docItemContainer_Djhp"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_Z_bl" aria-label="Trilha"><ul class="breadcrumbs"><li class="breadcrumbs__item"><a aria-label="Página Inicial" class="breadcrumbs__link" href="/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_YNFT"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li class="breadcrumbs__item"><a class="breadcrumbs__link" href="/docs/category/cloud"><span>Cloud</span></a></li><li class="breadcrumbs__item"><span class="breadcrumbs__link">AWS</span></li><li class="breadcrumbs__item"><a class="breadcrumbs__link" href="/docs/category/amazon-elastic-beanstalk"><span>Amazon Elastic Beanstalk</span></a></li><li class="breadcrumbs__item"><a class="breadcrumbs__link" href="/docs/category/hands-on-3"><span>Hands-on</span></a></li><li class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link">2. Deploy com Application Load Balancer (ALB)</span></li></ul></nav><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">Nesta página</button></div><div class="theme-doc-markdown markdown"><header><h1>Deploy com Application Load Balancer (ALB) no Elastic Beanstalk</h1></header><h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="objetivo">Objetivo<a href="#objetivo" class="hash-link" aria-label="Link direto para Objetivo" title="Link direto para Objetivo" translate="no">​</a></h2>
 <p>Realizar o <strong>deploy com Application Load Balancer (ALB)</strong> de uma aplicação no <strong>Amazon Elastic Beanstalk</strong>, aplicando customizações de rede, capacidade e operações alinhadas a boas práticas de produção. <strong>Diferente do Lab 1</strong>, aqui você ajustará explicitamente os recursos do ambiente antes do provisionamento.</p>
 <hr>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="etapas-de-configuração">Etapas de Configuração<a href="#etapas-de-configuração" class="hash-link" aria-label="Link direto para Etapas de Configuração" title="Link direto para Etapas de Configuração" translate="no">​</a></h2>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="etapa-1---configurações-do-ambiente">Etapa 1 - Configurações do Ambiente<a href="#etapa-1---configurações-do-ambiente" class="hash-link" aria-label="Link direto para Etapa 1 - Configurações do Ambiente" title="Link direto para Etapa 1 - Configurações do Ambiente" translate="no">​</a></h3>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="etapas-de-configuração">Etapas de Configuração<a href="#etapas-de-configuração" class="hash-link" aria-label="Link direto para Etapas de Configuração" title="Link direto para Etapas de Configuração" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="etapa-1---configurações-do-ambiente">Etapa 1 - Configurações do Ambiente<a href="#etapa-1---configurações-do-ambiente" class="hash-link" aria-label="Link direto para Etapa 1 - Configurações do Ambiente" title="Link direto para Etapa 1 - Configurações do Ambiente" translate="no">​</a></h3>
 <ol>
-<li>
-<p>Abra o console do Amazon Elastic Beanstalk em <strong><a href="https://console.aws.amazon.com/elasticbeanstalk/" target="_blank" rel="noopener noreferrer">https://console.aws.amazon.com/elasticbeanstalk/</a></strong></p>
+<li class="">
+<p>Abra o console do Amazon Elastic Beanstalk em <strong><a href="https://console.aws.amazon.com/elasticbeanstalk/" target="_blank" rel="noopener noreferrer" class="">https://console.aws.amazon.com/elasticbeanstalk/</a></strong></p>
 </li>
-<li>
+<li class="">
 <p>Clique em <strong><code>Criar aplicação</code></strong></p>
 </li>
-<li>
+<li class="">
 <p>Na etapa <strong><code>Configurar ambiente</code></strong>, selecione:</p>
 <ul>
-<li><strong><code>Ambiente de servidor Web</code></strong> -&gt; Usado para sites, APIs ou aplicações web acessíveis via HTTP.</li>
+<li class=""><strong><code>Ambiente de servidor Web</code></strong> -&gt; Usado para sites, APIs ou aplicações web acessíveis via HTTP.</li>
 </ul>
 </li>
-<li>
+<li class="">
 <p>Em <strong><code>Informações da aplicação</code></strong>, informe o <strong><code>nome da aplicação</code></strong></p>
 </li>
-<li>
+<li class="">
 <p>Em <strong><code>Informações do ambiente</code></strong>, preencha:</p>
 <ul>
-<li><strong><code>Nome do Ambiente</code></strong> -&gt; Esse nome será utilizado para identificar e acessar a aplicação.</li>
+<li class=""><strong><code>Nome do Ambiente</code></strong> -&gt; Esse nome será utilizado para identificar e acessar a aplicação.</li>
 </ul>
 </li>
-<li>
+<li class="">
 <p>Em <strong><code>Plataforma</code></strong>, selecione:</p>
 <ul>
-<li><strong>Python</strong> (versão mais recente disponível)</li>
+<li class=""><strong>Python</strong> (versão mais recente disponível)</li>
 </ul>
 </li>
-<li>
+<li class="">
 <p>Em <strong><code>Código da aplicação</code></strong>, escolha <strong><code>Fazer upload do seu código</code></strong> e preencha:</p>
 <ul>
-<li><strong><code>Rótulo da versão</code></strong> -&gt; identificador da versão do código.</li>
-<li><strong><code>Arquivo local</code></strong> -&gt; Selecione o pacote <strong>.zip</strong> da sua aplicação.</li>
+<li class=""><strong><code>Rótulo da versão</code></strong> -&gt; identificador da versão do código.</li>
+<li class=""><strong><code>Arquivo local</code></strong> -&gt; Selecione o pacote <strong>.zip</strong> da sua aplicação.</li>
 </ul>
 </li>
-<li>
+<li class="">
 <p>Em <strong><code>Predefinições</code></strong>, escolha:</p>
 <ul>
-<li><strong><code>Configuração personalizada</code></strong> -&gt; Permite ajustar manualmente parâmetros como <strong>rede, segurança, escalabilidade e banco de dados</strong>.</li>
+<li class=""><strong><code>Configuração personalizada</code></strong> -&gt; Permite ajustar manualmente parâmetros como <strong>rede, segurança, escalabilidade e banco de dados</strong>.</li>
 </ul>
 </li>
-<li>
+<li class="">
 <p>Clique em <strong><code>Próximo</code></strong> para seguir para a etapa 2.</p>
 </li>
 </ol>
 <p><img decoding="async" loading="lazy" alt="Configuração Ambiente" src="/assets/images/etapa-1-configuracao-ambiente-lab-avancado-ac6b567ac55765a62092b98b2adf658a.gif" width="1930" height="949" class="img_ev3q"></p>
 <hr>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="etapa-2---configuração-de-acesso-ao-serviço">Etapa 2 - Configuração de acesso ao serviço<a href="#etapa-2---configuração-de-acesso-ao-serviço" class="hash-link" aria-label="Link direto para Etapa 2 - Configuração de acesso ao serviço" title="Link direto para Etapa 2 - Configuração de acesso ao serviço" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="etapa-2---configuração-de-acesso-ao-serviço">Etapa 2 - Configuração de acesso ao serviço<a href="#etapa-2---configuração-de-acesso-ao-serviço" class="hash-link" aria-label="Link direto para Etapa 2 - Configuração de acesso ao serviço" title="Link direto para Etapa 2 - Configuração de acesso ao serviço" translate="no">​</a></h3>
 <p>Nesta etapa, configure os perfis do <strong>IAM</strong> que o Elastic Beanstalk utilizará para gerenciar os recursos do ambiente.</p>
 <p><strong>2.1 - Perfil de serviço (Obrigatório):</strong> Ao clicar em <strong><code>Criar perfil</code></strong>, a tela de criação da Role do IAM é exibida. Nela você deve selecionar o serviço que usará essa Role e o <strong>caso de uso</strong> específico.</p>
 <ul>
-<li>
+<li class="">
 <p><strong>Elastic Beanstalk - Compute</strong> -&gt; Esse caso de uso é voltado para o perfil de instância EC2. Ele concede permissões para que as instâncias criadas no ambiente possam executar ações necessárias para a aplicação, como acessar o Amazon S3 ou enviar métricas para o CloudWatch.</p>
 </li>
-<li>
+<li class="">
 <p><strong>Elastic Beanstalk - Environment</strong> -&gt; Esse caso de uso é o correto para o <strong>Perfil de serviço</strong>, pois permite que o Elastic Beanstalk tenha acesso a outros recursos da AWS necessários para <strong>criar e gerenciar ambientes</strong>.</p>
 </li>
 </ul>
 <blockquote>
 <ul>
-<li>
+<li class="">
 <p>Para o <strong>Perfil de serviço</strong>, selecione <strong><code>Elastic Beanstalk - Environment</code></strong> e continue a criação da Role.</p>
 </li>
-<li>
+<li class="">
 <p>Geralmente, ao final da criação, o console gera automaticamente uma Role chamada <strong><code>aws-elasticbeanstalk-service-role</code></strong>, que será utilizada para esse propósito.</p>
 </li>
 </ul>
@@ -93,142 +94,142 @@
 <p><strong>2.2 - Perfil da Instância EC2 (Obrigatório):</strong> Ao clicar em <strong><code>Criar perfil</code></strong>, a tela de criação da Role do IAM é exibida com as mesmas opções de caso de uso vistas no <strong>Perfil de serviço</strong>.</p>
 <p>A diferença está na escolha correta do caso de uso: <strong>Elastic Beanstalk - Compute</strong></p>
 <ul>
-<li>Ela concede permissões para que as instâncias do ambiente consigam executar ações necessárias, como:<!-- -->
+<li class="">Ela concede permissões para que as instâncias do ambiente consigam executar ações necessárias, como:<!-- -->
 <ul>
-<li>Enviar logs e métricas para o <strong>Amazon CloudWatch</strong>.</li>
-<li>Acessar arquivos armazenados no <strong>Amazon S3</strong>.</li>
-<li>Interagir com outros serviços de suporte dentro da AWS.</li>
+<li class="">Enviar logs e métricas para o <strong>Amazon CloudWatch</strong>.</li>
+<li class="">Acessar arquivos armazenados no <strong>Amazon S3</strong>.</li>
+<li class="">Interagir com outros serviços de suporte dentro da AWS.</li>
 </ul>
 </li>
 </ul>
 <blockquote>
 <ul>
-<li>
+<li class="">
 <p>Para o <strong>Perfil da instância EC2</strong>, selecione <strong><code>Elastic Beanstalk - Compute</code></strong> e continue a criação da Role.</p>
 </li>
-<li>
+<li class="">
 <p>Normalmente, o console cria uma Role com o nome <strong><code>aws-elasticbeanstalk-ec2-role</code></strong>, que será associada automaticamente às instâncias EC2 do ambiente.</p>
 </li>
 </ul>
 </blockquote>
 <p><strong>2.3 - Par de chaves EC2 (opcional):</strong></p>
 <ul>
-<li>Selecione um <strong>par de chaves existente</strong> ou crie um novo caso queira acessar as instâncias via <strong>SSH</strong>.</li>
-<li>Essa configuração é opcional: se não precisar de acesso remoto às instâncias, pode deixar em branco.</li>
+<li class="">Selecione um <strong>par de chaves existente</strong> ou crie um novo caso queira acessar as instâncias via <strong>SSH</strong>.</li>
+<li class="">Essa configuração é opcional: se não precisar de acesso remoto às instâncias, pode deixar em branco.</li>
 </ul>
 <blockquote>
 <p><strong>Boas práticas de Produção:</strong></p>
 <ul>
-<li>&quot;Revise as permissões padrão das roles criadas automaticamente&quot;</li>
-<li>&quot;Sempre utilize o <strong>Princípio do Menor Privilégio</strong></li>
-<li>&quot;Considere armazenar credenciais sensíveis no <strong>AWS Secrets Manager</strong>&quot;</li>
+<li class="">&quot;Revise as permissões padrão das roles criadas automaticamente&quot;</li>
+<li class="">&quot;Sempre utilize o <strong>Princípio do Menor Privilégio</strong></li>
+<li class="">&quot;Considere armazenar credenciais sensíveis no <strong>AWS Secrets Manager</strong>&quot;</li>
 </ul>
 </blockquote>
 <p><img decoding="async" loading="lazy" alt="Configurações Acesso ao Sistema" src="/assets/images/etapa-2-configuracao-acesso-ao-sistema-c9ca6aa0096602b102979f46412fcb23.gif" width="1930" height="938" class="img_ev3q"></p>
 <hr>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="etapa-3---definir-redes-banco-de-dados-e-etiquetas">Etapa 3 - Definir redes, banco de dados e etiquetas<a href="#etapa-3---definir-redes-banco-de-dados-e-etiquetas" class="hash-link" aria-label="Link direto para Etapa 3 - Definir redes, banco de dados e etiquetas" title="Link direto para Etapa 3 - Definir redes, banco de dados e etiquetas" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="etapa-3---definir-redes-banco-de-dados-e-etiquetas">Etapa 3 - Definir redes, banco de dados e etiquetas<a href="#etapa-3---definir-redes-banco-de-dados-e-etiquetas" class="hash-link" aria-label="Link direto para Etapa 3 - Definir redes, banco de dados e etiquetas" title="Link direto para Etapa 3 - Definir redes, banco de dados e etiquetas" translate="no">​</a></h3>
 <p>Nesta etapa, você pode configurar como o ambiente do Elastic Beanstalk será provisionado em termos de rede, banco de dados e organização com etiquetas.</p>
 <p><strong>3.1 - Configurações de instâncias:</strong></p>
 <ul>
-<li>
+<li class="">
 <p><strong>VPC</strong>, selecione <strong>VPC personalizada</strong> criada por você.</p>
 </li>
-<li>
+<li class="">
 <p><strong>Endereço IP público</strong> -&gt; Marque essa opção apenas se quiser que as instâncias EC2 recebam IP público diretamente.</p>
 </li>
-<li>
+<li class="">
 <p><strong>Sub-redes</strong> -&gt; Selecione ao menos <strong>uma sub-rede privada</strong> criada por você.</p>
 </li>
 </ul>
 <p><strong>3.2 - Banco de dados:</strong></p>
 <ul>
-<li>Essa opção permite integrar um <strong>RDS</strong> ao ambiente, criando um banco de dados gerenciado junto à aplicação.</li>
+<li class="">Essa opção permite integrar um <strong>RDS</strong> ao ambiente, criando um banco de dados gerenciado junto à aplicação.</li>
 </ul>
 <blockquote>
 <p>Atenção: Se você habilitar o banco de dados, lembre-se que o <strong>RDS não é excluído automaticamente</strong> quando o ambiente do Beanstalk for encerrado. É necessário removê-lo manualmente para evitar custos extras.</p>
 </blockquote>
 <p><strong>3.3 - Etiquetas (tags):</strong></p>
 <ul>
-<li>As <strong>tags</strong> permitem identificar, organizar e gerenciar seus recursos dentro da AWS.</li>
-<li>Cada tag é formada por um par <strong>chave/valor</strong></li>
-<li>O uso de tags é opcional</li>
+<li class="">As <strong>tags</strong> permitem identificar, organizar e gerenciar seus recursos dentro da AWS.</li>
+<li class="">Cada tag é formada por um par <strong>chave/valor</strong></li>
+<li class="">O uso de tags é opcional</li>
 </ul>
 <p><img decoding="async" loading="lazy" alt="Configuração Rede, Banco de dados" src="/assets/images/etapa-3-configuracao-redes-lab-avancado-2be1f8b371347a427b8962ca76043bdb.gif" width="1930" height="949" class="img_ev3q"></p>
 <hr>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="etapa-4---configurar-o-tráfego-e-a-escalabilidade-da-instância-opcional">Etapa 4 - Configurar o tráfego e a escalabilidade da instância (Opcional)<a href="#etapa-4---configurar-o-tráfego-e-a-escalabilidade-da-instância-opcional" class="hash-link" aria-label="Link direto para Etapa 4 - Configurar o tráfego e a escalabilidade da instância (Opcional)" title="Link direto para Etapa 4 - Configurar o tráfego e a escalabilidade da instância (Opcional)" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="etapa-4---configurar-o-tráfego-e-a-escalabilidade-da-instância-opcional">Etapa 4 - Configurar o tráfego e a escalabilidade da instância (Opcional)<a href="#etapa-4---configurar-o-tráfego-e-a-escalabilidade-da-instância-opcional" class="hash-link" aria-label="Link direto para Etapa 4 - Configurar o tráfego e a escalabilidade da instância (Opcional)" title="Link direto para Etapa 4 - Configurar o tráfego e a escalabilidade da instância (Opcional)" translate="no">​</a></h3>
 <p>Nesta etapa, o Elastic Beanstalk ajuste as configurações avançadas como relacionadas às <strong>instâncias EC2</strong> e ao <strong>Auto Scaling</strong> do ambiente.</p>
 <p><strong>4.1 - Instâncias:</strong></p>
 <ul>
-<li>
+<li class="">
 <p>Em <strong>Volume raiz (dispositivo de inicialização)</strong>, define o tipo, tamanho e performance do volume EBS associado às instâncias.</p>
 </li>
-<li>
+<li class="">
 <p>Em <strong>Monitoramento do Amazon CloudWatch</strong>, define o intervalo de coleta de métricas. Pode ser de <strong>5 minutos (padrão)</strong> ou <strong>1 minuto</strong> (para maior granularidade).</p>
 </li>
-<li>
+<li class="">
 <p>Em <strong>Serviço de metadados da instância (IMDS)</strong>, por padrão, o Beanstalk habilita apenas o <strong>IMDSv2</strong> por questões de segurança.</p>
 </li>
-<li>
+<li class="">
 <p>Em <strong>Grupos de segurança do EC2</strong>, escolhe os <strong>Security Groups</strong> que irão controlar o tráfego de rede das instâncias.</p>
 </li>
 </ul>
 <p><strong>4.2 - Capacidade (Auto Scaling):</strong></p>
 <ul>
-<li>
+<li class="">
 <p>Em <strong><code>Tipo de ambiente</code></strong>, selecione <strong><code>Carga balanceada</code></strong> para utilizar múltiplas instâncias EC2 atrás de um balanceador de carga.</p>
 </li>
-<li>
+<li class="">
 <p>Em <strong><code>Mínimo</code></strong> e <strong><code>Máximo</code></strong>, define a quantidade de instâncias mínima e máxima que o Auto Scaling poderá manter.</p>
 </li>
-<li>
+<li class="">
 <p>Em <strong><code>Composição da frota</code></strong>, escolha entre instâncias <strong><code>sob demanda</code> (garantem disponibilidade)</strong> ou <strong><code>instâncias Spot</code> (mais baratas, porém sem garantia de permanência)</strong>.</p>
 </li>
-<li>
+<li class="">
 <p>Em <strong><code>Arquitetura</code></strong>, selecione <strong><code>x86_64</code>  (mais compatível)</strong> ou <strong><code>arm64</code> (mais econômico, se sua aplicação suportar)</strong>.</p>
 </li>
-<li>
+<li class="">
 <p>Em <strong><code>Tipos de instâncias</code></strong>, selecione os tipos de máquinas EC2 que poderão ser utilizados. Por padrão já aparecem <strong><code>t3.micro</code></strong> e <strong><code>t3.small</code></strong>, mas você pode adicionar ou remover conforme necessário.</p>
 </li>
-<li>
+<li class="">
 <p>Em <strong><code>ID da AMI</code></strong>, mantenha a opção padrão (selecionada automaticamente pelo Beanstalk) ou escolha uma AMI personalizada, caso precise de um ambiente pré-configurado.</p>
 </li>
-<li>
+<li class="">
 <p>Em <strong><code>Resfriamento da escalabilidade</code></strong>, defina o tempo mínimo (em segundos) que o Auto Scaling aguardará entre uma ação de escala e outra (scale in/ scale out). O valor padrão é <strong><code>360 segundos</code> (6 minutos)</strong>.</p>
 </li>
-<li>
+<li class="">
 <p>Em <strong><code>Acionadores de Escalabilidade</code></strong> -&gt; Aqui você define as <strong>regras automáticas</strong> para aumentar ou reduzir as instâncias com base em métricas do CloudWatch</p>
 <ul>
-<li><strong>Métrica</strong> -&gt; métrica do CloudWatch usada como referência. (Ex: <strong><code>NetworkOut</code></strong>, <strong><code>CPUUtilization</code></strong>).</li>
-<li><strong>Estatística</strong> -&gt; como a métrica será interpretada: <strong><code>Average</code> (média)</strong>, <strong><code>Minimum</code> (mínimo)</strong>, <strong><code>Maximum</code> (máximo)</strong> ou <strong><code>Sum</code> (soma)</strong>.</li>
-<li><strong>Unidade</strong> -&gt; a unidade da métrica (ex: <strong><code>Bytes</code></strong>, <strong><code>Percent</code></strong>).</li>
-<li><strong>Período</strong> -&gt; intervalo entre avaliações da métrica (em minutos). (ex: a cada <strong>5 minutos</strong>).</li>
-<li><strong>Duração da ruptura</strong> -&gt; tempo que a métrica precisa permanecer acima ou abaixo do limite para disparar a ação. (ex: <strong>5 minutos</strong>).</li>
-<li><strong>Limite superior</strong> -&gt; valor da métrica que, quando ultrapassado, aciona <strong><code>scale out</code></strong> (adicionar instância).</li>
-<li><strong>Incremento para aumentar</strong> -&gt; quantas instâncias EC2 serão adicionadas quando o limite superior for ultrapassado.</li>
-<li><strong>Limite inferior</strong> -&gt; valor da métrica que, quando ficar abaixo, aciona <strong><code>scale in</code></strong> (remover instância).</li>
-<li><strong>Incremento para diminuir</strong> -&gt; quantas instâncias EC2 serão removidas quando o limite inferior for atingido.</li>
+<li class=""><strong>Métrica</strong> -&gt; métrica do CloudWatch usada como referência. (Ex: <strong><code>NetworkOut</code></strong>, <strong><code>CPUUtilization</code></strong>).</li>
+<li class=""><strong>Estatística</strong> -&gt; como a métrica será interpretada: <strong><code>Average</code> (média)</strong>, <strong><code>Minimum</code> (mínimo)</strong>, <strong><code>Maximum</code> (máximo)</strong> ou <strong><code>Sum</code> (soma)</strong>.</li>
+<li class=""><strong>Unidade</strong> -&gt; a unidade da métrica (ex: <strong><code>Bytes</code></strong>, <strong><code>Percent</code></strong>).</li>
+<li class=""><strong>Período</strong> -&gt; intervalo entre avaliações da métrica (em minutos). (ex: a cada <strong>5 minutos</strong>).</li>
+<li class=""><strong>Duração da ruptura</strong> -&gt; tempo que a métrica precisa permanecer acima ou abaixo do limite para disparar a ação. (ex: <strong>5 minutos</strong>).</li>
+<li class=""><strong>Limite superior</strong> -&gt; valor da métrica que, quando ultrapassado, aciona <strong><code>scale out</code></strong> (adicionar instância).</li>
+<li class=""><strong>Incremento para aumentar</strong> -&gt; quantas instâncias EC2 serão adicionadas quando o limite superior for ultrapassado.</li>
+<li class=""><strong>Limite inferior</strong> -&gt; valor da métrica que, quando ficar abaixo, aciona <strong><code>scale in</code></strong> (remover instância).</li>
+<li class=""><strong>Incremento para diminuir</strong> -&gt; quantas instâncias EC2 serão removidas quando o limite inferior for atingido.</li>
 </ul>
 </li>
 </ul>
 <p><strong>4.3 - Configurações de rede do balanceador de carga</strong></p>
 <ul>
-<li>
+<li class="">
 <p>Em <strong><code>Visibilidade</code></strong>, defina se o Load Balancer será:</p>
 <ul>
-<li><strong><code>Pública</code></strong> -&gt; acessível pela Internet (usado para aplicações web).</li>
-<li><strong><code>Interna</code></strong> -&gt; acessível apenas dentro da VPC (usado para sistemas internos/microsserviços).</li>
+<li class=""><strong><code>Pública</code></strong> -&gt; acessível pela Internet (usado para aplicações web).</li>
+<li class=""><strong><code>Interna</code></strong> -&gt; acessível apenas dentro da VPC (usado para sistemas internos/microsserviços).</li>
 </ul>
 </li>
-<li>
+<li class="">
 <p>Em <strong><code>Sub-redes do balanceador de carga</code></strong>, selecione:</p>
 <ul>
-<li>
+<li class="">
 <p><strong><code>Sub-redes públicas</code></strong> se a  visibilidade for <strong><code>Pública</code></strong></p>
 </li>
-<li>
+<li class="">
 <p><strong><code>Sub-redes privadas</code></strong> se a visibilidade for <strong><code>Interna</code></strong></p>
 </li>
-<li>
+<li class="">
 <p>Para <strong>alta disponibilidade</strong>, escolha <strong>duas ou mais sub-redes em diferentes zonas de disponibilidade (AZs)</strong></p>
 </li>
 </ul>
@@ -236,59 +237,59 @@
 </ul>
 <p><strong>4.4 - Tipo de balanceador de carga</strong></p>
 <ul>
-<li>
+<li class="">
 <p><strong><code>Application Load Balancer (ALB)</code></strong> -&gt; recomenado para aplicações web, trabalha na <strong>camada 7 (HTTP/HTTPS)</strong>.</p>
 <ul>
-<li>
+<li class="">
 <p>Ao escolher <strong>ALB</strong>, é necessário definir se ele será:</p>
 <ul>
-<li>
+<li class="">
 <p><strong><code>Dedicado</code></strong> -&gt; o Elastic Beanstalk cria um Load Balancer exclusivo para esse ambiente.</p>
 </li>
-<li>
+<li class="">
 <p><strong><code>Compartilhado</code></strong> -&gt; permite usar um Load Balancer já existente na sua conta, podendo ser compartilhado entre vários ambientes.</p>
 </li>
 </ul>
 </li>
 </ul>
 </li>
-<li>
+<li class="">
 <p><strong><code>Network Load Balancer (NLB)</code></strong> -&gt; trabalha na <strong>camada 4 (TCP/UDP)</strong>, indicado para tráfego de baixa latência e suporte a <strong>endereços IP estáticos</strong>.</p>
 <ul>
-<li>Ao escolher <strong>NLB, não é necessário definir</strong> se será dedicado ou compartilhado.</li>
+<li class="">Ao escolher <strong>NLB, não é necessário definir</strong> se será dedicado ou compartilhado.</li>
 </ul>
 </li>
 </ul>
 <p><strong>4.5 - Receptores, Processos e Regras</strong></p>
 <ul>
-<li>
+<li class="">
 <p>Em <strong><code>Receptores</code></strong> -&gt; definem em qual <strong>porta/protocolo</strong> o Load Balancer vai receber as conexões.</p>
 <ul>
-<li><strong>Porta 80</strong> por padrão já vem habilitada.</li>
-<li>Se quiser HTTPS, é necessário adicionar um receptor na <strong>porta 443</strong> e associar um <strong>certificado SSL</strong> (ACM).</li>
+<li class=""><strong>Porta 80</strong> por padrão já vem habilitada.</li>
+<li class="">Se quiser HTTPS, é necessário adicionar um receptor na <strong>porta 443</strong> e associar um <strong>certificado SSL</strong> (ACM).</li>
 </ul>
 </li>
-<li>
+<li class="">
 <p>Em <strong><code>Processos</code></strong> -&gt; definem como o tráfego recebido pelo receptor será encaminhado para as instâncias EC2.</p>
 <ul>
-<li>Padrão: <strong>porta 80 (HTTP)</strong></li>
-<li>Aqui também é configurado o <strong>caminho de verificação de integridade</strong> (health check).</li>
-<li><strong>Perdurabilidade (Stickiness)</strong> -&gt; controla se a sessão do usuário sempre será direcionado para mesma instância. Por padrão vem <strong>Desabilitado</strong>.</li>
+<li class="">Padrão: <strong>porta 80 (HTTP)</strong></li>
+<li class="">Aqui também é configurado o <strong>caminho de verificação de integridade</strong> (health check).</li>
+<li class=""><strong>Perdurabilidade (Stickiness)</strong> -&gt; controla se a sessão do usuário sempre será direcionado para mesma instância. Por padrão vem <strong>Desabilitado</strong>.</li>
 </ul>
 </li>
-<li>
+<li class="">
 <p>Em <strong><code>Regras</code></strong> -&gt; permitem criar condições personalizadas para rotear o tráfego.</p>
 <ul>
-<li>Por padrão, existe apenas a <strong>regra default</strong>, que encaminha todo o tráfego para o processo principal.</li>
+<li class="">Por padrão, existe apenas a <strong>regra default</strong>, que encaminha todo o tráfego para o processo principal.</li>
 </ul>
 </li>
 </ul>
 <p><strong>4.6 - Acesso aos arquivos de Log</strong></p>
 <ul>
-<li>Em <strong><code>Armazenar logs</code></strong> -&gt; habilita o envio dos logs de acesso do <strong>Elastic Load Balancer (ALB ou NLB)</strong> para um bucket do <strong>Amazon S3</strong>
+<li class="">Em <strong><code>Armazenar logs</code></strong> -&gt; habilita o envio dos logs de acesso do <strong>Elastic Load Balancer (ALB ou NLB)</strong> para um bucket do <strong>Amazon S3</strong>
 <ul>
-<li>Esse logs contêm informações detalhadas de cada requisição: IP de origem, caminho solicitado, latência, status de resposta, entre outros.</li>
-<li>Útil para auditoria, análise de tráfego e troubleshooting</li>
+<li class="">Esse logs contêm informações detalhadas de cada requisição: IP de origem, caminho solicitado, latência, status de resposta, entre outros.</li>
+<li class="">Útil para auditoria, análise de tráfego e troubleshooting</li>
 </ul>
 </li>
 </ul>
@@ -297,167 +298,167 @@
 </blockquote>
 <p><img decoding="async" loading="lazy" alt="Configuração Tráfego e Escalabilidade" src="/assets/images/etapa-4-configuracao-trafego-escalabilidade-lab-avancado-0139e4266f992c30747c6c7182865e96.gif" width="1930" height="949" class="img_ev3q"></p>
 <hr>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="etapa-5---configurar-atualizações-monitoramento-e-registros-em-log">Etapa 5 - Configurar atualizações, monitoramento e registros em log<a href="#etapa-5---configurar-atualizações-monitoramento-e-registros-em-log" class="hash-link" aria-label="Link direto para Etapa 5 - Configurar atualizações, monitoramento e registros em log" title="Link direto para Etapa 5 - Configurar atualizações, monitoramento e registros em log" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="etapa-5---configurar-atualizações-monitoramento-e-registros-em-log">Etapa 5 - Configurar atualizações, monitoramento e registros em log<a href="#etapa-5---configurar-atualizações-monitoramento-e-registros-em-log" class="hash-link" aria-label="Link direto para Etapa 5 - Configurar atualizações, monitoramento e registros em log" title="Link direto para Etapa 5 - Configurar atualizações, monitoramento e registros em log" translate="no">​</a></h3>
 <p><strong>5.1 - Monitoramento</strong></p>
 <ul>
-<li>
+<li class="">
 <p>Em <strong><code>Relatórios de integridade</code></strong>, selecione uma das opções:</p>
 <ul>
-<li>
+<li class="">
 <p><strong>Básico</strong> -&gt; fornece apenas informações gerais do ambiente (ex: status <strong>&quot;Ok&quot;</strong>, <strong>&quot;Warning&quot;</strong> ou <strong>&quot;Severe&quot;</strong>).</p>
 </li>
-<li>
+<li class="">
 <p><strong>Aprimorado</strong> -&gt; coleta métricas detalhadas em tempo real de instâncias e recursos, exibindo diagnósticos mais completos.</p>
 <ul>
-<li>Ao selecionar essa opção, você pode configurar <strong>métricas personalizadas do CloudWatch</strong> para instâncias e para o ambiente, além das métricas padrão já habilitadas.</li>
+<li class="">Ao selecionar essa opção, você pode configurar <strong>métricas personalizadas do CloudWatch</strong> para instâncias e para o ambiente, além das métricas padrão já habilitadas.</li>
 </ul>
 </li>
 </ul>
 </li>
-<li>
+<li class="">
 <p>Em <strong><code>Personalização de regra de monitoramento de integridade</code></strong>, marque as opções:</p>
 <ul>
-<li>
+<li class="">
 <p><strong>Ignorar aplicação 4xx</strong> -&gt; para desconsiderar erros 4xx (como <strong>404</strong> ou <strong>403</strong>) retornados pela aplicação durante a verificação de integridade.</p>
 </li>
-<li>
+<li class="">
 <p><strong>Ignorar balanceador de carga 4xx</strong> -&gt; para desconsiderar erros 4xx originados no Load Balancer.</p>
 <ul>
-<li>Útil para evitar falsos positivos em apps que retornam muitos 404 ou 403, mas não necessariamente indicam falha real.</li>
+<li class="">Útil para evitar falsos positivos em apps que retornam muitos 404 ou 403, mas não necessariamente indicam falha real.</li>
 </ul>
 </li>
 </ul>
 </li>
-<li>
+<li class="">
 <p>Em <strong><code>Streaming de eventos de integridade para o CloudWatch Logs</code></strong> -&gt; por padrão a opção vem desabilitada.</p>
 <ul>
-<li>Ao habilita, os eventos de integridade são enviados para o <strong>CloudWatch Logs</strong>, permitindo <strong>armazenamento de longo prazo</strong>, criação de <strong>dashboards personalizados</strong> e configuração de <strong>políticas de retenção</strong>.</li>
+<li class="">Ao habilita, os eventos de integridade são enviados para o <strong>CloudWatch Logs</strong>, permitindo <strong>armazenamento de longo prazo</strong>, criação de <strong>dashboards personalizados</strong> e configuração de <strong>políticas de retenção</strong>.</li>
 </ul>
 </li>
 </ul>
 <p><strong>5.2 - Atualizações gerenciadas da plataforma</strong></p>
 <ul>
-<li>
+<li class="">
 <p>Quando habilitada, o Elastic Beanstalk aplica automaticamente <strong>atualizações da plataforma</strong> durante a <strong>janela de manutenção</strong> configurada.</p>
 </li>
-<li>
+<li class="">
 <p>Em <strong><code>Janela de atualização semanal</code></strong> -&gt; define o <strong>dia e horário (UTC)</strong> em que as atualizações serão aplicadas.</p>
 <ul>
-<li>Durante esse período, o Beanstalk realiza updates de forma controlada, mantendo a aplicação disponível.</li>
+<li class="">Durante esse período, o Beanstalk realiza updates de forma controlada, mantendo a aplicação disponível.</li>
 </ul>
 </li>
-<li>
+<li class="">
 <p>Em <strong><code>Nível da atualização</code></strong>, selecione umas das opções:</p>
 <ul>
-<li><strong>Patch e secundária</strong> -&gt; aplica atualizações de segurança, correções de bugs e pequenas melhorias.</li>
-<li><strong>Somente Patch</strong> -&gt; aplica atualizações de segurança e correções de bugs.</li>
+<li class=""><strong>Patch e secundária</strong> -&gt; aplica atualizações de segurança, correções de bugs e pequenas melhorias.</li>
+<li class=""><strong>Somente Patch</strong> -&gt; aplica atualizações de segurança e correções de bugs.</li>
 </ul>
 </li>
-<li>
+<li class="">
 <p>Em <strong><code>Substituição de instâncias</code></strong></p>
 <ul>
-<li>Se habilitada, força a <strong>recriação das instâncias</strong> mesmo quando não há novas atualizações disponíveis.</li>
-<li>Útil para garantir que instâncias antigas sejam renovadas periodicamente.</li>
+<li class="">Se habilitada, força a <strong>recriação das instâncias</strong> mesmo quando não há novas atualizações disponíveis.</li>
+<li class="">Útil para garantir que instâncias antigas sejam renovadas periodicamente.</li>
 </ul>
 </li>
 </ul>
 <p><strong>5.3 - Notificações por e-mail</strong></p>
 <ul>
-<li>Em <strong><code>E-mail</code></strong>, insira um endereço de e-mail válido para receber notificações automáticas do Elastic Beanstalk.<!-- -->
+<li class="">Em <strong><code>E-mail</code></strong>, insira um endereço de e-mail válido para receber notificações automáticas do Elastic Beanstalk.<!-- -->
 <ul>
-<li>Essas notificações incluem <strong>eventos importantes do ambiente</strong>, como:<!-- -->
+<li class="">Essas notificações incluem <strong>eventos importantes do ambiente</strong>, como:<!-- -->
 <ul>
-<li>Falhas na implantação</li>
-<li>Problemas de integridade</li>
-<li>Atualizações da plataforma</li>
+<li class="">Falhas na implantação</li>
+<li class="">Problemas de integridade</li>
+<li class="">Atualizações da plataforma</li>
 </ul>
 </li>
-<li>Permite acompanhar o status do ambiente sem precisar acessar o console constantemente.</li>
+<li class="">Permite acompanhar o status do ambiente sem precisar acessar o console constantemente.</li>
 </ul>
 </li>
 </ul>
 <p><strong>5.4 - Atualizações e implantações contínuas</strong></p>
 <ul>
-<li>
+<li class="">
 <p>Em <strong><code>Implantações da aplicação</code></strong>, selecione como o Beanstalk vai atualizar as instâncias:</p>
 <ul>
-<li><strong>Todas de uma vez</strong> -&gt; substitui todas as instâncias ao mesmo tempo. Mais rápido, mas pode causar indisponibilidade durante o deploy.</li>
-<li><strong>Contínua (Rolling)</strong> -&gt; atualiza grupos de instâncias em lotes. Mantém parte do ambiente ativo enquanto o restante é atualizado.</li>
-<li><strong>Contínua com lote adicional</strong> -&gt; cria um lote extra temporário para manter a capacidade total do ambiente durante o deploy.</li>
-<li><strong>Imutável</strong> -&gt; cria novas instâncias com a nova versão e substitui as antigas apenas quando estiver tudo validado. Evita downtime, mas consome mais recursos.</li>
-<li><strong>Divisão de tráfego (Blue/Green)</strong> -&gt; cria um ambiente paralelo com a nova versão e, após validação, redireciona o tráfego para ele. Requer configuração manual de DNS/Route53.</li>
+<li class=""><strong>Todas de uma vez</strong> -&gt; substitui todas as instâncias ao mesmo tempo. Mais rápido, mas pode causar indisponibilidade durante o deploy.</li>
+<li class=""><strong>Contínua (Rolling)</strong> -&gt; atualiza grupos de instâncias em lotes. Mantém parte do ambiente ativo enquanto o restante é atualizado.</li>
+<li class=""><strong>Contínua com lote adicional</strong> -&gt; cria um lote extra temporário para manter a capacidade total do ambiente durante o deploy.</li>
+<li class=""><strong>Imutável</strong> -&gt; cria novas instâncias com a nova versão e substitui as antigas apenas quando estiver tudo validado. Evita downtime, mas consome mais recursos.</li>
+<li class=""><strong>Divisão de tráfego (Blue/Green)</strong> -&gt; cria um ambiente paralelo com a nova versão e, após validação, redireciona o tráfego para ele. Requer configuração manual de DNS/Route53.</li>
 </ul>
 </li>
-<li>
+<li class="">
 <p>Em <strong><code>Tipo de tamanho de lote</code></strong>, defina como os grupos de instâncias serão atualizados:</p>
 <ul>
-<li><strong>Porcentagem</strong> -&gt; define a porcentagem de instâncias que serão atualizadas por vez.</li>
-<li><strong>Corrigido</strong> -&gt; define um número fixo de instâncias por lote.</li>
+<li class=""><strong>Porcentagem</strong> -&gt; define a porcentagem de instâncias que serão atualizadas por vez.</li>
+<li class=""><strong>Corrigido</strong> -&gt; define um número fixo de instâncias por lote.</li>
 </ul>
 <p>As opções <strong><code>Tamanho do lote de implantação</code></strong>, <strong><code>Divisão de tráfego</code></strong> e <strong><code>Tempo de avaliação de divisão de tráfego</code></strong> ficam disponíveis apenas se a opção de <strong>Implantação da aplicação</strong> não for <strong><code>Todas de uma vez</code></strong>.</p>
 <ul>
-<li><strong>Tamanho do lote de implantação</strong> -&gt; quantidade (em % ou número fixo) de instâncias que receberão a atualização em cada etapa.</li>
-<li><strong>Divisão de tráfego</strong> -&gt; permite enviar parte do tráfego para a nova versão da aplicação durante a implantação.</li>
-<li><strong>Tempo de avaliação de divisão de tráfego</strong> -&gt; período (em minutos) que o Elastic Beanstalk vai manter a divisão de tráfego antes de finalizar a migração para a nova versão.</li>
+<li class=""><strong>Tamanho do lote de implantação</strong> -&gt; quantidade (em % ou número fixo) de instâncias que receberão a atualização em cada etapa.</li>
+<li class=""><strong>Divisão de tráfego</strong> -&gt; permite enviar parte do tráfego para a nova versão da aplicação durante a implantação.</li>
+<li class=""><strong>Tempo de avaliação de divisão de tráfego</strong> -&gt; período (em minutos) que o Elastic Beanstalk vai manter a divisão de tráfego antes de finalizar a migração para a nova versão.</li>
 </ul>
 </li>
-<li>
+<li class="">
 <p>Em <strong><code>Atualizações da configuração</code>:</strong></p>
 <ul>
-<li>
+<li class="">
 <p><strong><code>Tipo da atualização contínua</code></strong>, escolha como as instâncias serão substituídas quando houver alterações de configuração:</p>
 <ul>
-<li>
+<li class="">
 <p><strong>Desabilitado</strong> -&gt; nenhuma atualização automática é feita. Alterações só são aplicadas manualmente.</p>
 </li>
-<li>
+<li class="">
 <p><strong>Contínua com base no tempo</strong> -&gt; substitui instâncias em lotes a cada intervalo de tempo definido. Útil para ambientes previsíveis.</p>
 </li>
-<li>
+<li class="">
 <p><strong>Contínua com base na integridade</strong> -&gt; substitui instâncias em lotes, mas somente avança se o lote anterior estiver íntegro (sem falhas). Reduz risco de indisponibilidade.</p>
 </li>
-<li>
+<li class="">
 <p><strong>Imutável</strong> -&gt; cria novas instâncias com a configuração atualizada e substitui as antigas somente após validação. Mais seguro, mas consome mais recursos.</p>
 </li>
 </ul>
 <p>As opções <strong><code>Tamanho do lote</code></strong>, <strong><code>Capacidade mínima</code></strong> e <strong><code>Tempo de pausa</code></strong> ficam disponíveis apenas se o tipo de atualização contínua <strong>não for</strong> <strong><code>Desabilitado</code></strong> ou <strong><code>Imutável</code></strong>.</p>
 <ul>
-<li>
+<li class="">
 <p><strong>Tamanho do lote</strong> -&gt; número máximo de instâncias substituidas por vez durante a atualização.</p>
 </li>
-<li>
+<li class="">
 <p><strong>Capacidade mínima</strong> -&gt; número mínimo de instâncias que devem permanecer ativas em serviço em todas as fases da atualização.</p>
 </li>
-<li>
+<li class="">
 <p><strong>Tempo de pausa</strong> -&gt; intervalo de tempo (máx. 1 hora) que o Beanstalk aguarda antes de iniciar a próxima atualização de lote.</p>
 </li>
 </ul>
 </li>
 </ul>
 </li>
-<li>
+<li class="">
 <p>Em <strong><code>Preferências de implantação</code></strong>:</p>
 <ul>
-<li>
+<li class="">
 <p><strong>Ignorar verificação de integridade</strong>, escolhe as opções:</p>
 <ul>
-<li><strong>Verdadeiro</strong> -&gt; o Beanstalk <strong>não reprova a implantação</strong> mesmo que ocorram falhas nas verificações de integridade. Útil em ambientes de teste, mas arriscado em produção.</li>
-<li><strong>Falso</strong> -&gt; o Beanstalk interrompe a implantação se detectar falhas de integridade. Recomenadado para ambientes críticos/produção.</li>
+<li class=""><strong>Verdadeiro</strong> -&gt; o Beanstalk <strong>não reprova a implantação</strong> mesmo que ocorram falhas nas verificações de integridade. Útil em ambientes de teste, mas arriscado em produção.</li>
+<li class=""><strong>Falso</strong> -&gt; o Beanstalk interrompe a implantação se detectar falhas de integridade. Recomenadado para ambientes críticos/produção.</li>
 </ul>
 </li>
-<li>
+<li class="">
 <p><strong>Limite de integridade</strong> -&gt; define qual nível de integridade mínimo é aceito para considerar a implantação válida:</p>
 <ul>
-<li><strong>OK</strong> -&gt; exige que todas as instâncias estejam saudáveis (sem falhas).</li>
-<li><strong>Aviso</strong> -&gt; aceita pequenas falhas ou degradações, desde que não comprometam o ambiente.</li>
-<li><strong>Reduzido</strong> -&gt; tolerar um número maior de falhas nas instâncias durante a implantação.</li>
-<li><strong>Grave</strong> -&gt; mesmo em estado crítico o Beanstalk continua a implantação. Usado apenas para cenários de teste.</li>
+<li class=""><strong>OK</strong> -&gt; exige que todas as instâncias estejam saudáveis (sem falhas).</li>
+<li class=""><strong>Aviso</strong> -&gt; aceita pequenas falhas ou degradações, desde que não comprometam o ambiente.</li>
+<li class=""><strong>Reduzido</strong> -&gt; tolerar um número maior de falhas nas instâncias durante a implantação.</li>
+<li class=""><strong>Grave</strong> -&gt; mesmo em estado crítico o Beanstalk continua a implantação. Usado apenas para cenários de teste.</li>
 </ul>
 </li>
-<li>
+<li class="">
 <p><strong>Tempo limite de comando</strong> -&gt; define, em segundos, quanto tempo o Beanstalk aguardará para que cada instância conclua os comandos de implantação.</p>
 <ul>
-<li>O valor padrão é <strong>600 segundos (10 minutos)</strong>, mas pode ser ajustado conforme a complexidade da aplicação.</li>
+<li class="">O valor padrão é <strong>600 segundos (10 minutos)</strong>, mas pode ser ajustado conforme a complexidade da aplicação.</li>
 </ul>
 </li>
 </ul>
@@ -465,29 +466,29 @@
 </ul>
 <p><strong>5.5 - Software de plataforma</strong></p>
 <ul>
-<li>
+<li class="">
 <p>Em <strong>Opções de contêiner</strong> - Servidor de proxy -&gt; define o servidor web/proxy que ficará na frente da aplicação:</p>
 <ul>
-<li><strong>Nginx</strong> -&gt; padrão em ambientes Linux/Node.js/Python.</li>
-<li><strong>Apache</strong> -&gt; dependendo da plataforma escolhida (ex: PHP).</li>
+<li class=""><strong>Nginx</strong> -&gt; padrão em ambientes Linux/Node.js/Python.</li>
+<li class=""><strong>Apache</strong> -&gt; dependendo da plataforma escolhida (ex: PHP).</li>
 </ul>
 </li>
-<li>
+<li class="">
 <p>Em <strong>Amazon X-Ray</strong> -&gt; se <strong>Habilitado</strong>, ativa o daemon do X-Ray dentro das instâncias, permitindo capturar detalhes de requisições, rastrear latência e identificar gargalos.</p>
 </li>
-<li>
+<li class="">
 <p>Em <strong>Armazenamento de logs do S3</strong> -&gt; se <strong>Habilitado</strong>, envia os logs das instâncias para um bucket no <strong>Amazon S3</strong>. Útil para <strong>retenção de longo prazo, auditoria</strong> ou conformidade.</p>
 </li>
-<li>
+<li class="">
 <p>Em <strong>Streaming de logs de instâncias para o CloudWatch</strong> -&gt; se <em><em>Habilitado</em>,</em> envia os logs em tempo real para o <strong>CloudWatch Logs</strong>, permitindo <strong>monitoramento contínuo, criação de métricas e alarmes</strong></p>
 </li>
-<li>
+<li class="">
 <p>Em <strong>Propriedades do ambiente (variáveis de ambiente)</strong> -&gt; define variáveis que serão injetadas na aplicação.</p>
 <ul>
-<li>Tipos de origem:<!-- -->
+<li class="">Tipos de origem:<!-- -->
 <ul>
-<li><strong>Texto simples</strong> -&gt; valor direto no console (ex: <strong><code>PYTHONPATH</code></strong>, <strong><code>ENV=prod</code></strong>).</li>
-<li><strong>ARN de Secrets Manager/SSM</strong> -&gt; referências seguras para senhas, tokens e parâmetros sensíveis.</li>
+<li class=""><strong>Texto simples</strong> -&gt; valor direto no console (ex: <strong><code>PYTHONPATH</code></strong>, <strong><code>ENV=prod</code></strong>).</li>
+<li class=""><strong>ARN de Secrets Manager/SSM</strong> -&gt; referências seguras para senhas, tokens e parâmetros sensíveis.</li>
 </ul>
 </li>
 </ul>
@@ -495,33 +496,33 @@
 </ul>
 <p><img decoding="async" loading="lazy" alt="Configuração Atualizações, Monitoramento" src="/assets/images/etapa-5-configuracao-atualizacoes-monitoramento-lab-avancado-1625add63205312a642ad681a9df12c2.gif" width="1930" height="949" class="img_ev3q"></p>
 <hr>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="etapa-6---revisão-e-criação">Etapa 6 - Revisão e Criação<a href="#etapa-6---revisão-e-criação" class="hash-link" aria-label="Link direto para Etapa 6 - Revisão e Criação" title="Link direto para Etapa 6 - Revisão e Criação" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="etapa-6---revisão-e-criação">Etapa 6 - Revisão e Criação<a href="#etapa-6---revisão-e-criação" class="hash-link" aria-label="Link direto para Etapa 6 - Revisão e Criação" title="Link direto para Etapa 6 - Revisão e Criação" translate="no">​</a></h3>
 <p>Depois de configurar as etapas anteriores, o Elastic Beanstalk exibirá um resumo com todas as opções selecionadas para a aplicação e o ambiente.</p>
 <p><strong>6.1 - Revise as informações exibidas:</strong></p>
 <ul>
-<li><strong>Nome da aplicação</strong> e <strong>nome do ambiente</strong></li>
-<li><strong>Plataforma escolhida</strong></li>
-<li><strong>Código da aplicação</strong> (aplicação de amostra ou código enviado)</li>
-<li><strong>Configuração de rede</strong> (VPC e sub-rede selecionada)</li>
-<li><strong>Perfis do IAM</strong> criados (perfil de serviço e perfil da instância EC2)</li>
-<li><strong>Predefinição escolhida</strong> (ex: Instância única)</li>
-<li>Outras informações opcionais mantidas como padrão.</li>
+<li class=""><strong>Nome da aplicação</strong> e <strong>nome do ambiente</strong></li>
+<li class=""><strong>Plataforma escolhida</strong></li>
+<li class=""><strong>Código da aplicação</strong> (aplicação de amostra ou código enviado)</li>
+<li class=""><strong>Configuração de rede</strong> (VPC e sub-rede selecionada)</li>
+<li class=""><strong>Perfis do IAM</strong> criados (perfil de serviço e perfil da instância EC2)</li>
+<li class=""><strong>Predefinição escolhida</strong> (ex: Instância única)</li>
+<li class="">Outras informações opcionais mantidas como padrão.</li>
 </ul>
 <p><strong>6.2 - Se tudo estiver correto, clique em <strong><code>Criar</code></strong></strong></p>
 <p>Esse processo pode levar alguns minutos, pois o Beanstalk irá:</p>
 <ul>
-<li>Provisionar automaticamente os recursos de infraestrutura.</li>
-<li>Configurar monitoramento com CloudWatch</li>
-<li>Subir a aplicação no ambiente criado.</li>
+<li class="">Provisionar automaticamente os recursos de infraestrutura.</li>
+<li class="">Configurar monitoramento com CloudWatch</li>
+<li class="">Subir a aplicação no ambiente criado.</li>
 </ul>
 <p><img decoding="async" loading="lazy" alt="Revisão das Configurações" src="/assets/images/etapa-6-revisao-criacao-beanstalk-lab-avancado-100c9b82518796ee1c8f63f702f8ed2f.gif" width="1930" height="949" class="img_ev3q"></p>
 <p><strong>6.3 - Ao final, será exibida uma <strong><code>URL pública</code></strong> no formato</strong></p>
 <div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token plain">http://&lt;nome-do-ambiente&gt;.&lt;regiao&gt;.elasticbeanstalk.com</span><br></span></code></pre></div></div>
 <p><strong>6.4 - Clique na URL para validar que a aplicação está funcionando</strong></p>
 <ul>
-<li>Caso tenha usado a opção <strong>Aplicação de amostra</strong>, a página exibirá o exemplo padrão do Elastic Beanstalk.</li>
-<li>Caso tenha feito <strong>upload do seu código</strong>, a aplicação definida será carregada.</li>
+<li class="">Caso tenha usado a opção <strong>Aplicação de amostra</strong>, a página exibirá o exemplo padrão do Elastic Beanstalk.</li>
+<li class="">Caso tenha feito <strong>upload do seu código</strong>, a aplicação definida será carregada.</li>
 </ul>
-<p><img decoding="async" loading="lazy" alt="Acessando o Elastic Beanstalkl" src="/assets/images/etapa-7-acessando-beanstalk-lab-avancado-da75e768c93caa8ff5812e67927246e5.gif" width="1930" height="949" class="img_ev3q"></p></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col"><a href="https://github.com/lotechdevops/lotechdevops.github.io/tree/main/docs/cloud/AWS/elastic-beanstalk/hands-on/2.lab-elastic-beanstalk-avancado.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Editar esta página</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Páginas de documento"><a class="pagination-nav__link pagination-nav__link--prev" href="/docs/cloud/AWS/elastic-beanstalk/hands-on/lab-elastic-beanstalk-basico"><div class="pagination-nav__sublabel">Anterior</div><div class="pagination-nav__label">1. Deploy Básico</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/docs/category/amazon-cloudfront"><div class="pagination-nav__sublabel">Próxima</div><div class="pagination-nav__label">Amazon CloudFront</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#objetivo" class="table-of-contents__link toc-highlight">Objetivo</a></li><li><a href="#etapas-de-configuração" class="table-of-contents__link toc-highlight">Etapas de Configuração</a><ul><li><a href="#etapa-1---configurações-do-ambiente" class="table-of-contents__link toc-highlight">Etapa 1 - Configurações do Ambiente</a></li><li><a href="#etapa-2---configuração-de-acesso-ao-serviço" class="table-of-contents__link toc-highlight">Etapa 2 - Configuração de acesso ao serviço</a></li><li><a href="#etapa-3---definir-redes-banco-de-dados-e-etiquetas" class="table-of-contents__link toc-highlight">Etapa 3 - Definir redes, banco de dados e etiquetas</a></li><li><a href="#etapa-4---configurar-o-tráfego-e-a-escalabilidade-da-instância-opcional" class="table-of-contents__link toc-highlight">Etapa 4 - Configurar o tráfego e a escalabilidade da instância (Opcional)</a></li><li><a href="#etapa-5---configurar-atualizações-monitoramento-e-registros-em-log" class="table-of-contents__link toc-highlight">Etapa 5 - Configurar atualizações, monitoramento e registros em log</a></li><li><a href="#etapa-6---revisão-e-criação" class="table-of-contents__link toc-highlight">Etapa 6 - Revisão e Criação</a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"></div></footer></div>
+<p><img decoding="async" loading="lazy" alt="Acessando o Elastic Beanstalkl" src="/assets/images/etapa-7-acessando-beanstalk-lab-avancado-da75e768c93caa8ff5812e67927246e5.gif" width="1930" height="949" class="img_ev3q"></p></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col noPrint_WFHX"><a href="https://github.com/lotechdevops/lotechdevops.github.io/tree/main/docs/cloud/AWS/elastic-beanstalk/hands-on/2.lab-elastic-beanstalk-avancado.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Editar esta página</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Páginas de documento"><a class="pagination-nav__link pagination-nav__link--prev" href="/docs/cloud/AWS/elastic-beanstalk/hands-on/lab-elastic-beanstalk-basico"><div class="pagination-nav__sublabel">Anterior</div><div class="pagination-nav__label">1. Deploy Básico</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/docs/category/amazon-cloudfront"><div class="pagination-nav__sublabel">Próxima</div><div class="pagination-nav__label">Amazon CloudFront</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#objetivo" class="table-of-contents__link toc-highlight">Objetivo</a></li><li><a href="#etapas-de-configuração" class="table-of-contents__link toc-highlight">Etapas de Configuração</a><ul><li><a href="#etapa-1---configurações-do-ambiente" class="table-of-contents__link toc-highlight">Etapa 1 - Configurações do Ambiente</a></li><li><a href="#etapa-2---configuração-de-acesso-ao-serviço" class="table-of-contents__link toc-highlight">Etapa 2 - Configuração de acesso ao serviço</a></li><li><a href="#etapa-3---definir-redes-banco-de-dados-e-etiquetas" class="table-of-contents__link toc-highlight">Etapa 3 - Definir redes, banco de dados e etiquetas</a></li><li><a href="#etapa-4---configurar-o-tráfego-e-a-escalabilidade-da-instância-opcional" class="table-of-contents__link toc-highlight">Etapa 4 - Configurar o tráfego e a escalabilidade da instância (Opcional)</a></li><li><a href="#etapa-5---configurar-atualizações-monitoramento-e-registros-em-log" class="table-of-contents__link toc-highlight">Etapa 5 - Configurar atualizações, monitoramento e registros em log</a></li><li><a href="#etapa-6---revisão-e-criação" class="table-of-contents__link toc-highlight">Etapa 6 - Revisão e Criação</a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"></div></footer></div>
 </body>
 </html>

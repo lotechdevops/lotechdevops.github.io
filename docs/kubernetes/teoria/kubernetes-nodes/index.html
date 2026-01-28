@@ -2,16 +2,17 @@
 <html lang="pt-BR" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-kubernetes/teoria/kubernetes-nodes" data-has-hydrated="false">
 <head>
 <meta charset="UTF-8">
-<meta name="generator" content="Docusaurus v3.9.1">
+<meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">Kubernetes Workers: componentes e papel dos nós de trabalho | DevOpsR66</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://www.devopsr66.com/img/social-card.png"><meta data-rh="true" name="twitter:image" content="https://www.devopsr66.com/img/social-card.png"><meta data-rh="true" property="og:url" content="https://www.devopsr66.com/docs/kubernetes/teoria/kubernetes-nodes"><meta data-rh="true" property="og:locale" content="pt_BR"><meta data-rh="true" name="docusaurus_locale" content="pt-BR"><meta data-rh="true" name="docsearch:language" content="pt-BR"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Kubernetes Workers: componentes e papel dos nós de trabalho | DevOpsR66"><meta data-rh="true" name="description" content="Entenda o papel dos nós de trabalho (Workers) no Kubernetes, seus principais componentes e como eles executam os pods e aplicações dentro do cluster."><meta data-rh="true" property="og:description" content="Entenda o papel dos nós de trabalho (Workers) no Kubernetes, seus principais componentes e como eles executam os pods e aplicações dentro do cluster."><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://www.devopsr66.com/docs/kubernetes/teoria/kubernetes-nodes"><link data-rh="true" rel="alternate" href="https://www.devopsr66.com/docs/kubernetes/teoria/kubernetes-nodes" hreflang="pt-BR"><link data-rh="true" rel="alternate" href="https://www.devopsr66.com/docs/kubernetes/teoria/kubernetes-nodes" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Kubernetes","item":"https://www.devopsr66.com/docs/category/kubernetes"},{"@type":"ListItem","position":2,"name":"Conceitos de Kubernetes","item":"https://www.devopsr66.com/docs/category/conceitos-de-kubernetes"},{"@type":"ListItem","position":3,"name":"3. Workers","item":"https://www.devopsr66.com/docs/kubernetes/teoria/kubernetes-nodes"}]}</script><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="DevOpsR66 RSS Feed">
 <link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="DevOpsR66 Atom Feed">
 
 
 
 
-<script src="https://static.cloudflareinsights.com/beacon.min.js" defer="defer" data-cf-beacon="{&quot;token&quot;: &quot;cdf6c45914ab475fb2b617f03b308721&quot;}"></script><link rel="stylesheet" href="/assets/css/styles.e57c0933.css">
-<script src="/assets/js/runtime~main.03c98535.js" defer="defer"></script>
-<script src="/assets/js/main.99ed753b.js" defer="defer"></script>
+
+<script src="https://static.cloudflareinsights.com/beacon.min.js" defer="defer" data-cf-beacon="{&quot;token&quot;: &quot;cdf6c45914ab475fb2b617f03b308721&quot;}"></script><link rel="stylesheet" href="/assets/css/styles.ce6f1228.css">
+<script src="/assets/js/runtime~main.966624bf.js" defer="defer"></script>
+<script src="/assets/js/main.51e7389e.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -21,75 +22,75 @@
 <p>Cada nó pode ser uma <strong>máquina virtual</strong> ou uma <strong>máquina física</strong>, dependendo de como o cluster foi configurado.</p>
 <p>Um nó é responsável por <strong>hospedar os Pods</strong>, que são a menor unidade de execução no Kubernetes. Para isso, cada nó conta com alguns componentes essenciais que permitem rodar e gerenciar os contêineres:</p>
 <ul>
-<li><strong>Kubelet</strong></li>
-<li><strong>Kube-proxy</strong></li>
-<li><strong>Container Runtime (ex: containerd, CRI-O, Docker)</strong></li>
+<li class=""><strong>Kubelet</strong></li>
+<li class=""><strong>Kube-proxy</strong></li>
+<li class=""><strong>Container Runtime (ex: containerd, CRI-O, Docker)</strong></li>
 </ul>
 <p>Esses serviços são gerenciados pela camada de controle (<em>Control Plane)</em>, garantindo que o estado desejado do cluster seja respeitado.</p>
 <hr>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="kubelet">Kubelet<a href="#kubelet" class="hash-link" aria-label="Link direto para Kubelet" title="Link direto para Kubelet" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="kubelet">Kubelet<a href="#kubelet" class="hash-link" aria-label="Link direto para Kubelet" title="Link direto para Kubelet" translate="no">​</a></h2>
 <p>O <strong>Kubelet</strong> é o agente principal que roda em cada nó do Kubernetes. Ele atua como uma <strong>ponte entre o Control Plane e o worker</strong>, garantindo que os Pods estejam em execução conforme definido nas especificações.</p>
 <p>As principais responsabilidades do Kubelet incluem:</p>
 <p><strong>1. Gerenciamento de Pods</strong></p>
 <ul>
-<li>Garante que os contêineres descritos nos manifestos estejam em execução e íntegros.</li>
-<li>Se um contêiner falhar, o Kubelet toma as ações necessárias (reiniciar, remover ou reportar falha).</li>
+<li class="">Garante que os contêineres descritos nos manifestos estejam em execução e íntegros.</li>
+<li class="">Se um contêiner falhar, o Kubelet toma as ações necessárias (reiniciar, remover ou reportar falha).</li>
 </ul>
 <p><strong>2. Gerenciamento de Recursos:</strong></p>
 <ul>
-<li>Monitora e impõe limites de CPU, memória e outros recursos.</li>
-<li>Eele decide quais Pods podem rodar dentro do nó de acordo com as solicitações (<em>requests</em>) e limites (<em>limits</em>).</li>
+<li class="">Monitora e impõe limites de CPU, memória e outros recursos.</li>
+<li class="">Eele decide quais Pods podem rodar dentro do nó de acordo com as solicitações (<em>requests</em>) e limites (<em>limits</em>).</li>
 </ul>
 <p><strong>3. Monitoramento de Integridade:</strong></p>
 <ul>
-<li>Reporta constantemente o status dos contêineres para o Control Plane.</li>
-<li>Usa <em>probes</em> (readiness/liveness) para verificar se os Pods estão saudáveis.</li>
+<li class="">Reporta constantemente o status dos contêineres para o Control Plane.</li>
+<li class="">Usa <em>probes</em> (readiness/liveness) para verificar se os Pods estão saudáveis.</li>
 </ul>
 <p><strong>4. Gerenciamento de Volumes:</strong></p>
 <ul>
-<li>Monta volumes nos contêineres conforme especificado no manifesto. Isso garante acesso a armazenamento persistente ou temporário.</li>
+<li class="">Monta volumes nos contêineres conforme especificado no manifesto. Isso garante acesso a armazenamento persistente ou temporário.</li>
 </ul>
 <p><strong>5. Configuração de Rede:</strong></p>
 <ul>
-<li>Trabalha junto ao runtime e aos plugins de rede (CNI) para configurar IPs, namespaces e mapeamento de portas.</li>
+<li class="">Trabalha junto ao runtime e aos plugins de rede (CNI) para configurar IPs, namespaces e mapeamento de portas.</li>
 </ul>
 <p><strong>6. Gerenciamento de Imagens:</strong></p>
 <ul>
-<li>Faz o download de imagens de registros de contêiner e garante que a versão correta esteja rodando.</li>
+<li class="">Faz o download de imagens de registros de contêiner e garante que a versão correta esteja rodando.</li>
 </ul>
 <blockquote>
 <p>Em resumo, o Kubelet é o <strong>executor do estado desejado:</strong> ele recebe instruções do Control Plane e traduz em ações reais no nó.</p>
 </blockquote>
 <hr>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="kube-proxy">Kube-Proxy<a href="#kube-proxy" class="hash-link" aria-label="Link direto para Kube-Proxy" title="Link direto para Kube-Proxy" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="kube-proxy">Kube-Proxy<a href="#kube-proxy" class="hash-link" aria-label="Link direto para Kube-Proxy" title="Link direto para Kube-Proxy" translate="no">​</a></h2>
 <p>O <strong>Kube-Proxy</strong> é o componente responsável pela <strong>rede dentro do cluster</strong>. Ele roda em cada worker e garante que o tráfego seja roteado corretamente para os Pods e Services.</p>
 <p>Suas principais funções:</p>
 <ul>
-<li>
+<li class="">
 <p><strong>Roteamento de tráfego:</strong></p>
 <ul>
-<li>Mantém regras de rede para encaminhar solicitações para os Pods corretos.</li>
+<li class="">Mantém regras de rede para encaminhar solicitações para os Pods corretos.</li>
 </ul>
 </li>
-<li>
+<li class="">
 <p><strong>Modos de operação:</strong></p>
 <ul>
-<li><strong>IPTables mode:</strong> utiliza regras de iptables para rotear tráfego. Funciona bem, mas pode ter limitações em clusters grandes.</li>
-<li><strong>IPVS mode:</strong> usa o módulo IPVS do kernel Linux, oferecendo maior desempenho e escalabilidade.</li>
+<li class=""><strong>IPTables mode:</strong> utiliza regras de iptables para rotear tráfego. Funciona bem, mas pode ter limitações em clusters grandes.</li>
+<li class=""><strong>IPVS mode:</strong> usa o módulo IPVS do kernel Linux, oferecendo maior desempenho e escalabilidade.</li>
 </ul>
 </li>
-<li>
+<li class="">
 <p><strong>Monitoramento constante:</strong></p>
 <ul>
-<li>O kube-proxy se comunica com a API do Kubernetes para detectar novos Pods, Services e Endpoints, atualizando regras de rede automaticamente.</li>
+<li class="">O kube-proxy se comunica com a API do Kubernetes para detectar novos Pods, Services e Endpoints, atualizando regras de rede automaticamente.</li>
 </ul>
 </li>
 </ul>
 <p>Além disso, o kube-proxy é peça-chave para a <strong>exploração de serviços</strong> para fora do cluster, seja via <strong>NodePort</strong>, <strong>LoadBalancer</strong> ou <strong>Ingress Controller</strong>.</p>
 <hr>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="condições-do-nó">Condições do Nó<a href="#condições-do-nó" class="hash-link" aria-label="Link direto para Condições do Nó" title="Link direto para Condições do Nó" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="condições-do-nó">Condições do Nó<a href="#condições-do-nó" class="hash-link" aria-label="Link direto para Condições do Nó" title="Link direto para Condições do Nó" translate="no">​</a></h2>
 <p>Além dos componentes internos, o Kubernetes também monitora o estado de cada nó através de <strong>condições</strong>.<br>
 <!-- -->Essas condições indicam se o nó está íntegro e se pode receber novas cargas de trabalho.</p>
-<table><thead><tr><th>Condição do Nó</th><th>Descrição</th></tr></thead><tbody><tr><td><strong>Ready (Pronto)</strong></td><td><code>True</code> se o nó estiver íntegro e pronto para aceitar Pods. <code>False</code> se não estiver aceitando Pods e <code>Unknown</code> se o controlador do nó não tiver recebido atualizações dentro do <code>node-monitor-grace-period</code> (padrão: 40s).</td></tr><tr><td><strong>OutOfDisk (Sem espaço)</strong></td><td>Indica se o nó está sem espaço livre suficiente em disco. Se <code>True</code>, pode não ser possível agendar novos Pods. <em>(Observação: condição descontinuada em versões recentes do Kubernetes, substituída por métricas mais específicas)</em>.</td></tr><tr><td><strong>DiskPressure (Disco)</strong></td><td>Indica se o nó está sob pressão de disco, como pouco espaço disponível ou problemas de E/S.</td></tr><tr><td><strong>MemoryPressure (Memória)</strong></td><td><code>True</code> quando o nó está com pouca memória disponível, o que pode afetar a execução dos Pods.</td></tr><tr><td><strong>PIDPressure (Processos)</strong></td><td><code>True</code> se houver muitos processos em execução no nó (pressão de PIDs).</td></tr><tr><td><strong>NetworkUnavailable (Rede)</strong></td><td>Indica se o nó não está conectado à rede ou enfrenta problemas de conectividade, impedindo a comunicação com o cluster.</td></tr></tbody></table></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col"><a href="https://github.com/lotechdevops/lotechdevops.github.io/tree/main/docs/kubernetes/teoria/3.workers.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Editar esta página</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Páginas de documento"><a class="pagination-nav__link pagination-nav__link--prev" href="/docs/kubernetes/teoria/kubernetes-componentes"><div class="pagination-nav__sublabel">Anterior</div><div class="pagination-nav__label">2. Componentes</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/docs/kubernetes/teoria/kubernetes-control-plane"><div class="pagination-nav__sublabel">Próxima</div><div class="pagination-nav__label">4. Control Plane</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#kubelet" class="table-of-contents__link toc-highlight">Kubelet</a></li><li><a href="#kube-proxy" class="table-of-contents__link toc-highlight">Kube-Proxy</a></li><li><a href="#condições-do-nó" class="table-of-contents__link toc-highlight">Condições do Nó</a></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"></div></footer></div>
+<table><thead><tr><th>Condição do Nó</th><th>Descrição</th></tr></thead><tbody><tr><td><strong>Ready (Pronto)</strong></td><td><code>True</code> se o nó estiver íntegro e pronto para aceitar Pods. <code>False</code> se não estiver aceitando Pods e <code>Unknown</code> se o controlador do nó não tiver recebido atualizações dentro do <code>node-monitor-grace-period</code> (padrão: 40s).</td></tr><tr><td><strong>OutOfDisk (Sem espaço)</strong></td><td>Indica se o nó está sem espaço livre suficiente em disco. Se <code>True</code>, pode não ser possível agendar novos Pods. <em>(Observação: condição descontinuada em versões recentes do Kubernetes, substituída por métricas mais específicas)</em>.</td></tr><tr><td><strong>DiskPressure (Disco)</strong></td><td>Indica se o nó está sob pressão de disco, como pouco espaço disponível ou problemas de E/S.</td></tr><tr><td><strong>MemoryPressure (Memória)</strong></td><td><code>True</code> quando o nó está com pouca memória disponível, o que pode afetar a execução dos Pods.</td></tr><tr><td><strong>PIDPressure (Processos)</strong></td><td><code>True</code> se houver muitos processos em execução no nó (pressão de PIDs).</td></tr><tr><td><strong>NetworkUnavailable (Rede)</strong></td><td>Indica se o nó não está conectado à rede ou enfrenta problemas de conectividade, impedindo a comunicação com o cluster.</td></tr></tbody></table></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col noPrint_WFHX"><a href="https://github.com/lotechdevops/lotechdevops.github.io/tree/main/docs/kubernetes/teoria/3.workers.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Editar esta página</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Páginas de documento"><a class="pagination-nav__link pagination-nav__link--prev" href="/docs/kubernetes/teoria/kubernetes-componentes"><div class="pagination-nav__sublabel">Anterior</div><div class="pagination-nav__label">2. Componentes</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/docs/kubernetes/teoria/kubernetes-control-plane"><div class="pagination-nav__sublabel">Próxima</div><div class="pagination-nav__label">4. Control Plane</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#kubelet" class="table-of-contents__link toc-highlight">Kubelet</a></li><li><a href="#kube-proxy" class="table-of-contents__link toc-highlight">Kube-Proxy</a></li><li><a href="#condições-do-nó" class="table-of-contents__link toc-highlight">Condições do Nó</a></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"></div></footer></div>
 </body>
 </html>

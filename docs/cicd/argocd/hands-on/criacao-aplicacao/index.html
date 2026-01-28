@@ -2,44 +2,45 @@
 <html lang="pt-BR" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-cicd/argocd/hands-on/criacao-aplicacao" data-has-hydrated="false">
 <head>
 <meta charset="UTF-8">
-<meta name="generator" content="Docusaurus v3.9.1">
-<title data-rh="true">Criação da Application no ArgoCD | DevOpsR66</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://www.devopsr66.com/img/social-card.png"><meta data-rh="true" name="twitter:image" content="https://www.devopsr66.com/img/social-card.png"><meta data-rh="true" property="og:url" content="https://www.devopsr66.com/docs/cicd/argocd/hands-on/criacao-aplicacao"><meta data-rh="true" property="og:locale" content="pt_BR"><meta data-rh="true" name="docusaurus_locale" content="pt-BR"><meta data-rh="true" name="docsearch:language" content="pt-BR"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Criação da Application no ArgoCD | DevOpsR66"><meta data-rh="true" name="description" content="Como criar uma Application no ArgoCD para sincronizar aplicações entre o repositório Git e o cluster Kubernetes utilizando GitOps."><meta data-rh="true" property="og:description" content="Como criar uma Application no ArgoCD para sincronizar aplicações entre o repositório Git e o cluster Kubernetes utilizando GitOps."><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://www.devopsr66.com/docs/cicd/argocd/hands-on/criacao-aplicacao"><link data-rh="true" rel="alternate" href="https://www.devopsr66.com/docs/cicd/argocd/hands-on/criacao-aplicacao" hreflang="pt-BR"><link data-rh="true" rel="alternate" href="https://www.devopsr66.com/docs/cicd/argocd/hands-on/criacao-aplicacao" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"CI/CD","item":"https://www.devopsr66.com/docs/category/cicd"},{"@type":"ListItem","position":2,"name":"ArgoCD","item":"https://www.devopsr66.com/docs/category/argocd"},{"@type":"ListItem","position":3,"name":"Hands-on","item":"https://www.devopsr66.com/docs/category/hands-on"},{"@type":"ListItem","position":4,"name":"4. Criação da Application","item":"https://www.devopsr66.com/docs/cicd/argocd/hands-on/criacao-aplicacao"}]}</script><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="DevOpsR66 RSS Feed">
+<meta name="generator" content="Docusaurus v3.9.2">
+<title data-rh="true">Criação da Application no ArgoCD | DevOpsR66</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://www.devopsr66.com/img/social-card.png"><meta data-rh="true" name="twitter:image" content="https://www.devopsr66.com/img/social-card.png"><meta data-rh="true" property="og:url" content="https://www.devopsr66.com/docs/cicd/argocd/hands-on/criacao-aplicacao"><meta data-rh="true" property="og:locale" content="pt_BR"><meta data-rh="true" name="docusaurus_locale" content="pt-BR"><meta data-rh="true" name="docsearch:language" content="pt-BR"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Criação da Application no ArgoCD | DevOpsR66"><meta data-rh="true" name="description" content="Como criar uma Application no ArgoCD para sincronizar aplicações entre o repositório Git e o cluster Kubernetes utilizando GitOps."><meta data-rh="true" property="og:description" content="Como criar uma Application no ArgoCD para sincronizar aplicações entre o repositório Git e o cluster Kubernetes utilizando GitOps."><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://www.devopsr66.com/docs/cicd/argocd/hands-on/criacao-aplicacao"><link data-rh="true" rel="alternate" href="https://www.devopsr66.com/docs/cicd/argocd/hands-on/criacao-aplicacao" hreflang="pt-BR"><link data-rh="true" rel="alternate" href="https://www.devopsr66.com/docs/cicd/argocd/hands-on/criacao-aplicacao" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"CI/CD","item":"https://www.devopsr66.com/docs/category/cicd"},{"@type":"ListItem","position":2,"name":"ArgoCD","item":"https://www.devopsr66.com/docs/category/argocd"},{"@type":"ListItem","position":3,"name":"Hands-on","item":"https://www.devopsr66.com/docs/category/hands-on-4"},{"@type":"ListItem","position":4,"name":"4. Criação da Application","item":"https://www.devopsr66.com/docs/cicd/argocd/hands-on/criacao-aplicacao"}]}</script><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="DevOpsR66 RSS Feed">
 <link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="DevOpsR66 Atom Feed">
 
 
 
 
-<script src="https://static.cloudflareinsights.com/beacon.min.js" defer="defer" data-cf-beacon="{&quot;token&quot;: &quot;cdf6c45914ab475fb2b617f03b308721&quot;}"></script><link rel="stylesheet" href="/assets/css/styles.e57c0933.css">
-<script src="/assets/js/runtime~main.03c98535.js" defer="defer"></script>
-<script src="/assets/js/main.99ed753b.js" defer="defer"></script>
+
+<script src="https://static.cloudflareinsights.com/beacon.min.js" defer="defer" data-cf-beacon="{&quot;token&quot;: &quot;cdf6c45914ab475fb2b617f03b308721&quot;}"></script><link rel="stylesheet" href="/assets/css/styles.ce6f1228.css">
+<script src="/assets/js/runtime~main.966624bf.js" defer="defer"></script>
+<script src="/assets/js/main.51e7389e.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
 <symbol id="theme-svg-external-link" viewBox="0 0 24 24"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"/></symbol>
 </defs></svg>
-<script>!function(){var t=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();document.documentElement.setAttribute("data-theme",t||"dark"),document.documentElement.setAttribute("data-theme-choice",t||"dark")}(),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><link rel="preload" as="image" href="/img/logo.jpeg"><div role="region" aria-label="Pular para o conteúdo principal"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Pular para o conteúdo principal</a></div><nav aria-label="Navegação principal" class="theme-layout-navbar navbar navbar--fixed-top"><div class="navbar__inner"><div class="theme-layout-navbar-left navbar__items"><button aria-label="Alternar painel de navegação" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/"><div class="navbar__logo"><img src="/img/logo.jpeg" alt="Logo DevOpsR66" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src="/img/logo.jpeg" alt="Logo DevOpsR66" class="themedComponent_mlkZ themedComponent--dark_xIcU"></div><b class="navbar__title text--truncate">DevOpsR66</b></a><a class="navbar__item navbar__link" href="/docs/kubernetes/intro">Kubernetes</a><a class="navbar__item navbar__link" href="/docs/cloud/intro">Cloud</a><a class="navbar__item navbar__link" href="/docs/iac/intro">IaC</a><a class="navbar__item navbar__link" href="/docs/observabilidade/intro">Observabilidade</a><a class="navbar__item navbar__link" href="/docs/linux/intro">Linux</a><a class="navbar__item navbar__link" href="/docs/cicd/intro">CI/CD</a></div><div class="theme-layout-navbar-right navbar__items navbar__items--right"><a href="https://github.com/lotechdevops" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link header-github-link"></a><a href="https://www.linkedin.com/in/divino-sabino-moreira-neto-918844108/" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link header-linkedin-link"></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="modo do sistema" aria-label="Mudar entre modo claro e escuro (modo do sistema está ativo)"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP systemToggleIcon_QzmC"><path fill="currentColor" d="m12 21c4.971 0 9-4.029 9-9s-4.029-9-9-9-9 4.029-9 9 4.029 9 9 9zm4.95-13.95c1.313 1.313 2.05 3.093 2.05 4.95s-0.738 3.637-2.05 4.95c-1.313 1.313-3.093 2.05-4.95 2.05v-14c1.857 0 3.637 0.737 4.95 2.05z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="theme-layout-main main-wrapper mainWrapper_z2l0"><div class="docsWrapper_hBAB"><button aria-label="Voltar para o topo" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class="sidebarViewport_aRkj"><div class="sidebar_njMd"><nav aria-label="Painel lateral de documentos" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" href="/docs/category/cloud"><span title="Cloud" class="categoryLinkLabel_W154">Cloud</span></a><button aria-label="Expandir a categoria &#x27;Cloud&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" href="/docs/category/kubernetes"><span title="Kubernetes" class="categoryLinkLabel_W154">Kubernetes</span></a><button aria-label="Expandir a categoria &#x27;Kubernetes&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" href="/docs/category/iac"><span title="IaC" class="categoryLinkLabel_W154">IaC</span></a><button aria-label="Expandir a categoria &#x27;IaC&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" href="/docs/category/linux"><span title="Linux" class="categoryLinkLabel_W154">Linux</span></a><button aria-label="Expandir a categoria &#x27;Linux&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" href="/docs/category/observabilidade"><span title="Observabilidade" class="categoryLinkLabel_W154">Observabilidade</span></a><button aria-label="Expandir a categoria &#x27;Observabilidade&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--active" href="/docs/category/cicd"><span title="CI/CD" class="categoryLinkLabel_W154">CI/CD</span></a><button aria-label="Recolher a categoria &#x27;CI/CD&#x27;" aria-expanded="true" type="button" class="clean-btn menu__caret"></button></div><ul class="menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--active" tabindex="0" href="/docs/category/argocd"><span title="ArgoCD" class="categoryLinkLabel_W154">ArgoCD</span></a><button aria-label="Recolher a categoria &#x27;ArgoCD&#x27;" aria-expanded="true" type="button" class="clean-btn menu__caret"></button></div><ul class="menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" tabindex="0" href="/docs/category/conceitos"><span title="Conceitos" class="categoryLinkLabel_W154">Conceitos</span></a><button aria-label="Expandir a categoria &#x27;Conceitos&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--active" tabindex="0" href="/docs/category/hands-on"><span title="Hands-on" class="categoryLinkLabel_W154">Hands-on</span></a><button aria-label="Recolher a categoria &#x27;Hands-on&#x27;" aria-expanded="true" type="button" class="clean-btn menu__caret"></button></div><ul class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cicd/argocd/hands-on/instalacao-argocd"><span title="1. Instalação" class="linkLabel_WmDU">1. Instalação</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cicd/argocd/hands-on/configuracao-repositorio"><span title="2. Configuração do Repositório Git" class="linkLabel_WmDU">2. Configuração do Repositório Git</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cicd/argocd/hands-on/criacao-projeto"><span title="3. Criação do Project" class="linkLabel_WmDU">3. Criação do Project</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" tabindex="0" href="/docs/cicd/argocd/hands-on/criacao-aplicacao"><span title="4. Criação da Application" class="linkLabel_WmDU">4. Criação da Application</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cicd/argocd/hands-on/argocd-notifications"><span title="5. Configurando Notificações" class="linkLabel_WmDU">5. Configurando Notificações</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cicd/argocd/hands-on/criacao-applicationset"><span title="6. Criação da ApplicationSet" class="linkLabel_WmDU">6. Criação da ApplicationSet</span></a></li></ul></li></ul></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cicd/intro"><span title="intro" class="linkLabel_WmDU">intro</span></a></li></ul></li></ul></nav></div></div></aside><main class="docMainContainer_TBSr"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_VOVn"><div class="docItemContainer_Djhp"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_Z_bl" aria-label="Trilha"><ul class="breadcrumbs"><li class="breadcrumbs__item"><a aria-label="Página Inicial" class="breadcrumbs__link" href="/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_YNFT"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li class="breadcrumbs__item"><a class="breadcrumbs__link" href="/docs/category/cicd"><span>CI/CD</span></a></li><li class="breadcrumbs__item"><a class="breadcrumbs__link" href="/docs/category/argocd"><span>ArgoCD</span></a></li><li class="breadcrumbs__item"><a class="breadcrumbs__link" href="/docs/category/hands-on"><span>Hands-on</span></a></li><li class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link">4. Criação da Application</span></li></ul></nav><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">Nesta página</button></div><div class="theme-doc-markdown markdown"><header><h1>Criação da Application no ArgoCD</h1></header><h2 class="anchor anchorWithStickyNavbar_LWe7" id="objetivo">Objetivo<a href="#objetivo" class="hash-link" aria-label="Link direto para Objetivo" title="Link direto para Objetivo" translate="no">​</a></h2>
+<script>!function(){var t=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();document.documentElement.setAttribute("data-theme",t||"dark"),document.documentElement.setAttribute("data-theme-choice",t||"dark")}(),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><link rel="preload" as="image" href="/img/logo.jpeg"><div role="region" aria-label="Pular para o conteúdo principal"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Pular para o conteúdo principal</a></div><nav aria-label="Navegação principal" class="theme-layout-navbar navbar navbar--fixed-top"><div class="navbar__inner"><div class="theme-layout-navbar-left navbar__items"><button aria-label="Alternar painel de navegação" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/"><div class="navbar__logo"><img src="/img/logo.jpeg" alt="Logo DevOpsR66" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src="/img/logo.jpeg" alt="Logo DevOpsR66" class="themedComponent_mlkZ themedComponent--dark_xIcU"></div><b class="navbar__title text--truncate">DevOpsR66</b></a><a class="navbar__item navbar__link" href="/docs/kubernetes/intro">Kubernetes</a><a class="navbar__item navbar__link" href="/docs/cloud/intro">Cloud</a><a class="navbar__item navbar__link" href="/docs/iac/intro">IaC</a><a class="navbar__item navbar__link" href="/docs/observabilidade/intro">Observabilidade</a><a class="navbar__item navbar__link" href="/docs/linux/intro">Linux</a><a class="navbar__item navbar__link" href="/docs/cicd/intro">CI/CD</a></div><div class="theme-layout-navbar-right navbar__items navbar__items--right"><a href="https://github.com/lotechdevops" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link header-github-link"></a><a href="https://www.linkedin.com/in/divino-sabino-moreira-neto-918844108/" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link header-linkedin-link"></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="modo do sistema" aria-label="Mudar entre modo claro e escuro (modo do sistema está ativo)"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP systemToggleIcon_QzmC"><path fill="currentColor" d="m12 21c4.971 0 9-4.029 9-9s-4.029-9-9-9-9 4.029-9 9 4.029 9 9 9zm4.95-13.95c1.313 1.313 2.05 3.093 2.05 4.95s-0.738 3.637-2.05 4.95c-1.313 1.313-3.093 2.05-4.95 2.05v-14c1.857 0 3.637 0.737 4.95 2.05z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="theme-layout-main main-wrapper mainWrapper_z2l0"><div class="docsWrapper_hBAB"><button aria-label="Voltar para o topo" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class="sidebarViewport_aRkj"><div class="sidebar_njMd"><nav aria-label="Painel lateral de documentos" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" href="/docs/category/cloud"><span title="Cloud" class="categoryLinkLabel_W154">Cloud</span></a><button aria-label="Expandir a categoria &#x27;Cloud&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" href="/docs/category/kubernetes"><span title="Kubernetes" class="categoryLinkLabel_W154">Kubernetes</span></a><button aria-label="Expandir a categoria &#x27;Kubernetes&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" href="/docs/category/iac"><span title="IaC" class="categoryLinkLabel_W154">IaC</span></a><button aria-label="Expandir a categoria &#x27;IaC&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" href="/docs/category/linux"><span title="Linux" class="categoryLinkLabel_W154">Linux</span></a><button aria-label="Expandir a categoria &#x27;Linux&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" href="/docs/category/observabilidade"><span title="Observabilidade" class="categoryLinkLabel_W154">Observabilidade</span></a><button aria-label="Expandir a categoria &#x27;Observabilidade&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--active" href="/docs/category/cicd"><span title="CI/CD" class="categoryLinkLabel_W154">CI/CD</span></a><button aria-label="Recolher a categoria &#x27;CI/CD&#x27;" aria-expanded="true" type="button" class="clean-btn menu__caret"></button></div><ul class="menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--active" tabindex="0" href="/docs/category/argocd"><span title="ArgoCD" class="categoryLinkLabel_W154">ArgoCD</span></a><button aria-label="Recolher a categoria &#x27;ArgoCD&#x27;" aria-expanded="true" type="button" class="clean-btn menu__caret"></button></div><ul class="menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" tabindex="0" href="/docs/category/conceitos-5"><span title="Conceitos" class="categoryLinkLabel_W154">Conceitos</span></a><button aria-label="Expandir a categoria &#x27;Conceitos&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--active" tabindex="0" href="/docs/category/hands-on-4"><span title="Hands-on" class="categoryLinkLabel_W154">Hands-on</span></a><button aria-label="Recolher a categoria &#x27;Hands-on&#x27;" aria-expanded="true" type="button" class="clean-btn menu__caret"></button></div><ul class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cicd/argocd/hands-on/instalacao-argocd"><span title="1. Instalação" class="linkLabel_WmDU">1. Instalação</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cicd/argocd/hands-on/configuracao-repositorio"><span title="2. Configuração do Repositório Git" class="linkLabel_WmDU">2. Configuração do Repositório Git</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cicd/argocd/hands-on/criacao-projeto"><span title="3. Criação do Project" class="linkLabel_WmDU">3. Criação do Project</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" tabindex="0" href="/docs/cicd/argocd/hands-on/criacao-aplicacao"><span title="4. Criação da Application" class="linkLabel_WmDU">4. Criação da Application</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cicd/argocd/hands-on/argocd-notifications"><span title="5. Configurando Notificações" class="linkLabel_WmDU">5. Configurando Notificações</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cicd/argocd/hands-on/criacao-applicationset"><span title="6. Criação da ApplicationSet" class="linkLabel_WmDU">6. Criação da ApplicationSet</span></a></li></ul></li></ul></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/cicd/intro"><span title="intro" class="linkLabel_WmDU">intro</span></a></li></ul></li></ul></nav></div></div></aside><main class="docMainContainer_TBSr"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_VOVn"><div class="docItemContainer_Djhp"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_Z_bl" aria-label="Trilha"><ul class="breadcrumbs"><li class="breadcrumbs__item"><a aria-label="Página Inicial" class="breadcrumbs__link" href="/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_YNFT"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li class="breadcrumbs__item"><a class="breadcrumbs__link" href="/docs/category/cicd"><span>CI/CD</span></a></li><li class="breadcrumbs__item"><a class="breadcrumbs__link" href="/docs/category/argocd"><span>ArgoCD</span></a></li><li class="breadcrumbs__item"><a class="breadcrumbs__link" href="/docs/category/hands-on-4"><span>Hands-on</span></a></li><li class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link">4. Criação da Application</span></li></ul></nav><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">Nesta página</button></div><div class="theme-doc-markdown markdown"><header><h1>Criação da Application no ArgoCD</h1></header><h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="objetivo">Objetivo<a href="#objetivo" class="hash-link" aria-label="Link direto para Objetivo" title="Link direto para Objetivo" translate="no">​</a></h2>
 <p>Nesta etapa, vamos criar uma <strong>Application</strong> no ArgoCD para fazer o deploy do <strong>kube-prometheus-stack</strong> no namespace <code>observabilidade</code>.</p>
 <p>A Application será criada no Project <code>prometheus</code> que configuramos anteriormente e utilizará um <strong>Helm Chat</strong> com <strong>values customizados</strong> armazenados no Git.</p>
 <p><strong>Pré-requisitos</strong></p>
 <ul>
-<li>Project <code>prometheus</code> criado</li>
-<li>Namespace <code>observabilidade</code> existente no cluster</li>
-<li>Repositório Git com os manifestos configurado</li>
+<li class="">Project <code>prometheus</code> criado</li>
+<li class="">Namespace <code>observabilidade</code> existente no cluster</li>
+<li class="">Repositório Git com os manifestos configurado</li>
 </ul>
 <hr>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="passo-1-preparar-o-namespace-de-destino">Passo 1: Preparar o namespace de destino<a href="#passo-1-preparar-o-namespace-de-destino" class="hash-link" aria-label="Link direto para Passo 1: Preparar o namespace de destino" title="Link direto para Passo 1: Preparar o namespace de destino" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="passo-1-preparar-o-namespace-de-destino">Passo 1: Preparar o namespace de destino<a href="#passo-1-preparar-o-namespace-de-destino" class="hash-link" aria-label="Link direto para Passo 1: Preparar o namespace de destino" title="Link direto para Passo 1: Preparar o namespace de destino" translate="no">​</a></h2>
 <p>Antes de criar a Application, certifique-se de que o namespace existe:</p>
 <div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token plain">kubectl create namespace observabilidade</span><br></span></code></pre></div></div>
 <p><strong>Ou</strong> habilite a criação automática na Application (veremos adiante).</p>
 <hr>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="passo-2-criar-o-arquivo-da-application">Passo 2: Criar o arquivo da Application<a href="#passo-2-criar-o-arquivo-da-application" class="hash-link" aria-label="Link direto para Passo 2: Criar o arquivo da Application" title="Link direto para Passo 2: Criar o arquivo da Application" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="passo-2-criar-o-arquivo-da-application">Passo 2: Criar o arquivo da Application<a href="#passo-2-criar-o-arquivo-da-application" class="hash-link" aria-label="Link direto para Passo 2: Criar o arquivo da Application" title="Link direto para Passo 2: Criar o arquivo da Application" translate="no">​</a></h2>
 <p>Crie o arquivo <code>prometheus-application.yaml</code>:</p>
 <div class="language-yaml codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-yaml codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token key atrule">apiVersion</span><span class="token punctuation" style="color:rgb(248, 248, 242)">:</span><span class="token plain"> argoproj.io/v1alpha1</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token key atrule">kind</span><span class="token punctuation" style="color:rgb(248, 248, 242)">:</span><span class="token plain"> Application</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token key atrule">metadata</span><span class="token punctuation" style="color:rgb(248, 248, 242)">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">  </span><span class="token key atrule">name</span><span class="token punctuation" style="color:rgb(248, 248, 242)">:</span><span class="token plain"> prometheus</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">  </span><span class="token key atrule">namespace</span><span class="token punctuation" style="color:rgb(248, 248, 242)">:</span><span class="token plain"> argocd</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token key atrule">spec</span><span class="token punctuation" style="color:rgb(248, 248, 242)">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">  </span><span class="token key atrule">project</span><span class="token punctuation" style="color:rgb(248, 248, 242)">:</span><span class="token plain"> prometheus</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">  </span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">  </span><span class="token comment" style="color:rgb(98, 114, 164)"># Múltiplos sources: Helm Chart oficial + Values do Git</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">  </span><span class="token key atrule">sources</span><span class="token punctuation" style="color:rgb(248, 248, 242)">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">    </span><span class="token comment" style="color:rgb(98, 114, 164)"># Source 1: Helm Chart oficial do Prometheus</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">    </span><span class="token punctuation" style="color:rgb(248, 248, 242)">-</span><span class="token plain"> </span><span class="token key atrule">repoURL</span><span class="token punctuation" style="color:rgb(248, 248, 242)">:</span><span class="token plain"> https</span><span class="token punctuation" style="color:rgb(248, 248, 242)">:</span><span class="token plain">//prometheus</span><span class="token punctuation" style="color:rgb(248, 248, 242)">-</span><span class="token plain">community.github.io/helm</span><span class="token punctuation" style="color:rgb(248, 248, 242)">-</span><span class="token plain">charts</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">      </span><span class="token key atrule">chart</span><span class="token punctuation" style="color:rgb(248, 248, 242)">:</span><span class="token plain"> kube</span><span class="token punctuation" style="color:rgb(248, 248, 242)">-</span><span class="token plain">prometheus</span><span class="token punctuation" style="color:rgb(248, 248, 242)">-</span><span class="token plain">stack</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">      </span><span class="token key atrule">targetRevision</span><span class="token punctuation" style="color:rgb(248, 248, 242)">:</span><span class="token plain"> 79.5.0</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">      </span><span class="token key atrule">helm</span><span class="token punctuation" style="color:rgb(248, 248, 242)">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">        </span><span class="token key atrule">releaseName</span><span class="token punctuation" style="color:rgb(248, 248, 242)">:</span><span class="token plain"> prometheus</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">        </span><span class="token key atrule">valueFiles</span><span class="token punctuation" style="color:rgb(248, 248, 242)">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">          </span><span class="token punctuation" style="color:rgb(248, 248, 242)">-</span><span class="token plain"> $values/apps/values/prometheus/values.yaml</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">        </span><span class="token key atrule">skipCrds</span><span class="token punctuation" style="color:rgb(248, 248, 242)">:</span><span class="token plain"> </span><span class="token boolean important">false</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">    </span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">    </span><span class="token comment" style="color:rgb(98, 114, 164)"># Source 2: Repositório Git com os values customizados</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">    </span><span class="token punctuation" style="color:rgb(248, 248, 242)">-</span><span class="token plain"> </span><span class="token key atrule">repoURL</span><span class="token punctuation" style="color:rgb(248, 248, 242)">:</span><span class="token plain"> git@github.com</span><span class="token punctuation" style="color:rgb(248, 248, 242)">:</span><span class="token plain">lotechdevops/apps</span><span class="token punctuation" style="color:rgb(248, 248, 242)">-</span><span class="token plain">argocd.git</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">      </span><span class="token key atrule">targetRevision</span><span class="token punctuation" style="color:rgb(248, 248, 242)">:</span><span class="token plain"> main</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">      </span><span class="token key atrule">ref</span><span class="token punctuation" style="color:rgb(248, 248, 242)">:</span><span class="token plain"> values</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">  </span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">  </span><span class="token comment" style="color:rgb(98, 114, 164)"># Destino no cluster</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">  </span><span class="token key atrule">destination</span><span class="token punctuation" style="color:rgb(248, 248, 242)">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">    </span><span class="token key atrule">server</span><span class="token punctuation" style="color:rgb(248, 248, 242)">:</span><span class="token plain"> https</span><span class="token punctuation" style="color:rgb(248, 248, 242)">:</span><span class="token plain">//kubernetes.default.svc</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">    </span><span class="token key atrule">namespace</span><span class="token punctuation" style="color:rgb(248, 248, 242)">:</span><span class="token plain"> observabilidade</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">  </span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">  </span><span class="token comment" style="color:rgb(98, 114, 164)"># Política de sincronização</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">  </span><span class="token key atrule">syncPolicy</span><span class="token punctuation" style="color:rgb(248, 248, 242)">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">    </span><span class="token key atrule">automated</span><span class="token punctuation" style="color:rgb(248, 248, 242)">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">      </span><span class="token key atrule">enabled</span><span class="token punctuation" style="color:rgb(248, 248, 242)">:</span><span class="token plain"> </span><span class="token boolean important">true</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">      </span><span class="token key atrule">prune</span><span class="token punctuation" style="color:rgb(248, 248, 242)">:</span><span class="token plain"> </span><span class="token boolean important">true</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">      </span><span class="token key atrule">selfHeal</span><span class="token punctuation" style="color:rgb(248, 248, 242)">:</span><span class="token plain"> </span><span class="token boolean important">true</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">    </span><span class="token key atrule">retry</span><span class="token punctuation" style="color:rgb(248, 248, 242)">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">      </span><span class="token key atrule">limit</span><span class="token punctuation" style="color:rgb(248, 248, 242)">:</span><span class="token plain"> </span><span class="token number">5</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">      </span><span class="token key atrule">backoff</span><span class="token punctuation" style="color:rgb(248, 248, 242)">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">        </span><span class="token key atrule">duration</span><span class="token punctuation" style="color:rgb(248, 248, 242)">:</span><span class="token plain"> </span><span class="token string" style="color:rgb(255, 121, 198)">&quot;5s&quot;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">        </span><span class="token key atrule">factor</span><span class="token punctuation" style="color:rgb(248, 248, 242)">:</span><span class="token plain"> </span><span class="token number">2</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">        </span><span class="token key atrule">maxDuration</span><span class="token punctuation" style="color:rgb(248, 248, 242)">:</span><span class="token plain"> </span><span class="token string" style="color:rgb(255, 121, 198)">&quot;3m&quot;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">    </span><span class="token key atrule">syncOptions</span><span class="token punctuation" style="color:rgb(248, 248, 242)">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">      </span><span class="token punctuation" style="color:rgb(248, 248, 242)">-</span><span class="token plain"> CreateNamespace=true</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">      </span><span class="token punctuation" style="color:rgb(248, 248, 242)">-</span><span class="token plain"> PruneLast=true</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">      </span><span class="token punctuation" style="color:rgb(248, 248, 242)">-</span><span class="token plain"> ServerSideApply=true</span><br></span></code></pre></div></div>
 <hr>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="passo-3-aplicar-a-application">Passo 3: Aplicar a Application<a href="#passo-3-aplicar-a-application" class="hash-link" aria-label="Link direto para Passo 3: Aplicar a Application" title="Link direto para Passo 3: Aplicar a Application" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="passo-3-aplicar-a-application">Passo 3: Aplicar a Application<a href="#passo-3-aplicar-a-application" class="hash-link" aria-label="Link direto para Passo 3: Aplicar a Application" title="Link direto para Passo 3: Aplicar a Application" translate="no">​</a></h2>
 <div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token plain">kubectl apply -f prometheus-application.yaml</span><br></span></code></pre></div></div>
 <hr>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="passo-4-verificar-a-criação">Passo 4: Verificar a criação<a href="#passo-4-verificar-a-criação" class="hash-link" aria-label="Link direto para Passo 4: Verificar a criação" title="Link direto para Passo 4: Verificar a criação" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="passo-4-verificar-a-criação">Passo 4: Verificar a criação<a href="#passo-4-verificar-a-criação" class="hash-link" aria-label="Link direto para Passo 4: Verificar a criação" title="Link direto para Passo 4: Verificar a criação" translate="no">​</a></h2>
 <p><strong>Via kubectl</strong></p>
 <div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token plain">kubectl get application prometheus -n argocd</span><br></span></code></pre></div></div>
 <p><strong>Saída esperada</strong>:</p>
@@ -48,7 +49,7 @@
 <div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token plain">argocd app get prometheus</span><br></span></code></pre></div></div>
 <p><img decoding="async" loading="lazy" alt="Verificação Application criada via CLI" src="/assets/images/print-criacao-application-cli-e86f61900bafb5fbf24ccf6bb95b27f0.png" width="950" height="473" class="img_ev3q"></p>
 <hr>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="passo-5-acompanhar-a-sincronização">Passo 5: Acompanhar a sincronização<a href="#passo-5-acompanhar-a-sincronização" class="hash-link" aria-label="Link direto para Passo 5: Acompanhar a sincronização" title="Link direto para Passo 5: Acompanhar a sincronização" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="passo-5-acompanhar-a-sincronização">Passo 5: Acompanhar a sincronização<a href="#passo-5-acompanhar-a-sincronização" class="hash-link" aria-label="Link direto para Passo 5: Acompanhar a sincronização" title="Link direto para Passo 5: Acompanhar a sincronização" translate="no">​</a></h2>
 <p><strong>Visualizar logs da sincronização</strong></p>
 <div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token plain">argocd app logs prometheus --follow</span><br></span></code></pre></div></div>
 <p><strong>Visualizar recursos criados</strong></p>
@@ -56,208 +57,208 @@
 <p><img decoding="async" loading="lazy" alt="Verificar recursos criados application" src="/assets/images/print-visualizar-recursos-criados-application-e765046d3aa18173c677e8e2aa0b59c3.png" width="1495" height="823" class="img_ev3q"></p>
 <p><strong>Ver detalhes no ArgoCD UI</strong></p>
 <ol>
-<li>Acesse o ArgoCD UI</li>
-<li>Clique na Application <code>prometheus</code></li>
-<li>Visualize o grafo de recursos criados</li>
+<li class="">Acesse o ArgoCD UI</li>
+<li class="">Clique na Application <code>prometheus</code></li>
+<li class="">Visualize o grafo de recursos criados</li>
 </ol>
 <p><img decoding="async" loading="lazy" alt="Visualizar application console UI" src="/assets/images/print-visualizar-recursos-criados-application-ui-9cfa4e7033ffcf6515c433645150af43.png" width="1474" height="893" class="img_ev3q"></p>
 <hr>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="entendendo-múltpilos-sources">Entendendo múltpilos sources<a href="#entendendo-múltpilos-sources" class="hash-link" aria-label="Link direto para Entendendo múltpilos sources" title="Link direto para Entendendo múltpilos sources" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="entendendo-múltpilos-sources">Entendendo múltpilos sources<a href="#entendendo-múltpilos-sources" class="hash-link" aria-label="Link direto para Entendendo múltpilos sources" title="Link direto para Entendendo múltpilos sources" translate="no">​</a></h2>
 <p>Esta application usa uma configuração avançada com <strong>dois sources</strong>:</p>
 <p><strong>Source 1: Helm Chart oficial</strong></p>
 <div class="language-yaml codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-yaml codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token punctuation" style="color:rgb(248, 248, 242)">-</span><span class="token plain"> </span><span class="token key atrule">repoURL</span><span class="token punctuation" style="color:rgb(248, 248, 242)">:</span><span class="token plain"> https</span><span class="token punctuation" style="color:rgb(248, 248, 242)">:</span><span class="token plain">//prometheus</span><span class="token punctuation" style="color:rgb(248, 248, 242)">-</span><span class="token plain">community.github.io/helm</span><span class="token punctuation" style="color:rgb(248, 248, 242)">-</span><span class="token plain">charts</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">  </span><span class="token key atrule">chart</span><span class="token punctuation" style="color:rgb(248, 248, 242)">:</span><span class="token plain"> kube</span><span class="token punctuation" style="color:rgb(248, 248, 242)">-</span><span class="token plain">prometheus</span><span class="token punctuation" style="color:rgb(248, 248, 242)">-</span><span class="token plain">stack</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">  </span><span class="token key atrule">targetRevision</span><span class="token punctuation" style="color:rgb(248, 248, 242)">:</span><span class="token plain"> 79.5.0</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">  </span><span class="token key atrule">helm</span><span class="token punctuation" style="color:rgb(248, 248, 242)">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">    </span><span class="token key atrule">releaseName</span><span class="token punctuation" style="color:rgb(248, 248, 242)">:</span><span class="token plain"> prometheus</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">    </span><span class="token key atrule">valueFiles</span><span class="token punctuation" style="color:rgb(248, 248, 242)">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">      </span><span class="token punctuation" style="color:rgb(248, 248, 242)">-</span><span class="token plain"> $values/apps/values/prometheus/values.yaml</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">    </span><span class="token key atrule">skipCrds</span><span class="token punctuation" style="color:rgb(248, 248, 242)">:</span><span class="token plain"> </span><span class="token boolean important">false</span><br></span></code></pre></div></div>
 <p><strong>Campos importantes</strong>:</p>
 <ul>
-<li><strong>repoURL</strong>: Repositório Helm oficial do prometheus</li>
-<li><strong>chart</strong>: Nome do chart a ser instalado</li>
-<li><strong>targetRevision</strong>: Versão específica do chart (fixada para estabilidade)</li>
-<li><strong>helm.releaseName</strong>: Nome da release do Helm no cluster</li>
-<li><strong>ValuesFiles</strong>: Referência ao arquivo de values customizados usando <code>$values</code></li>
-<li><strong>skipCrds</strong>: <code>false</code> = instala os CRDs necessários</li>
+<li class=""><strong>repoURL</strong>: Repositório Helm oficial do prometheus</li>
+<li class=""><strong>chart</strong>: Nome do chart a ser instalado</li>
+<li class=""><strong>targetRevision</strong>: Versão específica do chart (fixada para estabilidade)</li>
+<li class=""><strong>helm.releaseName</strong>: Nome da release do Helm no cluster</li>
+<li class=""><strong>ValuesFiles</strong>: Referência ao arquivo de values customizados usando <code>$values</code></li>
+<li class=""><strong>skipCrds</strong>: <code>false</code> = instala os CRDs necessários</li>
 </ul>
 <p><strong>Source 2: Values customizados no Git</strong></p>
 <div class="language-yaml codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-yaml codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token punctuation" style="color:rgb(248, 248, 242)">-</span><span class="token plain"> </span><span class="token key atrule">repoURL</span><span class="token punctuation" style="color:rgb(248, 248, 242)">:</span><span class="token plain"> git@github.com</span><span class="token punctuation" style="color:rgb(248, 248, 242)">:</span><span class="token plain">lotechdevops/apps</span><span class="token punctuation" style="color:rgb(248, 248, 242)">-</span><span class="token plain">argocd.git</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">  </span><span class="token key atrule">targetRevision</span><span class="token punctuation" style="color:rgb(248, 248, 242)">:</span><span class="token plain"> main</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">  </span><span class="token key atrule">ref</span><span class="token punctuation" style="color:rgb(248, 248, 242)">:</span><span class="token plain"> values</span><br></span></code></pre></div></div>
 <p><strong>Campos importantes</strong>:</p>
 <ul>
-<li><strong>ref: values</strong>: Define um alias <code>$values</code> que pode ser referenciado no source 1</li>
-<li>Permite manter os values customizados <strong>versionados no Git</strong></li>
-<li>Facilita auditoria e rollback de configurações</li>
+<li class=""><strong>ref: values</strong>: Define um alias <code>$values</code> que pode ser referenciado no source 1</li>
+<li class="">Permite manter os values customizados <strong>versionados no Git</strong></li>
+<li class="">Facilita auditoria e rollback de configurações</li>
 </ul>
 <p><strong>Como o ArgoCD processa</strong></p>
 <ol>
-<li>ArgoCD clona o repositório Git (source 2)</li>
-<li>Busca o Helm Chart oficial (source 1)</li>
-<li>Aplica os values de <code>$values/apps/values/prometheus/values.yaml</code> sobre os valores padrão</li>
-<li>Renderiza os templates e aplica no cluster</li>
+<li class="">ArgoCD clona o repositório Git (source 2)</li>
+<li class="">Busca o Helm Chart oficial (source 1)</li>
+<li class="">Aplica os values de <code>$values/apps/values/prometheus/values.yaml</code> sobre os valores padrão</li>
+<li class="">Renderiza os templates e aplica no cluster</li>
 </ol>
 <p><strong>Por que usar múltiplos sources?</strong></p>
 <ul>
-<li><strong>Separação de responsabilidades</strong>: Chart oficial + configurações customizadas</li>
-<li><strong>Versionamento</strong>: Values no Git permitem rastreabilidade completa</li>
-<li><strong>Facilidade de upgrade</strong>: Atualiza o chart sem perder customizações</li>
-<li><strong>Reutilização</strong>: Mesmos values para diferentes ambientes</li>
-<li><strong>Segurança</strong>: Chart oficial mantido pela comunidade, apenas values customizados</li>
+<li class=""><strong>Separação de responsabilidades</strong>: Chart oficial + configurações customizadas</li>
+<li class=""><strong>Versionamento</strong>: Values no Git permitem rastreabilidade completa</li>
+<li class=""><strong>Facilidade de upgrade</strong>: Atualiza o chart sem perder customizações</li>
+<li class=""><strong>Reutilização</strong>: Mesmos values para diferentes ambientes</li>
+<li class=""><strong>Segurança</strong>: Chart oficial mantido pela comunidade, apenas values customizados</li>
 </ul>
 <hr>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="estrutura-do-repositório">Estrutura do repositório<a href="#estrutura-do-repositório" class="hash-link" aria-label="Link direto para Estrutura do repositório" title="Link direto para Estrutura do repositório" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="estrutura-do-repositório">Estrutura do repositório<a href="#estrutura-do-repositório" class="hash-link" aria-label="Link direto para Estrutura do repositório" title="Link direto para Estrutura do repositório" translate="no">​</a></h2>
 <div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token plain">apps-argocd/</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">├── apps/</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">│   └── values/</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">│       └── prometheus/</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">│           └── values.yaml    ← Customizações do Prometheus</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">└── apps/</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">    └── applications/</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">        └── prometheus.yaml     ← Application manifest</span><br></span></code></pre></div></div>
 <hr>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="alternativa-criação-via-argocd-ui">Alternativa: Criação via ArgoCD UI<a href="#alternativa-criação-via-argocd-ui" class="hash-link" aria-label="Link direto para Alternativa: Criação via ArgoCD UI" title="Link direto para Alternativa: Criação via ArgoCD UI" translate="no">​</a></h2>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="passo-1-acessar-criação-da-application">Passo 1: Acessar criação da Application<a href="#passo-1-acessar-criação-da-application" class="hash-link" aria-label="Link direto para Passo 1: Acessar criação da Application" title="Link direto para Passo 1: Acessar criação da Application" translate="no">​</a></h3>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="alternativa-criação-via-argocd-ui">Alternativa: Criação via ArgoCD UI<a href="#alternativa-criação-via-argocd-ui" class="hash-link" aria-label="Link direto para Alternativa: Criação via ArgoCD UI" title="Link direto para Alternativa: Criação via ArgoCD UI" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="passo-1-acessar-criação-da-application">Passo 1: Acessar criação da Application<a href="#passo-1-acessar-criação-da-application" class="hash-link" aria-label="Link direto para Passo 1: Acessar criação da Application" title="Link direto para Passo 1: Acessar criação da Application" translate="no">​</a></h3>
 <ol>
-<li>No painel do ArgoCD, acesse o menu lateral esquerdo -&gt; <strong>Applications</strong></li>
-<li>Clique em <strong>NEW APP</strong></li>
+<li class="">No painel do ArgoCD, acesse o menu lateral esquerdo -&gt; <strong>Applications</strong></li>
+<li class="">Clique em <strong>NEW APP</strong></li>
 </ol>
 <hr>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="passo-2-aba-general">Passo 2: Aba General<a href="#passo-2-aba-general" class="hash-link" aria-label="Link direto para Passo 2: Aba General" title="Link direto para Passo 2: Aba General" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="passo-2-aba-general">Passo 2: Aba General<a href="#passo-2-aba-general" class="hash-link" aria-label="Link direto para Passo 2: Aba General" title="Link direto para Passo 2: Aba General" translate="no">​</a></h3>
 <p>Nesta etapa, definimos <strong>o nome da aplicação, o Projeto ao qual ela pertence</strong> e o <strong>comportamento de sincronização</strong></p>
 <p><strong>Campos básicos</strong>:</p>
 <p><strong>Application Name</strong></p>
 <ul>
-<li>Nome lógico da aplicação no ArgoCD</li>
+<li class="">Nome lógico da aplicação no ArgoCD</li>
 </ul>
 <p><strong>Project</strong></p>
 <ul>
-<li>Vincula a aplicação ao Project criado anteriormente</li>
+<li class="">Vincula a aplicação ao Project criado anteriormente</li>
 </ul>
 <p><strong>Sync Policy</strong></p>
 <ul>
-<li><strong>Manual</strong>: O ArgoCD apenas detecta mudanças, mas o operador precisa clicar em &quot;Sync&quot; para aplicá-las.</li>
-<li><strong>Automatic</strong>: O ArgoCD aplica as mudanças detectadas sem intervenção do operador.</li>
+<li class=""><strong>Manual</strong>: O ArgoCD apenas detecta mudanças, mas o operador precisa clicar em &quot;Sync&quot; para aplicá-las.</li>
+<li class=""><strong>Automatic</strong>: O ArgoCD aplica as mudanças detectadas sem intervenção do operador.</li>
 </ul>
 <p>Ao selecionar <strong>Automatic</strong>, surgem três opções adicionais:</p>
 <ul>
-<li><strong>Enable Auto-Sync</strong>: Aplica automaticamente toda mudança detectada no Git</li>
-<li><strong>Prune resources</strong>: Remove recursos que foram deletados do repositório Git</li>
-<li><strong>Self-Heal</strong>: Restaura automaticamente qualquer alteração feita manualmente no cluster</li>
+<li class=""><strong>Enable Auto-Sync</strong>: Aplica automaticamente toda mudança detectada no Git</li>
+<li class=""><strong>Prune resources</strong>: Remove recursos que foram deletados do repositório Git</li>
+<li class=""><strong>Self-Heal</strong>: Restaura automaticamente qualquer alteração feita manualmente no cluster</li>
 </ul>
 <p><strong>Sync Options</strong></p>
 <p>Essas opções refinam o comportamento do deploy:</p>
 <ul>
-<li>
+<li class="">
 <p><strong>Auto-Create Namespace</strong>:</p>
 <ul>
-<li>Cria automaticamente o namespace, caso ele não exista</li>
-<li>Equivalente a: <code>CreateNamespace=true</code></li>
+<li class="">Cria automaticamente o namespace, caso ele não exista</li>
+<li class="">Equivalente a: <code>CreateNamespace=true</code></li>
 </ul>
 </li>
-<li>
+<li class="">
 <p><strong>Server-Side Apply</strong>:</p>
 <ul>
-<li>Usa o modo <code>--server-side</code> do <code>kubectl</code></li>
-<li>Aplica alterações diretamente no cluster</li>
-<li>Melho0r para recursos grandes e CRDs</li>
+<li class="">Usa o modo <code>--server-side</code> do <code>kubectl</code></li>
+<li class="">Aplica alterações diretamente no cluster</li>
+<li class="">Melho0r para recursos grandes e CRDs</li>
 </ul>
 </li>
-<li>
+<li class="">
 <p><strong>Prune Last</strong>:</p>
 <ul>
-<li>Deleta recursos antigos <strong>após</strong> aplicar os novos</li>
-<li>Evita downtime em atualizações</li>
-<li>Equivalente a: <code>PruneLast=true</code></li>
+<li class="">Deleta recursos antigos <strong>após</strong> aplicar os novos</li>
+<li class="">Evita downtime em atualizações</li>
+<li class="">Equivalente a: <code>PruneLast=true</code></li>
 </ul>
 </li>
-<li>
+<li class="">
 <p><strong>Skip Schema Validation</strong>:</p>
 <ul>
-<li>Ignora a validação de schema dos manifestos durante a aplicação</li>
-<li>Use quando o schema validation causar problemas</li>
+<li class="">Ignora a validação de schema dos manifestos durante a aplicação</li>
+<li class="">Use quando o schema validation causar problemas</li>
 </ul>
 </li>
-<li>
+<li class="">
 <p><strong>Respect Ignore Differences</strong>:</p>
 <ul>
-<li>Respeita regras de exclusão definidas na Application (<code>ignoreDifferences</code>)</li>
-<li>Impede sincronização de campos ignorados</li>
+<li class="">Respeita regras de exclusão definidas na Application (<code>ignoreDifferences</code>)</li>
+<li class="">Impede sincronização de campos ignorados</li>
 </ul>
 </li>
-<li>
+<li class="">
 <p><strong>Apply Out of Sync Only</strong>:</p>
 <ul>
-<li>Aplica apenas os recursos que estão fora de sincronismo, em vez de reaplicar todos</li>
+<li class="">Aplica apenas os recursos que estão fora de sincronismo, em vez de reaplicar todos</li>
 </ul>
 </li>
-<li>
+<li class="">
 <p><strong>Prune Propagation Policy</strong>:</p>
 <ul>
-<li>
+<li class="">
 <p>Controla <strong>como o Kubernetes vai deletar recursos</strong> durante o processo de prune:</p>
 <ul>
-<li>
+<li class="">
 <p><strong>foreground</strong></p>
 <ul>
-<li>Espera todos os recursos dependentes serem removidos antes de deletar o recurso pai</li>
+<li class="">Espera todos os recursos dependentes serem removidos antes de deletar o recurso pai</li>
 </ul>
 </li>
-<li>
+<li class="">
 <p><strong>background</strong></p>
 <ul>
-<li>Deleta o recurso pai imediatamente e deixa o Kubernetes remover os filhos em segundo plano</li>
+<li class="">Deleta o recurso pai imediatamente e deixa o Kubernetes remover os filhos em segundo plano</li>
 </ul>
 </li>
-<li>
+<li class="">
 <p><strong>orphan</strong></p>
 <ul>
-<li>Remove apenas o recurso pai e <strong>mantém os filhos</strong> no cluster</li>
+<li class="">Remove apenas o recurso pai e <strong>mantém os filhos</strong> no cluster</li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
 </li>
-<li>
+<li class="">
 <p><strong>Replace</strong>:</p>
 <ul>
-<li>
+<li class="">
 <p>Essa opção altera a forma como o ArgoCD <strong>atualiza os recursos</strong> no cluster:</p>
 <ul>
-<li>
+<li class="">
 <p><strong>Padrão</strong></p>
 <ul>
-<li>O ArgoCD usa o comando: <code>kubectl apply</code></li>
-<li>Atualiza apenas os campos alterados</li>
+<li class="">O ArgoCD usa o comando: <code>kubectl apply</code></li>
+<li class="">Atualiza apenas os campos alterados</li>
 </ul>
 </li>
-<li>
+<li class="">
 <p><strong>Com Replace habilitado</strong></p>
 <ul>
-<li>Ele usa o comando <code>kubectl replace</code></li>
-<li>Substitui o recurso inteiro</li>
-<li>Deleta e recria o recurso do zero</li>
+<li class="">Ele usa o comando <code>kubectl replace</code></li>
+<li class="">Substitui o recurso inteiro</li>
+<li class="">Deleta e recria o recurso do zero</li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
 </li>
-<li>
+<li class="">
 <p><strong>Retry</strong>:</p>
 <ul>
-<li>
+<li class="">
 <p>Controla <strong>como o ArgoCD lida com falhas de sincronização</strong>:</p>
 <ul>
-<li>
+<li class="">
 <p><strong>Limit</strong></p>
 <ul>
-<li>Número máximo de tentativas antes de desistir</li>
+<li class="">Número máximo de tentativas antes de desistir</li>
 </ul>
 </li>
-<li>
+<li class="">
 <p><strong>Duration</strong></p>
 <ul>
-<li>Tempo base entre as tentativas</li>
+<li class="">Tempo base entre as tentativas</li>
 </ul>
 </li>
-<li>
+<li class="">
 <p><strong>Factor</strong></p>
 <ul>
-<li>Multiplicador exponencial para cada tentativa subsequente</li>
+<li class="">Multiplicador exponencial para cada tentativa subsequente</li>
 </ul>
 </li>
-<li>
+<li class="">
 <p><strong>Max Duration</strong></p>
 <ul>
-<li>Tempo máximo de espera entre tentativas</li>
+<li class="">Tempo máximo de espera entre tentativas</li>
 </ul>
 </li>
 </ul>
@@ -266,83 +267,83 @@
 </li>
 </ul>
 <hr>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="passo-3-aba-source">Passo 3: Aba Source<a href="#passo-3-aba-source" class="hash-link" aria-label="Link direto para Passo 3: Aba Source" title="Link direto para Passo 3: Aba Source" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="passo-3-aba-source">Passo 3: Aba Source<a href="#passo-3-aba-source" class="hash-link" aria-label="Link direto para Passo 3: Aba Source" title="Link direto para Passo 3: Aba Source" translate="no">​</a></h3>
 <p>Aqui definimos <strong>de onde o ArgoCD buscará os arquivos</strong></p>
 <ul>
-<li>
+<li class="">
 <p><strong>Repository URL</strong></p>
 <ul>
-<li>Repositório conectado via SSH ou HTTPS</li>
-<li>Exemplo SSH: <code>git@github.com:lotechdevops/apps-argocd.git</code></li>
-<li>Exemplo HTTPS: <code>https://github.com/lotechdevops/apps-argocd.git</code></li>
+<li class="">Repositório conectado via SSH ou HTTPS</li>
+<li class="">Exemplo SSH: <code>git@github.com:lotechdevops/apps-argocd.git</code></li>
+<li class="">Exemplo HTTPS: <code>https://github.com/lotechdevops/apps-argocd.git</code></li>
 </ul>
 </li>
-<li>
+<li class="">
 <p><strong>Revision</strong></p>
 <ul>
-<li>Branch que o ArgoCD irá monitorar</li>
+<li class="">Branch que o ArgoCD irá monitorar</li>
 </ul>
 </li>
-<li>
+<li class="">
 <p><strong>Path</strong></p>
 <ul>
-<li>Caminho dentro do repositório onde estão os manifestos</li>
+<li class="">Caminho dentro do repositório onde estão os manifestos</li>
 </ul>
 </li>
 </ul>
 <hr>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="passo-4-aba-destination">Passo 4: Aba Destination<a href="#passo-4-aba-destination" class="hash-link" aria-label="Link direto para Passo 4: Aba Destination" title="Link direto para Passo 4: Aba Destination" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="passo-4-aba-destination">Passo 4: Aba Destination<a href="#passo-4-aba-destination" class="hash-link" aria-label="Link direto para Passo 4: Aba Destination" title="Link direto para Passo 4: Aba Destination" translate="no">​</a></h3>
 <p>Aqui definimos o <strong>cluster e namespace de destino</strong>:</p>
 <ul>
-<li>
+<li class="">
 <p><strong>Cluster URL</strong></p>
 <ul>
-<li>URL do cluster Kubernetes</li>
-<li>Para o cluster local: <code>https://kubernetes.default.svc</code></li>
-<li>Para clusters externos: URL do API server</li>
+<li class="">URL do cluster Kubernetes</li>
+<li class="">Para o cluster local: <code>https://kubernetes.default.svc</code></li>
+<li class="">Para clusters externos: URL do API server</li>
 </ul>
 </li>
-<li>
+<li class="">
 <p><strong>Namespace</strong></p>
 <ul>
-<li>Namespace de destino</li>
+<li class="">Namespace de destino</li>
 </ul>
 </li>
 </ul>
 <hr>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="passo-5-aba-directory">Passo 5: Aba Directory<a href="#passo-5-aba-directory" class="hash-link" aria-label="Link direto para Passo 5: Aba Directory" title="Link direto para Passo 5: Aba Directory" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="passo-5-aba-directory">Passo 5: Aba Directory<a href="#passo-5-aba-directory" class="hash-link" aria-label="Link direto para Passo 5: Aba Directory" title="Link direto para Passo 5: Aba Directory" translate="no">​</a></h3>
 <p>Esta aba aparece quando você está usando YAMLs diretos (não Helm Charts)</p>
 <p>Essa aba define <strong>como o ArgoCD vai interpretar os arquivos YAML</strong> dentro do caminho especificado</p>
 <ul>
-<li>
+<li class="">
 <p><strong>Directory Recurse</strong></p>
 <ul>
-<li><strong>Função</strong>: Faz o ArgoCD percorrer <strong>recursivamente</strong> as subpastas dentro do diretório definido no Path.</li>
-<li><strong>Padrão</strong>: Desativado (procura apenas YAMLs na pasta raiz do path)</li>
-<li><strong>Quando usar</strong>: Quando seu repositório tem manifestos espalhados em subdiretórios</li>
+<li class=""><strong>Função</strong>: Faz o ArgoCD percorrer <strong>recursivamente</strong> as subpastas dentro do diretório definido no Path.</li>
+<li class=""><strong>Padrão</strong>: Desativado (procura apenas YAMLs na pasta raiz do path)</li>
+<li class=""><strong>Quando usar</strong>: Quando seu repositório tem manifestos espalhados em subdiretórios</li>
 </ul>
 </li>
-<li>
+<li class="">
 <p><strong>Top-Level Arguments</strong></p>
 <ul>
-<li><strong>Função</strong>: Permite inserir parâmetros personalizados que o ArgoCD repassa ao renderizador do diretório.</li>
-<li><strong>Quando usar</strong>:<!-- -->
+<li class=""><strong>Função</strong>: Permite inserir parâmetros personalizados que o ArgoCD repassa ao renderizador do diretório.</li>
+<li class=""><strong>Quando usar</strong>:<!-- -->
 <ul>
-<li>Se o diretório usa <strong>Kustomize</strong> (<code>kustomization.yaml</code>), você pode passar argumentos como <code>--load-restrictor=LoadRestrictionsNone</code></li>
-<li>Se for <strong>Helm</strong>, pode definir parâmetros extras de renderização</li>
-<li>Em YAML puro, raramente é necessário</li>
+<li class="">Se o diretório usa <strong>Kustomize</strong> (<code>kustomization.yaml</code>), você pode passar argumentos como <code>--load-restrictor=LoadRestrictionsNone</code></li>
+<li class="">Se for <strong>Helm</strong>, pode definir parâmetros extras de renderização</li>
+<li class="">Em YAML puro, raramente é necessário</li>
 </ul>
 </li>
 </ul>
 </li>
-<li>
+<li class="">
 <p><strong>External Variables</strong></p>
 <ul>
-<li><strong>Função</strong>: Permite definir <strong>variáveis externas</strong> que podem ser usadas dentro dos manifestos.</li>
-<li><strong>Quando usar</strong>:<!-- -->
+<li class=""><strong>Função</strong>: Permite definir <strong>variáveis externas</strong> que podem ser usadas dentro dos manifestos.</li>
+<li class=""><strong>Quando usar</strong>:<!-- -->
 <ul>
-<li>Quando seus YAMLs têm placeholders como <code>${DOMAIN}</code> ou <code>${IMAGE_TAG}</code></li>
-<li>Quando quer compartilhar uma Application entre ambientes, mudando apenas as variáveis.</li>
+<li class="">Quando seus YAMLs têm placeholders como <code>${DOMAIN}</code> ou <code>${IMAGE_TAG}</code></li>
+<li class="">Quando quer compartilhar uma Application entre ambientes, mudando apenas as variáveis.</li>
 </ul>
 </li>
 </ul>
@@ -350,85 +351,85 @@
 <p>O ArgoCD substituirá automaticamente essas variáveis no momento da renderização</p>
 </blockquote>
 </li>
-<li>
+<li class="">
 <p><strong>Include</strong></p>
 <ul>
-<li><strong>Função</strong>: Permite <strong>incluir apenas determinados arquivos ou pastas</strong> durante a renderização.</li>
-<li><strong>Quando usar</strong>:<!-- -->
+<li class=""><strong>Função</strong>: Permite <strong>incluir apenas determinados arquivos ou pastas</strong> durante a renderização.</li>
+<li class=""><strong>Quando usar</strong>:<!-- -->
 <ul>
-<li>Quando seu diretório contém arquivos que <strong>não devem ser aplicados</strong> no cluster.</li>
-<li>Quando quer limitar a sincronização apenas a certos manifestos</li>
+<li class="">Quando seu diretório contém arquivos que <strong>não devem ser aplicados</strong> no cluster.</li>
+<li class="">Quando quer limitar a sincronização apenas a certos manifestos</li>
 </ul>
 </li>
 </ul>
 </li>
-<li>
+<li class="">
 <p><strong>Exclude</strong></p>
 <ul>
-<li><strong>Função</strong>: Faz o oposto do Include - <strong>exlui arquivos ou subpastas</strong> da sincronização.</li>
-<li><strong>Quando usar:</strong>
+<li class=""><strong>Função</strong>: Faz o oposto do Include - <strong>exlui arquivos ou subpastas</strong> da sincronização.</li>
+<li class=""><strong>Quando usar:</strong>
 <ul>
-<li>Quando há arquivos YAML de exemplo, backup ou testes no mesmo diretório</li>
-<li>Quando deseja que o ArgoCD ignore manifestos que não fazem parte do deploy atual</li>
+<li class="">Quando há arquivos YAML de exemplo, backup ou testes no mesmo diretório</li>
+<li class="">Quando deseja que o ArgoCD ignore manifestos que não fazem parte do deploy atual</li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
 <hr>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="passo-6-criar-a-application">Passo 6: Criar a Application<a href="#passo-6-criar-a-application" class="hash-link" aria-label="Link direto para Passo 6: Criar a Application" title="Link direto para Passo 6: Criar a Application" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="passo-6-criar-a-application">Passo 6: Criar a Application<a href="#passo-6-criar-a-application" class="hash-link" aria-label="Link direto para Passo 6: Criar a Application" title="Link direto para Passo 6: Criar a Application" translate="no">​</a></h3>
 <p>Após preencher todos os campos, clique em <strong>CREATE</strong></p>
 <hr>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="comandos-úteis">Comandos úteis<a href="#comandos-úteis" class="hash-link" aria-label="Link direto para Comandos úteis" title="Link direto para Comandos úteis" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="comandos-úteis">Comandos úteis<a href="#comandos-úteis" class="hash-link" aria-label="Link direto para Comandos úteis" title="Link direto para Comandos úteis" translate="no">​</a></h2>
 <ul>
-<li>Ver status da application</li>
+<li class="">Ver status da application</li>
 </ul>
 <div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token plain">argocd app get prometheus</span><br></span></code></pre></div></div>
 <ul>
-<li>Forçar sincronização</li>
+<li class="">Forçar sincronização</li>
 </ul>
 <div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token plain">argocd app sync prometheus</span><br></span></code></pre></div></div>
 <ul>
-<li>Ver diferenças (Git vs Cluster)</li>
+<li class="">Ver diferenças (Git vs Cluster)</li>
 </ul>
 <div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token plain">argocd app diff prometheus</span><br></span></code></pre></div></div>
 <ul>
-<li>Ver histórico de sincronizações</li>
+<li class="">Ver histórico de sincronizações</li>
 </ul>
 <div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token plain">argocd app history prometheus</span><br></span></code></pre></div></div>
 <ul>
-<li>Fazer rollback</li>
+<li class="">Fazer rollback</li>
 </ul>
 <div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token plain">argocd app rollback prometheus &lt;revision-id&gt;</span><br></span></code></pre></div></div>
 <ul>
-<li>Ver logs da application</li>
+<li class="">Ver logs da application</li>
 </ul>
 <div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token plain">argocd app logs prometheus --follow</span><br></span></code></pre></div></div>
 <ul>
-<li>Ver parâmetros Helm usados</li>
+<li class="">Ver parâmetros Helm usados</li>
 </ul>
 <div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token plain">argocd app get prometheus --show-params</span><br></span></code></pre></div></div>
 <ul>
-<li>Pausar sincronização automática</li>
+<li class="">Pausar sincronização automática</li>
 </ul>
 <div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token plain">argocd app set prometheus --sync-policy none</span><br></span></code></pre></div></div>
 <ul>
-<li>Reativar sincronização automática</li>
+<li class="">Reativar sincronização automática</li>
 </ul>
 <div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token plain">argocd app set prometheus --sync-policy automated</span><br></span></code></pre></div></div>
 <ul>
-<li>Deletar application</li>
+<li class="">Deletar application</li>
 </ul>
 <div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token plain">argocd app delete prometheus</span><br></span></code></pre></div></div>
 <hr>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="próximos-passos">Próximos passos<a href="#próximos-passos" class="hash-link" aria-label="Link direto para Próximos passos" title="Link direto para Próximos passos" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="próximos-passos">Próximos passos<a href="#próximos-passos" class="hash-link" aria-label="Link direto para Próximos passos" title="Link direto para Próximos passos" translate="no">​</a></h2>
 <p>Agora que a Application está criada e funcionando:</p>
 <ol>
-<li><strong>Monitore</strong> a sincronização no ArgoCD UI</li>
-<li><strong>Teste</strong> fazer mudanças no Git e veja aplicar automaticamente</li>
-<li><strong>Configure alertas</strong> para problemas de sincronização</li>
-<li><strong>Crie mais Applications</strong> para outras ferramentas</li>
-<li><strong>Implemente App-of-Apps</strong> para gerenciar múltiplas Applications</li>
-</ol></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col"><a href="https://github.com/lotechdevops/lotechdevops.github.io/tree/main/docs/cicd/argocd/hands-on/4.criacao-applicacao.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Editar esta página</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Páginas de documento"><a class="pagination-nav__link pagination-nav__link--prev" href="/docs/cicd/argocd/hands-on/criacao-projeto"><div class="pagination-nav__sublabel">Anterior</div><div class="pagination-nav__label">3. Criação do Project</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/docs/cicd/argocd/hands-on/argocd-notifications"><div class="pagination-nav__sublabel">Próxima</div><div class="pagination-nav__label">5. Configurando Notificações</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#objetivo" class="table-of-contents__link toc-highlight">Objetivo</a></li><li><a href="#passo-1-preparar-o-namespace-de-destino" class="table-of-contents__link toc-highlight">Passo 1: Preparar o namespace de destino</a></li><li><a href="#passo-2-criar-o-arquivo-da-application" class="table-of-contents__link toc-highlight">Passo 2: Criar o arquivo da Application</a></li><li><a href="#passo-3-aplicar-a-application" class="table-of-contents__link toc-highlight">Passo 3: Aplicar a Application</a></li><li><a href="#passo-4-verificar-a-criação" class="table-of-contents__link toc-highlight">Passo 4: Verificar a criação</a></li><li><a href="#passo-5-acompanhar-a-sincronização" class="table-of-contents__link toc-highlight">Passo 5: Acompanhar a sincronização</a></li><li><a href="#entendendo-múltpilos-sources" class="table-of-contents__link toc-highlight">Entendendo múltpilos sources</a></li><li><a href="#estrutura-do-repositório" class="table-of-contents__link toc-highlight">Estrutura do repositório</a></li><li><a href="#alternativa-criação-via-argocd-ui" class="table-of-contents__link toc-highlight">Alternativa: Criação via ArgoCD UI</a><ul><li><a href="#passo-1-acessar-criação-da-application" class="table-of-contents__link toc-highlight">Passo 1: Acessar criação da Application</a></li><li><a href="#passo-2-aba-general" class="table-of-contents__link toc-highlight">Passo 2: Aba General</a></li><li><a href="#passo-3-aba-source" class="table-of-contents__link toc-highlight">Passo 3: Aba Source</a></li><li><a href="#passo-4-aba-destination" class="table-of-contents__link toc-highlight">Passo 4: Aba Destination</a></li><li><a href="#passo-5-aba-directory" class="table-of-contents__link toc-highlight">Passo 5: Aba Directory</a></li><li><a href="#passo-6-criar-a-application" class="table-of-contents__link toc-highlight">Passo 6: Criar a Application</a></li></ul></li><li><a href="#comandos-úteis" class="table-of-contents__link toc-highlight">Comandos úteis</a></li><li><a href="#próximos-passos" class="table-of-contents__link toc-highlight">Próximos passos</a></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"></div></footer></div>
+<li class=""><strong>Monitore</strong> a sincronização no ArgoCD UI</li>
+<li class=""><strong>Teste</strong> fazer mudanças no Git e veja aplicar automaticamente</li>
+<li class=""><strong>Configure alertas</strong> para problemas de sincronização</li>
+<li class=""><strong>Crie mais Applications</strong> para outras ferramentas</li>
+<li class=""><strong>Implemente App-of-Apps</strong> para gerenciar múltiplas Applications</li>
+</ol></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col noPrint_WFHX"><a href="https://github.com/lotechdevops/lotechdevops.github.io/tree/main/docs/cicd/argocd/hands-on/4.criacao-applicacao.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Editar esta página</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Páginas de documento"><a class="pagination-nav__link pagination-nav__link--prev" href="/docs/cicd/argocd/hands-on/criacao-projeto"><div class="pagination-nav__sublabel">Anterior</div><div class="pagination-nav__label">3. Criação do Project</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/docs/cicd/argocd/hands-on/argocd-notifications"><div class="pagination-nav__sublabel">Próxima</div><div class="pagination-nav__label">5. Configurando Notificações</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#objetivo" class="table-of-contents__link toc-highlight">Objetivo</a></li><li><a href="#passo-1-preparar-o-namespace-de-destino" class="table-of-contents__link toc-highlight">Passo 1: Preparar o namespace de destino</a></li><li><a href="#passo-2-criar-o-arquivo-da-application" class="table-of-contents__link toc-highlight">Passo 2: Criar o arquivo da Application</a></li><li><a href="#passo-3-aplicar-a-application" class="table-of-contents__link toc-highlight">Passo 3: Aplicar a Application</a></li><li><a href="#passo-4-verificar-a-criação" class="table-of-contents__link toc-highlight">Passo 4: Verificar a criação</a></li><li><a href="#passo-5-acompanhar-a-sincronização" class="table-of-contents__link toc-highlight">Passo 5: Acompanhar a sincronização</a></li><li><a href="#entendendo-múltpilos-sources" class="table-of-contents__link toc-highlight">Entendendo múltpilos sources</a></li><li><a href="#estrutura-do-repositório" class="table-of-contents__link toc-highlight">Estrutura do repositório</a></li><li><a href="#alternativa-criação-via-argocd-ui" class="table-of-contents__link toc-highlight">Alternativa: Criação via ArgoCD UI</a><ul><li><a href="#passo-1-acessar-criação-da-application" class="table-of-contents__link toc-highlight">Passo 1: Acessar criação da Application</a></li><li><a href="#passo-2-aba-general" class="table-of-contents__link toc-highlight">Passo 2: Aba General</a></li><li><a href="#passo-3-aba-source" class="table-of-contents__link toc-highlight">Passo 3: Aba Source</a></li><li><a href="#passo-4-aba-destination" class="table-of-contents__link toc-highlight">Passo 4: Aba Destination</a></li><li><a href="#passo-5-aba-directory" class="table-of-contents__link toc-highlight">Passo 5: Aba Directory</a></li><li><a href="#passo-6-criar-a-application" class="table-of-contents__link toc-highlight">Passo 6: Criar a Application</a></li></ul></li><li><a href="#comandos-úteis" class="table-of-contents__link toc-highlight">Comandos úteis</a></li><li><a href="#próximos-passos" class="table-of-contents__link toc-highlight">Próximos passos</a></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"></div></footer></div>
 </body>
 </html>
