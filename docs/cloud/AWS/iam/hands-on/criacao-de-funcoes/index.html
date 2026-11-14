@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
-<title data-rh="true">Criar IAM Role para Serviços da AWS | DevOpsR66</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://www.devopsr66.com/img/social-card.png"><meta data-rh="true" name="twitter:image" content="https://www.devopsr66.com/img/social-card.png"><meta data-rh="true" property="og:url" content="https://www.devopsr66.com/docs/cloud/AWS/iam/hands-on/criacao-de-funcoes"><meta data-rh="true" property="og:locale" content="pt_BR"><meta data-rh="true" name="docusaurus_locale" content="pt-BR"><meta data-rh="true" name="docsearch:language" content="pt-BR"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Criar IAM Role para Serviços da AWS | DevOpsR66"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://www.devopsr66.com/docs/cloud/AWS/iam/hands-on/criacao-de-funcoes"><link data-rh="true" rel="alternate" href="https://www.devopsr66.com/docs/cloud/AWS/iam/hands-on/criacao-de-funcoes" hreflang="pt-BR"><link data-rh="true" rel="alternate" href="https://www.devopsr66.com/docs/cloud/AWS/iam/hands-on/criacao-de-funcoes" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"AWS","item":"https://www.devopsr66.com/docs/category/aws"},{"@type":"ListItem","position":2,"name":"IAM - Identity and Access Management","item":"https://www.devopsr66.com/docs/category/iam---identity-and-access-management"},{"@type":"ListItem","position":3,"name":"Hands-on","item":"https://www.devopsr66.com/docs/category/hands-on"},{"@type":"ListItem","position":4,"name":"4. Criação e Aplicação de Funções (Roles)","item":"https://www.devopsr66.com/docs/cloud/AWS/iam/hands-on/criacao-de-funcoes"}]}</script><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="DevOpsR66 RSS Feed">
+<title data-rh="true">Criar IAM Role para Serviços da AWS | DevOpsR66</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://www.devopsr66.com/img/social-card.png"><meta data-rh="true" name="twitter:image" content="https://www.devopsr66.com/img/social-card.png"><meta data-rh="true" property="og:url" content="https://www.devopsr66.com/docs/cloud/AWS/iam/hands-on/criacao-de-funcoes"><meta data-rh="true" property="og:locale" content="pt_BR"><meta data-rh="true" name="docusaurus_locale" content="pt-BR"><meta data-rh="true" name="docsearch:language" content="pt-BR"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Criar IAM Role para Serviços da AWS | DevOpsR66"><meta data-rh="true" name="description" content="Lab de função (role) IAM para serviços: criar uma role para a EC2 acessar o S3 sem chaves de acesso."><meta data-rh="true" property="og:description" content="Lab de função (role) IAM para serviços: criar uma role para a EC2 acessar o S3 sem chaves de acesso."><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://www.devopsr66.com/docs/cloud/AWS/iam/hands-on/criacao-de-funcoes"><link data-rh="true" rel="alternate" href="https://www.devopsr66.com/docs/cloud/AWS/iam/hands-on/criacao-de-funcoes" hreflang="pt-BR"><link data-rh="true" rel="alternate" href="https://www.devopsr66.com/docs/cloud/AWS/iam/hands-on/criacao-de-funcoes" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"AWS","item":"https://www.devopsr66.com/docs/category/aws"},{"@type":"ListItem","position":2,"name":"IAM - Identity and Access Management","item":"https://www.devopsr66.com/docs/category/iam---identity-and-access-management"},{"@type":"ListItem","position":3,"name":"Hands-on","item":"https://www.devopsr66.com/docs/category/hands-on"},{"@type":"ListItem","position":4,"name":"4. Criação e Aplicação de Funções (Roles)","item":"https://www.devopsr66.com/docs/cloud/AWS/iam/hands-on/criacao-de-funcoes"}]}</script><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="DevOpsR66 RSS Feed">
 <link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="DevOpsR66 Atom Feed">
 
 
@@ -11,7 +11,7 @@
 
 
 <script src="https://static.cloudflareinsights.com/beacon.min.js" defer="defer" data-cf-beacon="{&quot;token&quot;: &quot;cdf6c45914ab475fb2b617f03b308721&quot;}"></script><link rel="stylesheet" href="/assets/css/styles.ce6f1228.css">
-<script src="/assets/js/runtime~main.597fd2ea.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.aa3e3469.js" defer="defer"></script>
 <script src="/assets/js/main.da4f0a9f.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -25,7 +25,7 @@
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="pré-requisitos">Pré-requisitos<a href="#pré-requisitos" class="hash-link" aria-label="Link direto para Pré-requisitos" title="Link direto para Pré-requisitos" translate="no">​</a></h2>
 <ul>
 <li class="">Conta AWS com permissões administrativas</li>
-<li class="">Pelo menos um serviço da AWS ativo (neste exemplo: EC2 e S3)</li>
+<li class="">Uma instância EC2 com a AWS CLI instalada (ex.: Amazon Linux) e um bucket S3 com alguns objetos</li>
 </ul>
 <hr>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="o-que-é-uma-iam-role-para-serviço">O que é uma IAM Role para serviço?<a href="#o-que-é-uma-iam-role-para-serviço" class="hash-link" aria-label="Link direto para O que é uma IAM Role para serviço?" title="Link direto para O que é uma IAM Role para serviço?" translate="no">​</a></h2>
@@ -37,16 +37,17 @@
 <li class="">ECS acessando Secrets Manager</li>
 </ul>
 <blockquote>
-<p>A Role precisa confiar no serviço que irá assumi-la (definido na <strong>trust policy</strong>).</p>
+<p>A Role precisa confiar no serviço que irá assumi-la (definido na <strong>trust policy</strong>).
+Para a EC2, o console cria automaticamente um <strong>perfil de instância</strong> (<em>instance profile</em>) com o mesmo nome da role. É ele que de fato é associado à instância.</p>
 </blockquote>
 <hr>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="etapas-para-criar-a-role-exemplo-ec2--s3">Etapas para Criar a Role (Exemplo: EC2 → S3)<a href="#etapas-para-criar-a-role-exemplo-ec2--s3" class="hash-link" aria-label="Link direto para Etapas para Criar a Role (Exemplo: EC2 → S3)" title="Link direto para Etapas para Criar a Role (Exemplo: EC2 → S3)" translate="no">​</a></h2>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="1-criar-a-iam-role">1. Criar a IAM Role<a href="#1-criar-a-iam-role" class="hash-link" aria-label="Link direto para 1. Criar a IAM Role" title="Link direto para 1. Criar a IAM Role" translate="no">​</a></h3>
 <ol>
 <li class="">Vá até <strong>IAM &gt; Funções</strong></li>
-<li class="">Clique em <strong>Criar perfil</strong></li>
+<li class="">Clique em <strong>Criar perfil</strong> (no console em português, o botão de criar função aparece assim)</li>
 <li class="">No campo <strong>Tipo de entidade confiável</strong>, selecione <strong><code>Serviço da AWS</code></strong></li>
-<li class="">No Campo <strong>Caso de uso</strong>, selecione <strong><code>EC2</code></strong></li>
+<li class="">No campo <strong>Caso de uso</strong>, selecione <strong><code>EC2</code></strong></li>
 <li class="">Clique em <strong>Próximo</strong></li>
 <li class="">Selecione a política que define o que o serviço poderá fazer:<!-- -->
 <ul>
@@ -61,7 +62,7 @@
 </li>
 <li class="">Clique em <strong>Criar perfil</strong></li>
 </ol>
-<p><img decoding="async" loading="lazy" alt="Criar Função (Role)" src="/assets/images/criar-role-ec2-s3-eb6e3bd0e568555cab0c4b078d2b7c0b.gif" width="1914" height="889" class="img_ev3q"></p>
+<video controls="" muted="" playsinline="" preload="metadata" width="100%"><source src="/assets/medias/criar-role-ec2-s3-f8484f2946f43c3a188fc0ef5d6201f2.webm" type="video/webm"></video>
 <hr>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="2-associar-a-role-ao-serviço-ec2-neste-exemplo">2. Associar a Role ao Serviço (EC2 neste exemplo)<a href="#2-associar-a-role-ao-serviço-ec2-neste-exemplo" class="hash-link" aria-label="Link direto para 2. Associar a Role ao Serviço (EC2 neste exemplo)" title="Link direto para 2. Associar a Role ao Serviço (EC2 neste exemplo)" translate="no">​</a></h3>
 <ol>
@@ -77,23 +78,30 @@
 <li class="">Selecione a <strong>função</strong> criada anteriormente.</li>
 <li class="">Clique em <strong>Atualizar função do IAM</strong></li>
 </ol>
+<video controls="" muted="" playsinline="" preload="metadata" width="100%"><source src="/assets/medias/associando-role-instancia-007b1cf2f76e6e3271d67c90a319e6be.webm" type="video/webm"></video>
 <hr>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="3-validar-acesso-ao-s3-pela-ec2">3. Validar Acesso ao S3 pela EC2<a href="#3-validar-acesso-ao-s3-pela-ec2" class="hash-link" aria-label="Link direto para 3. Validar Acesso ao S3 pela EC2" title="Link direto para 3. Validar Acesso ao S3 pela EC2" translate="no">​</a></h3>
 <ol>
 <li class="">Conecte na instância EC2</li>
 <li class="">Execute o seguinte comando:</li>
 </ol>
-<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token plain">aws s3 ls s3://imagens-miniaturas --region us-east-1</span><br></span></code></pre></div></div>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token plain">aws s3 ls s3://imagens-miniaturas-818241363147-us-east-1-an --region us-east-1</span><br></span></code></pre></div></div>
 <blockquote>
 <p>Se os objetos do bucket forem listados, a role está funcionando corretamente.</p>
 </blockquote>
-<p><img decoding="async" loading="lazy" alt="Teste da Função no EC2 -&amp;gt; Bucket S3" src="/assets/images/teste-ec2-bucket-s3-a2723eeadf9f5e7e93194916c3245ed7.gif" width="1914" height="889" class="img_ev3q"></p>
+<p>Para confirmar que a instância usa a role (e não chaves de acesso), rode:</p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token plain">aws sts get-caller-identity</span><br></span></code></pre></div></div>
+<p>O retorno mostra um ARN do tipo <code>assumed-role/EC2S3ReadOnlyRole/i-xxxxxxxx</code>.</p>
+<blockquote>
+<p>Troque <code>imagens-miniaturas-818241363147-us-east-1-an</code> pelo nome do <strong>seu</strong> bucket (nomes de bucket são únicos globalmente).</p>
+</blockquote>
 <hr>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="boas-práticas">Boas Práticas<a href="#boas-práticas" class="hash-link" aria-label="Link direto para Boas Práticas" title="Link direto para Boas Práticas" translate="no">​</a></h2>
 <ul>
 <li class="">Nomeie suas roles por serviço e propósito (<code>LambdaCloudWatchLogsRole</code>)</li>
 <li class="">Sempre utilize o menor conjunto de permissões necessário</li>
 <li class="">Use tags para facilitar auditoria e rastreamento</li>
+<li class="">Prefira roles a chaves de acesso fixas dentro de instâncias</li>
 <li class="">Valide as permissões com o <strong>IAM Access Analyzer</strong></li>
 </ul>
 <hr>

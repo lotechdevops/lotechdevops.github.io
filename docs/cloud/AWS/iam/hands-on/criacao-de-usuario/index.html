@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
-<title data-rh="true">Criação de Usuário | DevOpsR66</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://www.devopsr66.com/img/social-card.png"><meta data-rh="true" name="twitter:image" content="https://www.devopsr66.com/img/social-card.png"><meta data-rh="true" property="og:url" content="https://www.devopsr66.com/docs/cloud/AWS/iam/hands-on/criacao-de-usuario"><meta data-rh="true" property="og:locale" content="pt_BR"><meta data-rh="true" name="docusaurus_locale" content="pt-BR"><meta data-rh="true" name="docsearch:language" content="pt-BR"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Criação de Usuário | DevOpsR66"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://www.devopsr66.com/docs/cloud/AWS/iam/hands-on/criacao-de-usuario"><link data-rh="true" rel="alternate" href="https://www.devopsr66.com/docs/cloud/AWS/iam/hands-on/criacao-de-usuario" hreflang="pt-BR"><link data-rh="true" rel="alternate" href="https://www.devopsr66.com/docs/cloud/AWS/iam/hands-on/criacao-de-usuario" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"AWS","item":"https://www.devopsr66.com/docs/category/aws"},{"@type":"ListItem","position":2,"name":"IAM - Identity and Access Management","item":"https://www.devopsr66.com/docs/category/iam---identity-and-access-management"},{"@type":"ListItem","position":3,"name":"Hands-on","item":"https://www.devopsr66.com/docs/category/hands-on"},{"@type":"ListItem","position":4,"name":"1. Criação de Usuário","item":"https://www.devopsr66.com/docs/cloud/AWS/iam/hands-on/criacao-de-usuario"}]}</script><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="DevOpsR66 RSS Feed">
+<title data-rh="true">Criação de Usuário | DevOpsR66</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://www.devopsr66.com/img/social-card.png"><meta data-rh="true" name="twitter:image" content="https://www.devopsr66.com/img/social-card.png"><meta data-rh="true" property="og:url" content="https://www.devopsr66.com/docs/cloud/AWS/iam/hands-on/criacao-de-usuario"><meta data-rh="true" property="og:locale" content="pt_BR"><meta data-rh="true" name="docusaurus_locale" content="pt-BR"><meta data-rh="true" name="docsearch:language" content="pt-BR"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Criação de Usuário | DevOpsR66"><meta data-rh="true" name="description" content="Passo a passo para criar um usuário IAM no console da AWS, definir permissões, testar o login e ativar MFA."><meta data-rh="true" property="og:description" content="Passo a passo para criar um usuário IAM no console da AWS, definir permissões, testar o login e ativar MFA."><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://www.devopsr66.com/docs/cloud/AWS/iam/hands-on/criacao-de-usuario"><link data-rh="true" rel="alternate" href="https://www.devopsr66.com/docs/cloud/AWS/iam/hands-on/criacao-de-usuario" hreflang="pt-BR"><link data-rh="true" rel="alternate" href="https://www.devopsr66.com/docs/cloud/AWS/iam/hands-on/criacao-de-usuario" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"AWS","item":"https://www.devopsr66.com/docs/category/aws"},{"@type":"ListItem","position":2,"name":"IAM - Identity and Access Management","item":"https://www.devopsr66.com/docs/category/iam---identity-and-access-management"},{"@type":"ListItem","position":3,"name":"Hands-on","item":"https://www.devopsr66.com/docs/category/hands-on"},{"@type":"ListItem","position":4,"name":"1. Criação de Usuário","item":"https://www.devopsr66.com/docs/cloud/AWS/iam/hands-on/criacao-de-usuario"}]}</script><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="DevOpsR66 RSS Feed">
 <link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="DevOpsR66 Atom Feed">
 
 
@@ -11,7 +11,7 @@
 
 
 <script src="https://static.cloudflareinsights.com/beacon.min.js" defer="defer" data-cf-beacon="{&quot;token&quot;: &quot;cdf6c45914ab475fb2b617f03b308721&quot;}"></script><link rel="stylesheet" href="/assets/css/styles.ce6f1228.css">
-<script src="/assets/js/runtime~main.597fd2ea.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.aa3e3469.js" defer="defer"></script>
 <script src="/assets/js/main.da4f0a9f.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -25,34 +25,35 @@
 <ul>
 <li class="">Conta AWS ativa</li>
 <li class="">Acesso ao IAM com permissões administrativas</li>
+<li class="">Aplicativo autenticador no celular (para a etapa de MFA)</li>
 </ul>
 <hr>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="etapas">Etapas<a href="#etapas" class="hash-link" aria-label="Link direto para Etapas" title="Link direto para Etapas" translate="no">​</a></h2>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="1-acessar-o-console-iam">1. Acessar o Console IAM<a href="#1-acessar-o-console-iam" class="hash-link" aria-label="Link direto para 1. Acessar o Console IAM" title="Link direto para 1. Acessar o Console IAM" translate="no">​</a></h3>
 <ol>
-<li class="">Faça login no [Console AWS] (<a href="https://console.aws.amazon.com/" target="_blank" rel="noopener noreferrer" class="">https://console.aws.amazon.com/</a>)</li>
-<li class="">Pesquise pelo serviço <strong>IAM</strong> no meu de busca e clique sobre o serviço.</li>
+<li class="">Faça login no <a href="https://console.aws.amazon.com/" target="_blank" rel="noopener noreferrer" class="">Console AWS</a></li>
+<li class="">Pesquise pelo serviço <strong>IAM</strong> no menu de busca e clique sobre o serviço.</li>
 </ol>
-<p><img decoding="async" loading="lazy" alt="Busca serviço IAM console" src="/assets/images/busca-iam-673030ef69ba898da2e01c0d898d8b18.gif" width="1914" height="906" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="Busca serviço IAM console" src="/assets/images/busca-iam-e97c6e4dc020643c49eaf19963a441ff.png" width="1230" height="786" class="img_ev3q"></p>
 <hr>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="2-criar-novo-usuário">2. Criar Novo Usuário<a href="#2-criar-novo-usuário" class="hash-link" aria-label="Link direto para 2. Criar Novo Usuário" title="Link direto para 2. Criar Novo Usuário" translate="no">​</a></h3>
 <ol>
-<li class="">Clique em <strong>Usuários</strong> no menu lateral a esquerda.</li>
-<li class="">Clique em <strong>Criar usuario</strong></li>
+<li class="">Clique em <strong>Usuários do IAM</strong> no menu lateral a esquerda.</li>
+<li class="">Clique em <strong>Criar usuário</strong></li>
 <li class="">Defina o <strong>nome do usuário</strong></li>
 <li class="">Marque as opções:<!-- -->
 <ul>
 <li class="">Fornecer acesso para os usuários ao Console de Gerenciamento da AWS</li>
-<li class="">Quero criar um usuário do IAM</li>
 </ul>
 </li>
-<li class="">Gere uma senha automaticamente ou crie um senha personalizada<!-- -->
+<li class="">Gere uma senha automaticamente ou crie uma senha personalizada<!-- -->
 <ul>
 <li class="">Marque a opção &quot;Usuários devem criar uma nova senha na próxima sessão&quot; (recomendado)</li>
 </ul>
 </li>
+<li class="">Clique em <strong>Próximo</strong> para configurar as permissões do usuário.</li>
 </ol>
-<p><img decoding="async" loading="lazy" alt="Criar usuário IAM" src="/assets/images/criacao-usuario-3cc69e7902b1b640268faa79b862dc02.gif" width="1943" height="914" class="img_ev3q"></p>
+<video controls="" muted="" playsinline="" preload="metadata" width="100%"><source src="/assets/medias/criando-usuario-925df8bda81164335d3af4581e40b18f.webm" type="video/webm"></video>
 <hr>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="3-definir-permissões">3. Definir permissões<a href="#3-definir-permissões" class="hash-link" aria-label="Link direto para 3. Definir permissões" title="Link direto para 3. Definir permissões" translate="no">​</a></h3>
 <blockquote>
@@ -64,9 +65,9 @@
 </ul>
 </blockquote>
 <ol>
-<li class="">Na tela de <strong>Permissões</strong>, selecione a opção <strong>Anexar políticas diretamente</strong></li>
+<li class="">Na tela de <strong>Definir Permissões</strong>, selecione a opção <strong>Anexar políticas diretamente</strong></li>
 <li class="">Selecione a política desejada, no nosso exemplo iremos selecionar a política <strong>PowerUserAccess</strong></li>
-<li class="">Revise as configurações e Adicione tags como (Opcional):<!-- -->
+<li class="">Revise as configurações e, se quiser, adicione tags (opcional):<!-- -->
 <ul>
 <li class=""><code>key: Department, value: DevOps</code></li>
 </ul>
@@ -75,51 +76,24 @@
 <li class="">Anote ou baixe as credenciais temporárias (URL de login + nome do usuário + senha inicial).</li>
 </ol>
 <blockquote>
-<p>⚠️ Essa senha só aparece uma vez.</p>
+<p><strong>Atenção:</strong> essa senha só aparece uma vez.</p>
 </blockquote>
-<p><img decoding="async" loading="lazy" alt="Configurar permissões usuário IAM" src="/assets/images/criacao-usuario-permissoes-dd1eab05284eb5c3618d209a92a24bc8.gif" width="1914" height="859" class="img_ev3q"></p>
+<video controls="" muted="" playsinline="" preload="metadata" width="100%"><source src="/assets/medias/permissao-usuario-cc9a0e79cf931558f21f66de9a49c3ff.webm" type="video/webm"></video>
 <hr>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="4-testar-login">4. Testar Login<a href="#4-testar-login" class="hash-link" aria-label="Link direto para 4. Testar Login" title="Link direto para 4. Testar Login" translate="no">​</a></h3>
 <ol>
 <li class="">Acesse o link de login personalizado.<!-- -->
 <ul>
-<li class="">No nosso exemplo acessaremos: <code>https://lotechawstreinamento.signin.aws.amazon.com/console</code></li>
+<li class="">No nosso exemplo acessaremos: <code>https://devopsr66.signin.aws.amazon.com/console</code></li>
 </ul>
 </li>
 <li class="">Faça login com o usuário criado<!-- -->
 <ul>
-<li class="">No nosso exemplo criamos o usuário: <code>Lorenzo</code></li>
+<li class="">No nosso exemplo criamos o usuário: <code>Joao</code></li>
 </ul>
 </li>
 <li class="">Insira a senha inicial e redefina.</li>
 </ol>
-<p><img decoding="async" loading="lazy" alt="Teste Login Console" src="/assets/images/teste-login-c29426a4447cc1f96676bedc1a466ea3.gif" width="1914" height="983" class="img_ev3q"></p>
-<hr>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="5-configurar-mfa">5. Configurar MFA<a href="#5-configurar-mfa" class="hash-link" aria-label="Link direto para 5. Configurar MFA" title="Link direto para 5. Configurar MFA" translate="no">​</a></h3>
-<ol>
-<li class="">Vá em <strong>IAM &gt; Usuários &gt; [Usuario Criado]</strong></li>
-<li class="">Acesse a aba <strong>Credenciais de segurança</strong></li>
-<li class="">Clique em <strong>Atribuir dispositivo com MFA</strong></li>
-<li class="">Escolha uma das três opções disponíveis:<!-- -->
-<ul>
-<li class=""><strong>Chave de acesso ou chave de segurança</strong></li>
-<li class=""><strong>Aplicação autenticadora</strong> (Ex de uso: <strong>Google Authenticator</strong>, <strong>Microsoft Authenticator</strong>)</li>
-<li class=""><strong>Token TOTP de hardware</strong></li>
-</ul>
-</li>
-</ol>
-<blockquote>
-<p>No nosso exemplo de configuração, iremos utilizar a opção <strong><code>Aplicação autenticadora</code></strong></p>
-</blockquote>
-<ol start="6">
-<li class="">Insere um nome do dispositivo. (Ex: <strong><code>awstreinamento_console</code></strong>)</li>
-<li class="">Clique em <strong>Próximo</strong></li>
-<li class="">Clique em <strong>Mostrar código QR</strong></li>
-<li class="">Abre o app no celular e lê o QRcode gerado.</li>
-<li class="">Insere os códigos gerados no app nos campos <strong><code>Código MFA 1 e Código MFA 2</code></strong></li>
-<li class="">Clique em <strong>Adicionar MFA</strong></li>
-</ol>
-<p><img decoding="async" loading="lazy" alt="Configurar MFA" src="/assets/images/configurar-mfa-dc29e82f60697b2ec9930e96e93c5a7c.gif" width="1914" height="889" class="img_ev3q"></p>
-<hr></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col noPrint_WFHX"><a href="https://github.com/lotechdevops/lotechdevops.github.io/tree/main/docs/cloud/AWS/iam/hands-on/1.criacao-usuario.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Editar esta página</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Páginas de documento"><a class="pagination-nav__link pagination-nav__link--prev" href="/docs/category/hands-on"><div class="pagination-nav__sublabel">Anterior</div><div class="pagination-nav__label">Hands-on</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/docs/cloud/AWS/iam/hands-on/criacao-de-grupo"><div class="pagination-nav__sublabel">Próxima</div><div class="pagination-nav__label">2. Criação de Grupo</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#objetivo" class="table-of-contents__link toc-highlight">Objetivo</a></li><li><a href="#pré-requisitos" class="table-of-contents__link toc-highlight">Pré-requisitos</a></li><li><a href="#etapas" class="table-of-contents__link toc-highlight">Etapas</a><ul><li><a href="#1-acessar-o-console-iam" class="table-of-contents__link toc-highlight">1. Acessar o Console IAM</a></li><li><a href="#2-criar-novo-usuário" class="table-of-contents__link toc-highlight">2. Criar Novo Usuário</a></li><li><a href="#3-definir-permissões" class="table-of-contents__link toc-highlight">3. Definir permissões</a></li><li><a href="#4-testar-login" class="table-of-contents__link toc-highlight">4. Testar Login</a></li><li><a href="#5-configurar-mfa" class="table-of-contents__link toc-highlight">5. Configurar MFA</a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"></div></footer></div>
+<video controls="" muted="" playsinline="" preload="metadata" width="100%"><source src="/assets/medias/teste-login-ee781d5905fb1615ab04f266633307e5.webm" type="video/webm"></video></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col noPrint_WFHX"><a href="https://github.com/lotechdevops/lotechdevops.github.io/tree/main/docs/cloud/AWS/iam/hands-on/1.criacao-usuario.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Editar esta página</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Páginas de documento"><a class="pagination-nav__link pagination-nav__link--prev" href="/docs/category/hands-on"><div class="pagination-nav__sublabel">Anterior</div><div class="pagination-nav__label">Hands-on</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/docs/cloud/AWS/iam/hands-on/criacao-de-grupo"><div class="pagination-nav__sublabel">Próxima</div><div class="pagination-nav__label">2. Criação de Grupo</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#objetivo" class="table-of-contents__link toc-highlight">Objetivo</a></li><li><a href="#pré-requisitos" class="table-of-contents__link toc-highlight">Pré-requisitos</a></li><li><a href="#etapas" class="table-of-contents__link toc-highlight">Etapas</a><ul><li><a href="#1-acessar-o-console-iam" class="table-of-contents__link toc-highlight">1. Acessar o Console IAM</a></li><li><a href="#2-criar-novo-usuário" class="table-of-contents__link toc-highlight">2. Criar Novo Usuário</a></li><li><a href="#3-definir-permissões" class="table-of-contents__link toc-highlight">3. Definir permissões</a></li><li><a href="#4-testar-login" class="table-of-contents__link toc-highlight">4. Testar Login</a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"></div></footer></div>
 </body>
 </html>

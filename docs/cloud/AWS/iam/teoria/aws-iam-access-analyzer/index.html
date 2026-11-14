@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
-<title data-rh="true">AWS IAM Access Analyzer | DevOpsR66</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://www.devopsr66.com/img/social-card.png"><meta data-rh="true" name="twitter:image" content="https://www.devopsr66.com/img/social-card.png"><meta data-rh="true" property="og:url" content="https://www.devopsr66.com/docs/cloud/AWS/iam/teoria/aws-iam-access-analyzer"><meta data-rh="true" property="og:locale" content="pt_BR"><meta data-rh="true" name="docusaurus_locale" content="pt-BR"><meta data-rh="true" name="docsearch:language" content="pt-BR"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="AWS IAM Access Analyzer | DevOpsR66"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://www.devopsr66.com/docs/cloud/AWS/iam/teoria/aws-iam-access-analyzer"><link data-rh="true" rel="alternate" href="https://www.devopsr66.com/docs/cloud/AWS/iam/teoria/aws-iam-access-analyzer" hreflang="pt-BR"><link data-rh="true" rel="alternate" href="https://www.devopsr66.com/docs/cloud/AWS/iam/teoria/aws-iam-access-analyzer" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"AWS","item":"https://www.devopsr66.com/docs/category/aws"},{"@type":"ListItem","position":2,"name":"IAM - Identity and Access Management","item":"https://www.devopsr66.com/docs/category/iam---identity-and-access-management"},{"@type":"ListItem","position":3,"name":"Conceitos","item":"https://www.devopsr66.com/docs/category/conceitos"},{"@type":"ListItem","position":4,"name":"4. AWS IAM Access Analyzer","item":"https://www.devopsr66.com/docs/cloud/AWS/iam/teoria/aws-iam-access-analyzer"}]}</script><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="DevOpsR66 RSS Feed">
+<title data-rh="true">AWS IAM Access Analyzer | DevOpsR66</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://www.devopsr66.com/img/social-card.png"><meta data-rh="true" name="twitter:image" content="https://www.devopsr66.com/img/social-card.png"><meta data-rh="true" property="og:url" content="https://www.devopsr66.com/docs/cloud/AWS/iam/teoria/aws-iam-access-analyzer"><meta data-rh="true" property="og:locale" content="pt_BR"><meta data-rh="true" name="docusaurus_locale" content="pt-BR"><meta data-rh="true" name="docsearch:language" content="pt-BR"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="AWS IAM Access Analyzer | DevOpsR66"><meta data-rh="true" name="description" content="IAM Access Analyzer: acesso externo, interno e não utilizado, prazos de análise e cobrança."><meta data-rh="true" property="og:description" content="IAM Access Analyzer: acesso externo, interno e não utilizado, prazos de análise e cobrança."><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://www.devopsr66.com/docs/cloud/AWS/iam/teoria/aws-iam-access-analyzer"><link data-rh="true" rel="alternate" href="https://www.devopsr66.com/docs/cloud/AWS/iam/teoria/aws-iam-access-analyzer" hreflang="pt-BR"><link data-rh="true" rel="alternate" href="https://www.devopsr66.com/docs/cloud/AWS/iam/teoria/aws-iam-access-analyzer" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"AWS","item":"https://www.devopsr66.com/docs/category/aws"},{"@type":"ListItem","position":2,"name":"IAM - Identity and Access Management","item":"https://www.devopsr66.com/docs/category/iam---identity-and-access-management"},{"@type":"ListItem","position":3,"name":"Conceitos","item":"https://www.devopsr66.com/docs/category/conceitos"},{"@type":"ListItem","position":4,"name":"4. AWS IAM Access Analyzer","item":"https://www.devopsr66.com/docs/cloud/AWS/iam/teoria/aws-iam-access-analyzer"}]}</script><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="DevOpsR66 RSS Feed">
 <link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="DevOpsR66 Atom Feed">
 
 
@@ -11,7 +11,7 @@
 
 
 <script src="https://static.cloudflareinsights.com/beacon.min.js" defer="defer" data-cf-beacon="{&quot;token&quot;: &quot;cdf6c45914ab475fb2b617f03b308721&quot;}"></script><link rel="stylesheet" href="/assets/css/styles.ce6f1228.css">
-<script src="/assets/js/runtime~main.597fd2ea.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.aa3e3469.js" defer="defer"></script>
 <script src="/assets/js/main.da4f0a9f.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -37,7 +37,7 @@
 <li class="">Usa o conceito de <strong>Zona de Confiança</strong> (sua conta/org AWS).</li>
 </ul>
 <blockquote>
-<p>Reanálise ocorre automaticamente após alterações ou a cada 30 minutos.</p>
+<p>Após alterar uma política, a reanálise leva cerca de 30 minutos; além disso há uma varredura periódica em até 24 horas.</p>
 </blockquote>
 <hr>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="2-verificação-de-acesso-interno">2. Verificação de Acesso Interno<a href="#2-verificação-de-acesso-interno" class="hash-link" aria-label="Link direto para 2. Verificação de Acesso Interno" title="Link direto para 2. Verificação de Acesso Interno" translate="no">​</a></h3>
@@ -99,15 +99,15 @@
 <hr>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="tempo-de-análise">Tempo de Análise<a href="#tempo-de-análise" class="hash-link" aria-label="Link direto para Tempo de Análise" title="Link direto para Tempo de Análise" translate="no">​</a></h2>
 <ul>
-<li class="">Políticas são verificadas em até <strong>30 minutos</strong></li>
+<li class="">Políticas novas ou alteradas são analisadas em cerca de <strong>30 minutos</strong></li>
 <li class="">Recursos multirregionais (como S3 access point) podem levar <strong>até 6 horas</strong></li>
-<li class="">Em casos raros, pode levar até <strong>24 horas</strong></li>
+<li class="">Quando a mudança não dispara reanálise (ex.: alterações em RCPs), vale a próxima varredura periódica, em até <strong>24 horas</strong></li>
 </ul>
 <hr>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="modelo-de-cobrança">Modelo de Cobrança<a href="#modelo-de-cobrança" class="hash-link" aria-label="Link direto para Modelo de Cobrança" title="Link direto para Modelo de Cobrança" translate="no">​</a></h2>
-<table><thead><tr><th>Tipo de Análise</th><th>Modelo de Cobrança</th></tr></thead><tbody><tr><td>Acesso não utilizado</td><td>Por número de funções e usuários analisados</td></tr><tr><td>Acesso interno</td><td>Por número de recursos monitorados</td></tr><tr><td>Verificações personalizadas</td><td>Por número de requisições de API</td></tr></tbody></table>
+<table><thead><tr><th>Tipo de Análise</th><th>Modelo de Cobrança</th></tr></thead><tbody><tr><td>Acesso externo</td><td>Sem custo adicional</td></tr><tr><td>Acesso não utilizado</td><td>Por número de funções e usuários analisados</td></tr><tr><td>Acesso interno</td><td>Por número de recursos monitorados</td></tr><tr><td>Verificações personalizadas</td><td>Por número de requisições de API</td></tr></tbody></table>
 <blockquote>
-<p>Perfis vinculados a serviços <strong>não são analisados</strong> quanto a uso.</p>
+<p>Funções vinculadas a serviço (service-linked roles) <strong>não são analisadas</strong> quanto a acesso não utilizado.</p>
 </blockquote>
 <hr>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="boas-práticas-com-access-analyzer">Boas Práticas com Access Analyzer<a href="#boas-práticas-com-access-analyzer" class="hash-link" aria-label="Link direto para Boas Práticas com Access Analyzer" title="Link direto para Boas Práticas com Access Analyzer" translate="no">​</a></h2>

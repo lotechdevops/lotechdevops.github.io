@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
-<title data-rh="true">Aplicação de Políticas IAM | DevOpsR66</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://www.devopsr66.com/img/social-card.png"><meta data-rh="true" name="twitter:image" content="https://www.devopsr66.com/img/social-card.png"><meta data-rh="true" property="og:url" content="https://www.devopsr66.com/docs/cloud/AWS/iam/hands-on/aplicacao-de-politicas"><meta data-rh="true" property="og:locale" content="pt_BR"><meta data-rh="true" name="docusaurus_locale" content="pt-BR"><meta data-rh="true" name="docsearch:language" content="pt-BR"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Aplicação de Políticas IAM | DevOpsR66"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://www.devopsr66.com/docs/cloud/AWS/iam/hands-on/aplicacao-de-politicas"><link data-rh="true" rel="alternate" href="https://www.devopsr66.com/docs/cloud/AWS/iam/hands-on/aplicacao-de-politicas" hreflang="pt-BR"><link data-rh="true" rel="alternate" href="https://www.devopsr66.com/docs/cloud/AWS/iam/hands-on/aplicacao-de-politicas" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"AWS","item":"https://www.devopsr66.com/docs/category/aws"},{"@type":"ListItem","position":2,"name":"IAM - Identity and Access Management","item":"https://www.devopsr66.com/docs/category/iam---identity-and-access-management"},{"@type":"ListItem","position":3,"name":"Hands-on","item":"https://www.devopsr66.com/docs/category/hands-on"},{"@type":"ListItem","position":4,"name":"3. Criação e Aplicação de Políticas","item":"https://www.devopsr66.com/docs/cloud/AWS/iam/hands-on/aplicacao-de-politicas"}]}</script><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="DevOpsR66 RSS Feed">
+<title data-rh="true">Aplicação de Políticas IAM | DevOpsR66</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://www.devopsr66.com/img/social-card.png"><meta data-rh="true" name="twitter:image" content="https://www.devopsr66.com/img/social-card.png"><meta data-rh="true" property="og:url" content="https://www.devopsr66.com/docs/cloud/AWS/iam/hands-on/aplicacao-de-politicas"><meta data-rh="true" property="og:locale" content="pt_BR"><meta data-rh="true" name="docusaurus_locale" content="pt-BR"><meta data-rh="true" name="docsearch:language" content="pt-BR"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Aplicação de Políticas IAM | DevOpsR66"><meta data-rh="true" name="description" content="Lab de políticas IAM: anexar política gerenciada da AWS, criar política personalizada e política inline."><meta data-rh="true" property="og:description" content="Lab de políticas IAM: anexar política gerenciada da AWS, criar política personalizada e política inline."><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://www.devopsr66.com/docs/cloud/AWS/iam/hands-on/aplicacao-de-politicas"><link data-rh="true" rel="alternate" href="https://www.devopsr66.com/docs/cloud/AWS/iam/hands-on/aplicacao-de-politicas" hreflang="pt-BR"><link data-rh="true" rel="alternate" href="https://www.devopsr66.com/docs/cloud/AWS/iam/hands-on/aplicacao-de-politicas" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"AWS","item":"https://www.devopsr66.com/docs/category/aws"},{"@type":"ListItem","position":2,"name":"IAM - Identity and Access Management","item":"https://www.devopsr66.com/docs/category/iam---identity-and-access-management"},{"@type":"ListItem","position":3,"name":"Hands-on","item":"https://www.devopsr66.com/docs/category/hands-on"},{"@type":"ListItem","position":4,"name":"3. Criação e Aplicação de Políticas","item":"https://www.devopsr66.com/docs/cloud/AWS/iam/hands-on/aplicacao-de-politicas"}]}</script><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="DevOpsR66 RSS Feed">
 <link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="DevOpsR66 Atom Feed">
 
 
@@ -11,7 +11,7 @@
 
 
 <script src="https://static.cloudflareinsights.com/beacon.min.js" defer="defer" data-cf-beacon="{&quot;token&quot;: &quot;cdf6c45914ab475fb2b617f03b308721&quot;}"></script><link rel="stylesheet" href="/assets/css/styles.ce6f1228.css">
-<script src="/assets/js/runtime~main.597fd2ea.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.aa3e3469.js" defer="defer"></script>
 <script src="/assets/js/main.da4f0a9f.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -24,13 +24,13 @@
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="pré-requisitos">Pré-requisitos<a href="#pré-requisitos" class="hash-link" aria-label="Link direto para Pré-requisitos" title="Link direto para Pré-requisitos" translate="no">​</a></h2>
 <ul>
 <li class="">Conta AWS com acesso administrativo.</li>
-<li class="">Usuário e grupo previamente criados.</li>
+<li class="">Usuário e grupo criados nos labs anteriores.</li>
 </ul>
 <hr>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="etapas">Etapas<a href="#etapas" class="hash-link" aria-label="Link direto para Etapas" title="Link direto para Etapas" translate="no">​</a></h2>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="1-acessar-o-console-do-iam">1. Acessar o Console do IAM<a href="#1-acessar-o-console-do-iam" class="hash-link" aria-label="Link direto para 1. Acessar o Console do IAM" title="Link direto para 1. Acessar o Console do IAM" translate="no">​</a></h3>
 <ol>
-<li class="">Acesse o <a href="https://console.aws.amazon.com/" target="_blank" rel="noopener noreferrer" class="">Console da AWS</a></li>
+<li class="">Acesse o <a href="https://console.aws.amazon.com/" target="_blank" rel="noopener noreferrer" class="">Console da AWS</a> e abra o serviço <strong>IAM</strong></li>
 </ol>
 <hr>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="2-aplicar-política-gerenciada-da-aws">2. Aplicar Política Gerenciada da AWS<a href="#2-aplicar-política-gerenciada-da-aws" class="hash-link" aria-label="Link direto para 2. Aplicar Política Gerenciada da AWS" title="Link direto para 2. Aplicar Política Gerenciada da AWS" translate="no">​</a></h3>
@@ -41,7 +41,7 @@
 <li class="">No nosso exemplo iremos aplicar a política no grupo <strong><code>DevOps-EC2FullAccess</code></strong> criado anteriormente.</li>
 </ul>
 </li>
-<li class="">Vá até a aba <strong><code>Permissões</code></strong> e</li>
+<li class="">Vá até a aba <strong><code>Permissões</code></strong></li>
 <li class="">Clique na opção <strong><code>Adicionar permissões</code></strong> e depois clique em <strong><code>Anexar políticas</code></strong></li>
 <li class="">Use o campo de busca e selecione, por exemplo:<!-- -->
 <ul>
@@ -50,9 +50,12 @@
 </li>
 <li class="">Clique em <strong><code>Anexar políticas</code></strong></li>
 </ol>
-<p><img decoding="async" loading="lazy" alt="Aplicar política gerenciada da AWS" src="/assets/images/anexar-politica-gerenciada-6e82c583c524c86950955fbebeacaf60.gif" width="1914" height="889" class="img_ev3q"></p>
+<video controls="" muted="" playsinline="" preload="metadata" width="100%"><source src="/assets/medias/anexar-politica-gerenciada-4f448461fa244e8bc5b53da53e367e6e.webm" type="video/webm"></video>
 <hr>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="3-criar-política-gerenciada-personalizada">3. Criar Política Gerenciada Personalizada<a href="#3-criar-política-gerenciada-personalizada" class="hash-link" aria-label="Link direto para 3. Criar Política Gerenciada Personalizada" title="Link direto para 3. Criar Política Gerenciada Personalizada" translate="no">​</a></h3>
+<blockquote>
+<p>Neste exemplo usamos <strong>Recursos: Tudo</strong> para simplificar. Em ambiente real, restrinja ao ARN do recurso (princípio do menor privilégio).</p>
+</blockquote>
 <ol>
 <li class="">Vá até <strong>IAM &gt; Políticas</strong></li>
 <li class="">Clique em  <strong><code>Criar política</code></strong></li>
@@ -69,23 +72,26 @@
 <li class="">No nosso exemplo iremos criar a política:<!-- -->
 <ul>
 <li class="">Nome: <strong><code>PoliticaPersonalizada-RDS-DevOps</code></strong></li>
-<li class="">Descrição: <strong><code>Politica personalizada para o time de devops listar as database do rds</code></strong>.</li>
+<li class="">Descrição: <strong><code>Política personalizada para o time de DevOps listar e criar instâncias RDS</code></strong>.</li>
 </ul>
 </li>
 </ul>
 </li>
 <li class="">Clique em <strong>Criar política</strong></li>
 </ol>
-<p><img decoding="async" loading="lazy" alt="Criar política gerenciada personalizada" src="/assets/images/criar-politica-gerenciada-personalizada-efd16dceb9a38b15c67db5bc3d3cffae.gif" width="1914" height="889" class="img_ev3q"></p>
+<video controls="" muted="" playsinline="" preload="metadata" width="100%"><source src="/assets/medias/criar-politica-gerenciada-personalizada-b508e9d8c6ed07b2c3589bacae205618.webm" type="video/webm"></video>
 <hr>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="4-criar-política-inline-11">4. Criar Política Inline (1:1)<a href="#4-criar-política-inline-11" class="hash-link" aria-label="Link direto para 4. Criar Política Inline (1:1)" title="Link direto para 4. Criar Política Inline (1:1)" translate="no">​</a></h3>
+<blockquote>
+<p>A política inline fica embutida em <strong>um único usuário</strong> e é excluída junto com ele. Use só em casos pontuais.</p>
+</blockquote>
 <ol>
-<li class="">Vá em <strong>IAM &gt; Usuários</strong> clique no usuário que receberá a política.</li>
+<li class="">Vá em <strong>IAM &gt; Usuários do IAM</strong> clique no usuário que receberá a política.</li>
 <li class="">Na aba <strong>Permissões</strong>, clique em <strong>Adicionar permissões</strong> e <strong>Criar política em linha</strong></li>
 <li class="">Na aba <strong>Visual</strong>, defina:<!-- -->
 <ul>
 <li class="">Serviço: <strong><code>DynamoDB</code></strong></li>
-<li class="">Ações permitidas: <strong><code>Todas de Leitura</code></strong></li>
+<li class="">Ações permitidas: <strong><code>Todas as ações de leitura</code></strong> (nível de acesso <strong>Leitura</strong>)</li>
 <li class="">Recursos: <strong>Clique em <code>Tudo</code> para selecionar qualquer DynamoDB criado na conta.</strong></li>
 </ul>
 </li>
@@ -95,14 +101,13 @@
 <li class="">No nosso exemplo iremos criar a política:<!-- -->
 <ul>
 <li class="">Nome: <strong><code>PoliticaPersonalizada-DynamoDB-DevOps</code></strong></li>
-<li class="">Descrição: <strong><code>Politica personalizada para o time de devops listar as database do DynamoDB</code></strong>.</li>
 </ul>
 </li>
 </ul>
 </li>
 <li class="">Clique em <strong>Criar política</strong></li>
 </ol>
-<p><img decoding="async" loading="lazy" alt="Criar política inline" src="/assets/images/criar-politica-inline-1812d27699f0d0f89c5626aa785e4091.gif" width="1914" height="889" class="img_ev3q"></p>
+<video controls="" muted="" playsinline="" preload="metadata" width="100%"><source src="/assets/medias/criar-politica-inline-bd1f3c483e8debc87abcd6103f4c9d5e.webm" type="video/webm"></video>
 <hr>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="boas-práticas">Boas Práticas<a href="#boas-práticas" class="hash-link" aria-label="Link direto para Boas Práticas" title="Link direto para Boas Práticas" translate="no">​</a></h2>
 <ul>
@@ -110,7 +115,7 @@
 <li class="">Evite usar políticas inline, exceto em casos pontuais</li>
 <li class="">Nomeie as políticas de forma descritiva (<code>CustomEC2Ops</code>, <code>S3FullDev</code>)</li>
 <li class="">Sempre siga o princípio do menor privilégio</li>
-<li class="">Revise permissões com o Access Advisor</li>
+<li class="">Revise permissões com o <strong>Access Advisor</strong> (aba <em>Último acesso</em> do usuário ou da função)</li>
 </ul></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col noPrint_WFHX"><a href="https://github.com/lotechdevops/lotechdevops.github.io/tree/main/docs/cloud/AWS/iam/hands-on/3.aplicacao-politicas.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Editar esta página</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Páginas de documento"><a class="pagination-nav__link pagination-nav__link--prev" href="/docs/cloud/AWS/iam/hands-on/criacao-de-grupo"><div class="pagination-nav__sublabel">Anterior</div><div class="pagination-nav__label">2. Criação de Grupo</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/docs/cloud/AWS/iam/hands-on/criacao-de-funcoes"><div class="pagination-nav__sublabel">Próxima</div><div class="pagination-nav__label">4. Criação e Aplicação de Funções (Roles)</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#objetivo" class="table-of-contents__link toc-highlight">Objetivo</a></li><li><a href="#pré-requisitos" class="table-of-contents__link toc-highlight">Pré-requisitos</a></li><li><a href="#etapas" class="table-of-contents__link toc-highlight">Etapas</a><ul><li><a href="#1-acessar-o-console-do-iam" class="table-of-contents__link toc-highlight">1. Acessar o Console do IAM</a></li><li><a href="#2-aplicar-política-gerenciada-da-aws" class="table-of-contents__link toc-highlight">2. Aplicar Política Gerenciada da AWS</a></li><li><a href="#3-criar-política-gerenciada-personalizada" class="table-of-contents__link toc-highlight">3. Criar Política Gerenciada Personalizada</a></li><li><a href="#4-criar-política-inline-11" class="table-of-contents__link toc-highlight">4. Criar Política Inline (1:1)</a></li></ul></li><li><a href="#boas-práticas" class="table-of-contents__link toc-highlight">Boas Práticas</a></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"></div></footer></div>
 </body>
 </html>
